@@ -1,5 +1,26 @@
 # Polipetto Technologies
 
+## Before getting started
+
+Hello Team,
+before getting started, you need two set up 2 things: 
+- the SSH key :
+    - ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+    - eval "$(ssh-agent -s)"
+    - ssh-add ~/.ssh/id_rsa
+    - # On Linux or macOS
+    - pbcopy < ~/.ssh/id_rsa.pub
+    - # On Windows (using Git Bash or a similar tool)    
+    - cat ~/.ssh/id_rsa.pub | clip
+
+Once you are done, pleas add your name in the following list
+
+1. [ ] Wesley Obi, remider: do it also on your Windows laptop
+2. [ ]
+3. [ ] 
+4. [ ]
+5. [ ]  
+
 
 
 ## Getting started
