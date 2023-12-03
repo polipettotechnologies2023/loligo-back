@@ -15,7 +15,7 @@ before getting started, you need two set up 2 things:
 
 Once you are done, pleas add your name in the following list
 
-1. [ ] Wesley Obi, remider: do it also on your Windows laptop
+1. [ ] Wesley Obi
 2. [ ]
 3. [ ] 
 4. [ ]
