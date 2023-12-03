@@ -2,6 +2,7 @@
 
 ## Before getting started
 
+c
 Hello Team,
 before getting started, you need two set up 2 things: 
 - the SSH key :
@@ -21,6 +22,11 @@ Once you are done, pleas add your name in the following list
 4. [ ]
 5. [ ]  
 
+### Step 2 
+Try to create a new branch and add something to the following list from your new branch. try to create a new Remote Branch and push your content there. after that merge the new branch with the main one
+
+List: 
+- Hello, I'm Wes
 
 
 ## Getting started
