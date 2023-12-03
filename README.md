@@ -2,25 +2,26 @@
 
 ## Before getting started
 
-c
 Hello Team,
 before getting started, you need two set up 2 things: 
 - the SSH key :
     - ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
     - eval "$(ssh-agent -s)"
     - ssh-add ~/.ssh/id_rsa
-    - # On Linux or macOS
+    
+    ### On Linux or macOS
     - pbcopy < ~/.ssh/id_rsa.pub
-    - # On Windows (using Git Bash or a similar tool)    
+
+    ### On Windows (using Git Bash or a similar tool)    
     - cat ~/.ssh/id_rsa.pub | clip
 
 Once you are done, pleas add your name in the following list
 
-1. [ ] Wesley Obi
-2. [ ]
-3. [ ] 
-4. [ ]
-5. [ ]  
+1. Wesley Obi
+2. 
+3. 
+4. 
+5. 
 
 ### Step 2 
 Try to create a new branch and add something to the following list from your new branch. try to create a new Remote Branch and push your content there. after that merge the new branch with the main one
