@@ -25,9 +25,23 @@ Once you are done, pleas add your name in the following list
 ### Step 2 
 Try to create a new branch and add something to the following list from your new branch. try to create a new Remote Branch and push your content there. after that merge the new branch with the main one
 
+
 List: 
 - Hello, I'm Wes
+- 
+- 
+- 
+- 
 
+### Step 3 
+Try to create a new pull request and ask me for the approval in the group. After I've approved it, try to merge it int the main branch. As content of the PR, write something in the following list:
+
+List: 
+- 
+- 
+- 
+- 
+- 
 
 ## Getting started
 
