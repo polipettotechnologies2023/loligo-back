@@ -44,6 +44,11 @@ List:
 - 
 - 
 
+
+
+# Jira instance 
+https://polipetto-lolligo.atlassian.net/jira/your-work
+
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
