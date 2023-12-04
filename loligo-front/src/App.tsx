@@ -1,17 +1,30 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import LoginButton from './components/LoginButton'
 import LogoutButton from "./components/LogoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
+import axios from 'axios'
 
 
 function App() {
   const [count, setCount] = useState(0)
+  const [hello, setHello] = useState("Not Hello")
   const { user, isAuthenticated } = useAuth0();
 
-  console.log(user)
+  
+
+
+
+  useEffect(()=>{
+
+    (async () => {
+      let res = await axios.get(`${import.meta.env.VITE_PYTHON_SERVER}/`)
+      setHello(res.data?.Hello)
+    })()
+    
+  },[])
 
   return (
 
@@ -38,8 +51,11 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      
+
 
       <p>{user?.name}</p>
+      <p>Hello {hello}</p>
       <LogoutButton></LogoutButton>
 
       
