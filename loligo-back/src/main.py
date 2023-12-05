@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from pydantic import BaseModel
 
+from dotenv import load_dotenv #https://pypi.org/project/python-dotenv/
 
 
 app = FastAPI()
@@ -36,7 +37,23 @@ def read_item(item_id: int, q: Union[str, None] = None):
 
 
 
-# TODO move the funcitons in separated files (aka implement modules)
+# TODO move the funcitons in separated files (aka implement modules). Set up router
+
+# exmaple of routing with 
+
+# # handlers.py
+# def read_root():
+#     return {"Hello": "World"}
+
+# # routes.py
+# from fastapi import APIRouter
+# from .handlers import read_root
+
+# router = APIRouter()
+
+# @router.get("/")
+# def root_handler():
+#     return read_root()
 
 class userInfoNewRequest(BaseModel):
     name: str
