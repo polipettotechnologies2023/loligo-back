@@ -2,6 +2,9 @@
 create a .env.local and copy paste the content from .env. After that go into our planspeil sheet and take there.
 
 
+# how to install requirements (aka node_modules)
+npm install
+
 
 # React + TypeScript + Vite
 
