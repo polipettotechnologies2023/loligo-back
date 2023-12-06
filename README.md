@@ -29,7 +29,7 @@ Try to create a new branch and add something to the following list from your new
 
 List: 
 - Hello, I'm Wes
-- 
+- Hi, I'm Yifan.
 - 
 - 
 - 
