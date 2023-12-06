@@ -38,7 +38,7 @@ List:
 Try to create a new pull request and ask me for the approval in the group. After I've approved it, try to merge it int the main branch. As content of the PR, write something in the following list.
 
 List: 
-- 
+- A pull request created by Yifan.
 - 
 - 
 - 
