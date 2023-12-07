@@ -35,7 +35,7 @@ List:
 
 - Hello, I'm Wes
 - Hi, I'm Yifan.
-  -Hi, Elmira
+- Hi, Elmira
 -
 -
 
