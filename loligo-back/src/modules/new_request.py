@@ -31,10 +31,8 @@ async def new_request_func(userInfoNewRequest : userInfoNewRequest):
 async def ticket_creation(data):
     url = config["JIRA_WEBHOOK_CREATE_TICKET"] 
 
-
     # remider, before sendinf the data back, in python you have to paseit into a dict and then sent it as a json
     my_dict = {"name" : data.name,"description" : data.description, "domainName" : data.domainName, }
-
 
     try:
         res = requests.post(url, json = my_dict)
@@ -48,12 +46,11 @@ async def ticket_creation(data):
 
 # entriend in DB 
 async def db_insert():
-
     return 
 
 
 
-# DP Automation recognition
+# DP Automation recognition, turn this function into a module. import it and dont await for it to finish before sending the answer.
 async def automatic_DP_detection():
     #TODO create a function for automatic detection of DP. this should be triggered here but we should not wait for it
     return 
