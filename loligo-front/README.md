@@ -6,6 +6,15 @@ create a .env.local and copy paste the content from .env. After that go into our
 npm install
 
 
+# How to start the docker container
+
+- download docker gui app
+- enter in the project using the command line (ex.  ~/Desktop/Project Polipetto/loligo-front (main))
+- build the image : `docker build -t loligo-front .`
+- run the image for the first time in the terminal: `docker run -dp 127.0.0.1:5173:5173 loligo-front`
+- From now on you can use the gui to start the front-end application
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
