@@ -38,7 +38,7 @@ async def ticket_creation(data):
         res = requests.post(url, json = my_dict)
         print(res)
     except:
-        print("errro in request for jira")
+        print("error in request for jira")
         return {"error" : "error"}
     
     return 200

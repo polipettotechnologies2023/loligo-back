@@ -1,32 +1,27 @@
 import os
 import jwt
 from configparser import ConfigParser
+import requests
+import http.client
+import json
+from dotenv import dotenv_values
 
 # this module is for the validation of the jwt. please do not touch it :) reporter: Wes
+
+config = dotenv_values(".env")
 
 def set_up():
     """Sets up configuration for the app"""
 
-    # TODO fix the config and make it work (try to remove the config dictionary from there and use just the env/config file)
-
-    env = os.getenv("ENV", ".config")
-
-    # if env == ".config":
-    #     config = ConfigParser()
-    #     config.read(".config")
-    #     config = config["AUTH0"]
-    # else:
-    config = {
-        "DOMAIN": os.getenv("DOMAIN", "dev-pj64rev484rdrjqd.eu.auth0.com"),
-        #change the api audience with the new api
-        "API_AUDIENCE": os.getenv("API_AUDIENCE", "https://loligo-backend-secure-api-service/"),
-        "ISSUER": os.getenv("ISSUER", "https://dev-pj64rev484rdrjqd.eu.auth0.com/"),
-        "ALGORITHMS": os.getenv("ALGORITHMS", "RS256"),
+    config_setup = {
+        "DOMAIN": config["AUTH0_DOMAIN"],
+        "API_AUDIENCE": config["AUTH0_API_AUDIENCE"],
+        "ISSUER": f'{config["AUTH0_ISSUER"]}/',
+        "ALGORITHMS": config["AUTH0_ALGORITHMS"]
     }
-    return config
+    return config_setup
 
-
-class VerifyToken():
+class VerifyAndIssueToken():
     """Does all the token verification using PyJWT"""
 
     def __init__(self, token, permissions=None, scopes=None):
@@ -102,3 +97,59 @@ class VerifyToken():
                                   "access to this resource")
                 return result
         return result
+    
+
+
+def managemnet_access_token():
+
+    conn = http.client.HTTPSConnection(config["AUTH0_DOMAIN"])
+
+    client_id = config["CLIENT_ID_MANAGEMENT"]
+    client_secret =  config["CLIENT_SECRET_MANAGEMENT"]
+    audience =  config["AUDIENCE_MANAGEMENT"]
+    grant_type =  config["GRANT_TYPE_MANAGEMENT"]
+
+    payload = f'{{"client_id":"{client_id}","client_secret":"{client_secret}","audience":"{audience}","grant_type":"{grant_type}"}}'
+
+    headers = { 'content-type': "application/json" }
+
+    conn.request("POST", "/oauth/token", payload, headers)
+
+    res = conn.getresponse()
+    data = res.read()
+    return data.decode("utf-8")
+
+
+def get_access_token(id):
+    url_token = f"{config['AUTH0_ISSUER']}/oauth/token"
+    headers = {"content-type": "application/json"}
+    data = {
+        "client_id": config['AUTH0_CLIENT_ID'],
+        "client_secret": config['AUTH0_CLIENT_SECRET'],
+        "audience": config['AUTH0_API_AUDIENCE'],
+        "grant_type": "client_credentials",
+    }
+
+   
+
+    json_managemnet_token = managemnet_access_token()
+    converted_managemnet_token = json.loads(json_managemnet_token)
+
+    managemnet_token = "Bearer " + converted_managemnet_token.get("access_token")
+
+    url_user = f"{config['AUDIENCE_MANAGEMENT']}users/{id}"
+    headers = {
+    'Accept': 'application/json',
+    'Authorization': managemnet_token
+    }
+
+    response_user = requests.get(url_user, json=data, headers=headers)
+
+    if(response_user.status_code == 200):
+        response_token = requests.post(url_token, json=data, headers=headers)
+        response_token = response_token.json()
+        access_token = "Bearer " + response_token.get("access_token")
+        return access_token
+    else:
+        return {'status_code': 404,
+                'message' : 'user not found'}
