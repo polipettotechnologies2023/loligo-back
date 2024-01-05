@@ -12,7 +12,7 @@ export default function Home() {
 
     (async () => {
 
-      
+      console.log(user)
     })()
     
   },[])
@@ -21,7 +21,7 @@ export default function Home() {
   
      
          <> 
-           <p>{user?.name}</p>
+           <p>{user?.sub}</p>
 
            <LogoutButton></LogoutButton>
 

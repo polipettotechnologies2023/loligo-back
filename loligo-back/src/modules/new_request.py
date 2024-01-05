@@ -6,8 +6,8 @@ config = dotenv_values(".env")
 
 class userInfoNewRequest(BaseModel): #this is an interface. this how you define the structure of the incoming data. I suggest to keep the interface in the same file of the function
     name: str
-    description: str
-    domainName: str 
+    # description: str
+    # domainName: str 
     # tax: float | None = None
 
 
@@ -32,8 +32,9 @@ async def ticket_creation(data):
     url = config["JIRA_WEBHOOK_CREATE_TICKET"] 
 
     # remider, before sendinf the data back, in python you have to paseit into a dict and then sent it as a json
-    my_dict = {"name" : data.name,"description" : data.description, "domainName" : data.domainName, }
-
+    # my_dict = {"name" : data.name,"description" : data.description, "domainName" : data.domainName, }
+    my_dict = {"name" : data.name} # tmp dict
+    
     try:
         res = requests.post(url, json = my_dict)
         print(res)
@@ -43,11 +44,9 @@ async def ticket_creation(data):
     
     return 200
 
-
 # entriend in DB 
 async def db_insert():
     return 
-
 
 
 # DP Automation recognition, turn this function into a module. import it and dont await for it to finish before sending the answer.
