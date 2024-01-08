@@ -2,6 +2,7 @@ import axios from "axios"
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from '../vite-env';
+import { Button } from "@nextui-org/react";
 
 export default function NewRequest(){
 
@@ -45,7 +46,7 @@ export default function NewRequest(){
     return(
         <>
         <input type="text" value={name} onChange={(e) => setFormData(e.target.value)} />
-        <button onClick={createTicket}> button </button>
+        <Button onClick={createTicket}> button </Button>
         </>
         )
 }

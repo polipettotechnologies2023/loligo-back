@@ -10,3 +10,6 @@ if yout IDE is giving you errors relaterd to FastAPI please follow this guide ht
 
 # How to work with inverinonment variables in the python backend? 
 https://pypi.org/project/python-dotenv/
+
+# What if get acertificate issue on my mac? 
+https://stackoverflow.com/questions/40684543/how-to-make-python-use-ca-certificates-from-mac-os-truststore
