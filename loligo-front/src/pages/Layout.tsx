@@ -1,24 +1,16 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import CustomNav from "../components/CustomNav"
 
 // TODO Creare a good layout page
 
 const Layout = () => {
   return (
     <>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/newrequest">new Request</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contact</Link>
-          </li>
-        </ul>
-      </nav>
-
+    <br />
+      <CustomNav></CustomNav>
+      <br />
+      <br />
+      {/* TODO: change the br with some real spacing in css/trailwind/nexui */}
       <Outlet />
     </>
   )

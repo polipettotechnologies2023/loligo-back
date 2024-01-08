@@ -5,6 +5,7 @@ import "./index.css";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { Provider } from "react-redux";
 import { store } from "./stores/store.ts";
+import { NextUIProvider } from '@nextui-org/react'
 
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -19,7 +20,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       cacheLocation="localstorage"
     >
       <Provider store={store}>
-        <App />
+        <NextUIProvider>
+          <main className="light text-foreground bg-background">
+            <App />
+          </main>
+        </NextUIProvider>
       </Provider>
     </Auth0Provider>
     
