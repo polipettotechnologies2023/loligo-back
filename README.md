@@ -24,7 +24,7 @@ Once you are done, pleas add your name in the following list
 1. Wesley Obi
 2. Yifan Du
 3. Elmira
-4.
+4. Alexis
 5.
 
 ### Step 2
@@ -36,7 +36,7 @@ List:
 - Hello, I'm Wes
 - Hi, I'm Yifan.
 - Hi, Elmira
--
+- Hi, I'm Alexis. 
 -
 
 ### Step 3
