@@ -14,9 +14,9 @@ export default function RequestsLists() {
     </div>
     <br />
     <div className="flex flex-wrap gap-4 justify-center">
-    <CustomCard></CustomCard>
+    <CustomCard chipcolor="warning" chipvalue={"in progress"}></CustomCard>
     <Spacer x={1} />
-    <CustomCard></CustomCard>
+    {/* <CustomCard></CustomCard> */}
     </div>
     
     </>

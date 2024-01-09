@@ -11,6 +11,8 @@ router = APIRouter()
 
 token_auth_scheme = HTTPBearer() 
 
+# endpoints for our frontend 
+
 @router.get("/items/{item_id}")
 def read_item(item_id: int, q: Union[str, None] = None, token : str = Depends(token_auth_scheme)):
     result = VerifyToken(token.credentials).verify()
@@ -22,9 +24,12 @@ def login(user_id: str):
     access_token = get_access_token(user_id)
     return access_token
 
-@router.post("/newrequest/")
+@router.post("/newrequest")
 async def handle_new_request(request_data : userInfoNewRequest = Body(...), token : str = Depends(token_auth_scheme)):
     result = VerifyToken(token.credentials).verify()
     # check the result before sendiing the request
     print(result)
     return await new_request_func(request_data)
+
+
+# endpoints for jira automations

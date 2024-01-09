@@ -1,7 +1,12 @@
-import {Card, CardHeader, CardBody, CardFooter, Divider, Link, Image} from "@nextui-org/react";
+import {Card, CardHeader, CardBody, CardFooter, Divider, Link, Image, Chip} from "@nextui-org/react";
+
+interface IChip{
+  chipcolor: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
+  chipvalue: String;
+}
 
 
-export default function CustomCard() {
+export default function CustomCard(prop:IChip) {
   return (
     <Card className="max-w-[400px]">
       <CardHeader className="flex gap-3">
@@ -16,6 +21,7 @@ export default function CustomCard() {
           <p className="text-md">NextUI</p>
           <p className="text-small text-default-500">nextui.org</p>
         </div>
+        <Chip color={prop.chipcolor} size="sm">{prop.chipvalue}</Chip>
       </CardHeader>
       <Divider/>
       <CardBody>
@@ -28,7 +34,7 @@ export default function CustomCard() {
           showAnchorIcon
           href="https://LinkToTheUserWebsite"
         >
-          Visit source code on GitHub.
+          Visit the this website
         </Link>
       </CardFooter>
     </Card>

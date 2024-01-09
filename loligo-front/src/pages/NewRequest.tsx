@@ -16,7 +16,7 @@ export default function NewRequest(){
     const createTicket = async () =>{
 
         let res = await axios.post(
-            `${import.meta.env.VITE_PYTHON_SERVER}/newrequest/`,
+            `${import.meta.env.VITE_PYTHON_SERVER}/newrequest`,
             {
                 name
             },
