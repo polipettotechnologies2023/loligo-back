@@ -25,7 +25,7 @@ Once you are done, pleas add your name in the following list
 2. Yifan Du
 3. Elmira
 4. Alexis
-5.
+5. Rohit
 
 ### Step 2
 
@@ -37,7 +37,7 @@ List:
 - Hi, I'm Yifan.
 - Hi, Elmira
 - Hi, I'm Alexis. 
--
+- Hi, I'm Rohit
 
 ### Step 3
 
