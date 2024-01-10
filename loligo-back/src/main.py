@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .routers import app_router
+from .modules import db_connection
 
 app = FastAPI()
 app.include_router(app_router.router)
@@ -14,3 +15,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# test db connection 
+db_connection.db_open()
+db_connection.db_close()
