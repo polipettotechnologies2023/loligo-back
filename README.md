@@ -37,7 +37,7 @@ List:
 - Hi, I'm Yifan.
 - Hi, Elmira
 - Hi, I'm Alexis. 
--
+- Hi, I'm Rohit
 
 ### Step 3
 
