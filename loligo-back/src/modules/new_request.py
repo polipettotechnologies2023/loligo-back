@@ -38,8 +38,13 @@ async def ticket_creation(data):
     url = config["JIRA_WEBHOOK_CREATE_TICKET"] 
 
     # remider, before sendinf the data back, in python you have to paseit into a dict and then sent it as a json
-    # my_dict = {"name" : data.name,"description" : data.description, "domainName" : data.domainName, }
-    my_dict = {"ticket_name" : data.ticket_name} # tmp dict
+    my_dict = {
+        "ticket_name": data.ticket_name,
+        "domain_name" : data.domain_name,
+        "website_link" : data.website_link,
+        "user_id" : data.user_id,
+        "user_email" : data.user_email
+    } # tmp dict
     
     try:
         res = requests.post(url, json = my_dict)
