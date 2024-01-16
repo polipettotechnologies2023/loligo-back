@@ -20,5 +20,5 @@ app.add_middleware(
 uvicorn.run(app, host="0.0.0.0", port=8181)
 
 # test db connection 
-db_connection.db_open()
-db_connection.db_close()
+# db_connection.db_open()
+# db_connection.db_close()
