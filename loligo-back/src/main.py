@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .routers import app_router
 from .modules import db_connection
+import uvicorn
 
 app = FastAPI()
 app.include_router(app_router.router)
@@ -15,6 +16,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+uvicorn.run(app, host="0.0.0.0", port=8181)
 
 # test db connection 
 db_connection.db_open()
