@@ -1,6 +1,12 @@
 # How to install requirements
 pip install -r requirements.txt
 
+
+<!-- new -->
+# How to start the server app
+python3 -m src.main
+
+<!-- old -->
 # How to start the server app
 uvicorn src.main:app --reload 
 and with a specific port -> uvicorn src.main:app --reload --port 8001
