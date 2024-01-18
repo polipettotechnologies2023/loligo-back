@@ -6,6 +6,7 @@ from fastapi import Depends, HTTPException, Header, Body
 from fastapi.security import HTTPBearer
 from .utils import VerifyAndIssueToken as VerifyToken
 from .utils import get_access_token
+# from import dashabord
 
 router = APIRouter()
 
@@ -23,6 +24,15 @@ def read_item(item_id: int, q: Union[str, None] = None, token : str = Depends(to
 def login(user_id: str):
     access_token = get_access_token(user_id)
     return access_token
+
+
+@router.post("/dashboard")
+async def handle_dahsboard(request_data : userInfoNewRequest = Body(...), token : str = Depends(token_auth_scheme)):
+    result = VerifyToken(token.credentials).verify()
+    # check the result before sendiing the request
+    print(result)
+    return await dashboard(request_data)
+
 
 @router.post("/newrequest")
 async def handle_new_request(request_data : userInfoNewRequest = Body(...), token : str = Depends(token_auth_scheme)):

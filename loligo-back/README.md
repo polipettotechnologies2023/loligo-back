@@ -19,3 +19,6 @@ https://pypi.org/project/python-dotenv/
 
 # What if get acertificate issue on my mac? 
 https://stackoverflow.com/questions/40684543/how-to-make-python-use-ca-certificates-from-mac-os-truststore
+
+# How to connect to your local db
+Change the values in the .env file
