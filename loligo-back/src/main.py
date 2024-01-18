@@ -17,7 +17,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-uvicorn.run(app, host="0.0.0.0", port=8181)
+uvicorn.run(app, host="0.0.0.0", port=8080)
 
 # test db connection 
 # db_connection.db_open()

@@ -19,7 +19,7 @@ class userInfoNewRequest(BaseModel): #this is an interface. this how you define 
 #main function module
 async def new_request_func(userInfoNewRequest : userInfoNewRequest):
 
-    ticket_insetion = await db_insert_req((f"{userInfoNewRequest.ticket_name}", f"{userInfoNewRequest.domain_name}",f"{userInfoNewRequest.website_link}",f"{userInfoNewRequest.user_id}",f"{userInfoNewRequest.user_email}"))    
+    ticket_insetion = await db_insert_req((f"{userInfoNewRequest.ticket_name}",f"{userInfoNewRequest.website_link}",f"{userInfoNewRequest.user_id}",f"{userInfoNewRequest.user_email}"))    
     ticket_step = await ticket_creation(userInfoNewRequest)
 
     if ticket_step != True:
