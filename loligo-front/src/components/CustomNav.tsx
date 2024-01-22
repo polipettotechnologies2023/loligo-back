@@ -31,7 +31,7 @@ export default function CustomNav() {
               className="transition-transform"
               color="primary"
               name={user?.name}
-              size="sm"
+              size="lg"
               src={user?.picture}
             />
           </DropdownTrigger>
