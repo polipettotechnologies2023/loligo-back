@@ -56,44 +56,49 @@ def get_websites_links(url):
 
 
 
-def find_text_in_websites(url, search_text):
+def find_dp_in_websites(url, search_pd):
     links_to_check = get_websites_links(url)
-    found_text_sites = []
-
-    # Convert the search text to lowercase for a case-insensitive search
-    search_text_lower = search_text.lower()
+    found_pd_sites = []
+    print(search_pd)
 
     for link in links_to_check:
+        print(f'Checking the follwoing link {link}')
         try:
             with urllib.request.urlopen(link) as response:
                 html_content = response.read().decode('utf-8').lower()
 
-                # Check if the search text is present in the content (case-insensitive)
-                if search_text_lower in html_content:
-                    found_text_sites.append(link)
+                # TODO: the following cold be a function and mulitithreading can be enabled
+                for dp, value in search_pd.items():
+                    print(f'Checking the follwoing dp {dp}')
+                    for pattern in value: 
+                        print(f'Checking the follwoing pattern {pattern}')
+                        search_pd_lower = pattern.lower()
+                        if search_pd_lower in html_content:
+                            print(f'{pattern} found here {link}')
+                            found_pd_sites.append(link)
 
         except HTTPError as e:
             print(f"HTTP Error {e.code}: {link}")
         except URLError as e:
             print(f"URL Error: {e.reason}")
-
-    return found_text_sites
-
-
-def test():
-# Domain base verification
-    url = 'https://polipetto.pp.ua'
-
-    search_text_to_find = "€200,000"
-
-    #one specifc dark pattern
-    result = find_text_in_websites(url, search_text_to_find)
-    find_text_in_websites(url, search_text_to_find) # dp 1
+    return found_pd_sites
 
 
+def automatic_dp_detection(url_link):
+
+    #TODO: think about using multithreading for this -- see above 
+    search_dp_to_find = {
+        #Look for phrases like “other people are viewing this item now”.
+        "Beyond Brignull - Fake Activity " : ["34589034", "Polipetto", "IT services provider" ],
+        #  Look for phrases like “offer ends in” or “countdown”
+        # "Beyond Brignull - Fake Countdown " : [ "€200,000", "mario", "Our Mission" ],
+    }
+
+    # TODO: improve results structure, decide id we should create the jira ticker after this function or before
+    result = find_dp_in_websites(url_link, search_dp_to_find)
+    
     if result:
         print(f"The search text was found on the following websites: {result}")
     else:
         print("The search text was not found on any of the websites.")
-
-test()
+    return

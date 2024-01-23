@@ -5,6 +5,9 @@ import mysql.connector
 from .db_connection import db_open
 from .db_connection import db_close
 from .db_connection import db_insert
+from .automatic_detection import automatic_dp_detection
+from threading import Thread
+
 
 config = dotenv_values(".env")
 
@@ -19,12 +22,12 @@ class UserInfoNewRequest(BaseModel): #this is an interface. this how you define 
 #main function module
 async def new_request_func(userInfoNewRequest : UserInfoNewRequest):
 
-    ticket_insetion = await db_insert_req((f"{userInfoNewRequest.ticket_name}",f"{userInfoNewRequest.website_link}",f"{userInfoNewRequest.user_id}",f"{userInfoNewRequest.user_email}"))    
+    ticket_insetion = await db_insert_req((f"{userInfoNewRequest.ticket_id}", f"{userInfoNewRequest.ticket_name}",f"{userInfoNewRequest.website_link}",f"{userInfoNewRequest.user_id}",f"{userInfoNewRequest.user_email}"))    
     ticket_step = await ticket_creation(userInfoNewRequest)
+    Thread(target=lambda: automatic_dp_detection(userInfoNewRequest.website_link)).start()
 
-    if ticket_step != True:
+    if ticket_step != True :
         return ticket_step
-
 
     return {
                 "result": "success",
@@ -64,4 +67,3 @@ async def db_insert_req(val):
         await db_close()
         return True
     return 400
-
