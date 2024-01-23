@@ -1,8 +1,8 @@
 # How to install requirements
 pip install -r requirements.txt
 
-
 <!-- new -->
+
 # How to start the server app
 python3 -m src.main
 
