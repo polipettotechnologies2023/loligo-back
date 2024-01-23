@@ -15,6 +15,8 @@ export default function NewRequest(){
 
     const createTicket = async () =>{
 
+        // you can find the data to send in the backand interface
+        //  for the ticketId use this library https://www.npmjs.com/package/uuid
         let res = await axios.post(
             `${import.meta.env.VITE_PYTHON_SERVER}/newrequest`,
             {

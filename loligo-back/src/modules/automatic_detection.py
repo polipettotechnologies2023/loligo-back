@@ -88,6 +88,8 @@ def test():
 
     #one specifc dark pattern
     result = find_text_in_websites(url, search_text_to_find)
+    find_text_in_websites(url, search_text_to_find) # dp 1
+
 
     if result:
         print(f"The search text was found on the following websites: {result}")

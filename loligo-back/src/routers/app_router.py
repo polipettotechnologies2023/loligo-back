@@ -1,12 +1,12 @@
 
 from typing import Union
 from fastapi import APIRouter
-from ..modules.new_request import new_request_func, userInfoNewRequest
+from ..modules.new_request import new_request_func, UserInfoNewRequest
 from fastapi import Depends, HTTPException, Header, Body
 from fastapi.security import HTTPBearer
 from .utils import VerifyAndIssueToken as VerifyToken
 from .utils import get_access_token
-# from import dashabord
+from ..modules.dashboard import get_dashboard, UserInfoDashboard
 
 router = APIRouter()
 
@@ -27,17 +27,17 @@ def login(user_id: str):
 
 
 @router.post("/dashboard")
-async def handle_dahsboard(request_data : userInfoNewRequest = Body(...), token : str = Depends(token_auth_scheme)):
+async def handle_dahsboard(request_data : UserInfoDashboard = Body(...), token : str = Depends(token_auth_scheme)):
     result = VerifyToken(token.credentials).verify()
-    # check the result before sendiing the request
+    # TODO: check the result before sendiing the request
     print(result)
-    return await dashboard(request_data)
+    return await get_dashboard(request_data)
 
 
 @router.post("/newrequest")
-async def handle_new_request(request_data : userInfoNewRequest = Body(...), token : str = Depends(token_auth_scheme)):
+async def handle_new_request(request_data : UserInfoNewRequest = Body(...), token : str = Depends(token_auth_scheme)):
     result = VerifyToken(token.credentials).verify()
-    # check the result before sendiing the request
+    # TODO: check the result before sendiing the request
     print(result)
     return await new_request_func(request_data)
 

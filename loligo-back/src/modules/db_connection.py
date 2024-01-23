@@ -34,6 +34,13 @@ async def db_close():
         return True
 
 async def db_insert(sqlQuery,val):
-    connection.cursor().execute(sqlQuery,val)
+    myconnection = connection.cursor()
+    myconnection.execute(sqlQuery,val)
     connection.commit()
     return True
+
+async def get_db_data(sqlQuery):
+    myconnection = connection.cursor()
+    myconnection.execute(sqlQuery)
+    result = myconnection.fetchall()
+    return result
