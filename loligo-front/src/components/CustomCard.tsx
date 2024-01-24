@@ -55,7 +55,7 @@ export default function CustomCard({
           alt="Card background"
           className="object-cover rounded-xl"
           src={requestPicture}
-          width={270}
+          width={100}
         />
       </CardBody>
     </Card>
