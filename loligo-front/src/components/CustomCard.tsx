@@ -1,12 +1,68 @@
-import {Card, CardHeader, CardBody, CardFooter, Divider, Link, Image, Chip} from "@nextui-org/react";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Link,
+  Image,
+  Chip,
+} from "@nextui-org/react";
 
-interface IChip{
-  chipcolor: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
-  chipvalue: String;
+interface IChip {
+  requestId: string;
+  requestWeb: string;
+  requestName: string;
+  requestPicture: string;
+  requestStatus: string;
 }
 
+export default function CustomCard({
+  requestId,
+  requestWeb,
+  requestName,
+  requestPicture,
+  requestStatus,
+}: IChip) {
+  const handlerColor = (status: string) => {
+    if (status === "Sent") {
+      return "primary";
+    } else if (status === "In Review") {
+      return "secondary";
+    } else if (status === "Done") {
+      return "success";
+    } else {
+      return "default";
+    }
+  };
 
-export default function CustomCard(prop:IChip) {
+  return (
+    <Card className="py-4">
+      <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+        <p className="text-large uppercase font-bold">
+          {requestId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Chip color={handlerColor(requestStatus)} size="md" variant="flat">
+            {requestStatus}
+          </Chip>
+        </p>
+        <Link isExternal showAnchorIcon href={requestWeb} color="secondary">
+          {requestWeb}
+        </Link>
+        <h4 className="font-bold text-large">{requestName}</h4>
+      </CardHeader>
+      <CardBody className="overflow-visible py-2">
+        <Image
+          isZoomed
+          shadow="sm"
+          alt="Card background"
+          className="object-cover rounded-xl"
+          src={requestPicture}
+          width={270}
+        />
+      </CardBody>
+    </Card>
+  );
+}
+
+/*export default function CustomCard(prop:IChip) {
   return (
     <Card className="max-w-[400px]">
       <CardHeader className="flex gap-3">
@@ -39,5 +95,4 @@ export default function CustomCard(prop:IChip) {
       </CardFooter>
     </Card>
   );
-}
-
+}*/
