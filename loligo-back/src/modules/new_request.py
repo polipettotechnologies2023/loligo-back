@@ -8,8 +8,8 @@ from .db_connection import db_insert
 
 config = dotenv_values(".env")
 
-class userInfoNewRequest(BaseModel): #this is an interface. this how you define the structure of the incoming data. I suggest to keep the interface in the same file of the function
-    # ticket_id: asdjsaldjakjdkasdjlajdk
+class UserInfoNewRequest(BaseModel): #this is an interface. this how you define the structure of the incoming data. I suggest to keep the interface in the same file of the function
+    ticket_id: str
     ticket_name : str
     website_link : str
     user_id : str
@@ -17,7 +17,7 @@ class userInfoNewRequest(BaseModel): #this is an interface. this how you define 
 
 
 #main function module
-async def new_request_func(userInfoNewRequest : userInfoNewRequest):
+async def new_request_func(userInfoNewRequest : UserInfoNewRequest):
 
     ticket_insetion = await db_insert_req((f"{userInfoNewRequest.ticket_name}",f"{userInfoNewRequest.website_link}",f"{userInfoNewRequest.user_id}",f"{userInfoNewRequest.user_email}"))    
     ticket_step = await ticket_creation(userInfoNewRequest)
@@ -39,7 +39,7 @@ async def ticket_creation(data):
 
     # remider, before sendinf the data back, in python you have to paseit into a dict and then sent it as a json
     my_dict = {
-        # "ticket_id": Unique ID also that needs to be passed to the other dark patter funcitons
+        "ticket_id":  data.ticket_id,
         "ticket_name": data.ticket_name,
         "website_link" : data.website_link,
         "user_id" : data.user_id,
@@ -59,15 +59,9 @@ async def ticket_creation(data):
 async def db_insert_req(val):
     open_db = await db_open()
     if(open_db == True):
-        sql = "INSERT INTO ticket (time, ticket_name, websiteLink, userId, userEmail) VALUES (current_timestamp(), %s, %s, %s, %s)"
+        sql = "INSERT INTO ticket (ticket_id, time, ticket_name, websiteLink, userId, userEmail) VALUES (%s, current_timestamp(), %s, %s, %s, %s)"
         await db_insert(sql,val)
         await db_close()
         return True
-    return False
+    return 400
 
-
-# DP Automation recognition, turn this function into a module. import it and dont await for it to finish before sending the answer.
-async def automatic_DP_detection():
-    #TODO create a function for automatic detection of DP. this should be triggered here but we should not wait for it
-    return 
-    
