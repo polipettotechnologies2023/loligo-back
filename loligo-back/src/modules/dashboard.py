@@ -11,13 +11,13 @@ config = dotenv_values(".env")
 class UserInfoDashboard(BaseModel):
     user_id: str
 
-async def get_dashboard(user_info: UserInfoDashboard):
+def get_dashboard(user_info: UserInfoDashboard):
     try:
-        open_db = await db_open()
+        open_db = db_open()
         if open_db == True:
             sql = f"SELECT * FROM ticket WHERE userId = '{user_info.user_id}'"
-            result = await get_db_data(sql)
-            await db_close()
+            result = get_db_data(sql)
+            db_close()
             return {'result': result}
         else:
             return {'error': 'Failed to open the database connection'}, 500
