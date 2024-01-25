@@ -17,13 +17,13 @@ export default function LandingPage() {
             <div className="block1" style={{
                 gridRow:"1 / 5",
                 gridColumn: "1 / 4",
-                backgroundImage: `url(${background})`,
+                backgroundImage: `url(loligo_logo_traced.svg)`,
                 backgroundRepeat: "no-repeat",
                 scale: "1.5",
                 margin: "50px 0px 0px 200px",
                 opacity: "0.5",
                 position:"relative"
-            }}>text here 1</div>
+            }}></div>
             <div className="block2" style={{
                 gridRow:"1 / 3",
                 gridColumn: "2 / 4",
@@ -36,8 +36,7 @@ export default function LandingPage() {
                     </img></div>
             <div className="block3" style={{
                 gridRow:"3 / 5",
-                gridColumn: "2 / 4",
-                //background:"dodgerblue"
+                gridColumn: "2 / 4"
             }}>
                 <h1 style={{textAlign:"center",
                             fontSize:"8rem",
