@@ -1,34 +1,53 @@
-import { Tabs, Tab } from "@nextui-org/react";
-import { Key, useState } from "react";
+import { Button, ButtonGroup } from "@nextui-org/react";
 
 import DataCards from "./DataCards";
 
-export default function RequestFilter() {
-  const [itemCard, setItemCard] = useState(DataCards);
-  const tabItems = [...new Set(DataCards.map((Val) => Val.requestStatus))];
+interface RequestFilterProps {
+  filterItem: (value: string) => void;
+  setItemCard: (data: typeof DataCards) => void;
+}
 
-  const filterItem = (curStatus: Key) => {
-    const newItem = DataCards.filter((newVal) => {
-      return newVal.requestStatus == curStatus;
-    });
-    setItemCard(newItem);
-  };
-
+export default function RequestFilter({
+  filterItem,
+  setItemCard,
+}: RequestFilterProps) {
   return (
     <>
       <div className="flex flex-wrap gap-4 justify-center">
-        <Tabs
-          color="secondary"
-          size="md"
-          aria-label="Tabs colors"
-          radius="full"
-          onSelectionChange={filterItem}
-        >
-          <Tab key="all" title="All" onClick={() => setItemCard(DataCards)} />
-          <Tab key="sent" title="Sent" />
-          <Tab key="review" title="In Review" />
-          <Tab key="done" title="Done" />
-        </Tabs>
+        <ButtonGroup size="md" radius="full" variant="shadow">
+          <Button
+            key="all"
+            title="All"
+            color="warning"
+            onClick={() => setItemCard(DataCards)}
+          >
+            All
+          </Button>
+          <Button
+            key="sent"
+            title="Sent"
+            color="primary"
+            onClick={() => filterItem("sent")}
+          >
+            Sent
+          </Button>
+          <Button
+            key="review"
+            title="In Review"
+            color="secondary"
+            onClick={() => filterItem("review")}
+          >
+            In Review
+          </Button>
+          <Button
+            key="done"
+            title="Done"
+            color="success"
+            onClick={() => filterItem("done")}
+          >
+            Done
+          </Button>
+        </ButtonGroup>
         {/* create a grid of cards requests here */}
       </div>
     </>

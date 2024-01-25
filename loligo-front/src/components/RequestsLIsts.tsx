@@ -6,13 +6,21 @@ import DataCards from "./DataCards";
 import RequestFilter from "./RequestFilter";
 
 export default function RequestsLists() {
-  //const [requestState, setRequestState] = useState(-1);
   const [itemCard, setItemCard] = useState(DataCards);
-  //const tabItems = [...new Set(DataCards.map((Val) => Val.requestStatus))];
+
+  const filterItem = (curStatus: String) => {
+    const newItem = DataCards.filter((newVal) => {
+      return newVal.requestStatus === curStatus;
+    });
+    setItemCard(newItem);
+  };
 
   return (
     <>
-      <RequestFilter></RequestFilter>
+      <RequestFilter
+        filterItem={filterItem}
+        setItemCard={setItemCard}
+      ></RequestFilter>
       <br />
       <h1 className="px-6 text-xl">My Requests</h1>
       <br />

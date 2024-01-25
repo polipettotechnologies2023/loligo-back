@@ -4,14 +4,14 @@ const Data = [
     requestWeb: "https://polipetto.pp.ua/",
     requestName: "Polipetto Technologies",
     requestPicture: "/PolipettoLogo.png",
-    requestStatus: "sent",
+    requestStatus: "done",
   },
   {
     requestId: "REQUEST #000002",
     requestWeb: "https://polipetto.pp.ua/",
     requestName: "Polipetto Technologies",
     requestPicture: "/PolipettoLogo.png",
-    requestStatus: "sent",
+    requestStatus: "review",
   },
   {
     requestId: "REQUEST #000003",
