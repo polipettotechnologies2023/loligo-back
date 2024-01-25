@@ -63,28 +63,28 @@ def get_websites_links(url):
 
 def find_dp_in_websites(url, search_pd):
     links_to_check = get_websites_links(url)
-    found_pd_sites = []
-    print(search_pd)
+    found_pd_sites = {}
 
     for link in links_to_check:
-        print(f'Checking the follwoing link {link}')
+        print(f'Checking the following link {link}')
         try:
             with urllib.request.urlopen(link) as response:
                 html_content = response.read().decode('utf-8').lower()
 
-                # TODO: the following cold be a function and mulitithreading can be enabled
-                for dp, value in search_pd.items():
-                    print(f'Checking the follwoing dp {dp}')
-                    dp_dict = []
-                    for pattern in value: 
-                        print(f'Checking the follwoing pattern {pattern}')
+                for dp, patterns in search_pd.items():
+                    print(f'Checking the following dp {dp}')
+                    for pattern in patterns:
+                        print(f'Checking the following pattern {pattern}')
                         search_pd_lower = pattern.lower()
                         if search_pd_lower in html_content:
                             print(f'{pattern} found here {link}')
-                            dp_dict.append({ pattern : link})
-                    found_pd_sites.append({ dp : dp_dict})
-
-
+                            if dp in found_pd_sites:
+                                if pattern in found_pd_sites[dp]:
+                                    found_pd_sites[dp][pattern].append(link)
+                                else:
+                                    found_pd_sites[dp][pattern] = [link]
+                            else:
+                                found_pd_sites[dp] = {pattern: [link]}
 
         except HTTPError as e:
             print(f"HTTP Error {e.code}: {link}")
