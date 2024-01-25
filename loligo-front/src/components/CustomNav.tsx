@@ -40,14 +40,11 @@ export default function CustomNav() {
               <p className="font-semibold">Signed in as</p>
               <p className="font-semibold">{user?.email}</p>
             </DropdownItem>
-            {/* <DropdownItem key="settings">My Settings</DropdownItem>
-            <DropdownItem key="team_settings">Team Settings</DropdownItem>
-            <DropdownItem key="analytics">Analytics</DropdownItem>
-            <DropdownItem key="system">System</DropdownItem>
-            <DropdownItem key="configurations">Configurations</DropdownItem> */}
             
             
-            <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
+            <DropdownItem key="profile">Profile</DropdownItem>
+            <DropdownItem key="get_help">Get Help</DropdownItem>
+            <DropdownItem key="delete_my_account">Delete my account</DropdownItem>
             <DropdownItem key="logout" color="danger" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
               Log Out
             </DropdownItem>
