@@ -8,9 +8,7 @@ import {
   useDisclosure,
   Input,
 } from "@nextui-org/react";
-// import { useAuth0 } from "@auth0/auth0-react";
-// import { Link } from "react-router-dom";
-
+import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -18,20 +16,23 @@ import { RootState } from "../vite-env";
 
 export default function NewRequest() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  async function SubmitBottonHandler() {}
-  //formData is a name that represent the values that are passed in the form
-  // PS: we are not using the formData obj so it's better to rename it
-  const [name, setFormData] = useState("");
+  const { user } = useAuth0();
+  
+  
   const [websiteName, setWebsiteName] = useState("");
+  const [webSiteLink, setWebsiteLink] = useState("");
   const token = useSelector((state: RootState) => state.token.value);
 
-  const createTicket = async () => {
+  const SubmitBottonHandler = async () => {
     // you can find the data to send in the backand interface
     //  for the ticketId use this library https://www.npmjs.com/package/uuid
     let res = await axios.post(
       `${import.meta.env.VITE_PYTHON_SERVER}/newrequest`,
       {
-        name,
+        "ticket_name" : websiteName,
+        "website_link" : webSiteLink,
+        "user_email" : user?.email,
+        "user_id" : user?.sub,
       },
       {
         headers: {
@@ -49,6 +50,10 @@ export default function NewRequest() {
       alert(res.status);
       console.log(res);
     }
+    // console.log(webSiteLink)
+    // console.log(websiteName)
+    
+
   };
 
   return (
@@ -74,6 +79,7 @@ export default function NewRequest() {
                 />
                 <p>Your Base URL:</p>
                 <Input
+                onChange={ e => setWebsiteLink(e.target.value)}
                   label=""
                   placeholder="i.e.polipetto.pp.ua"
                   type="WebsiteURL"
