@@ -23,7 +23,7 @@ export default function NewRequest() {
   const [webSiteLink, setWebsiteLink] = useState("");
   const token = useSelector((state: RootState) => state.token.value);
 
-  const SubmitBottonHandler = async () => {
+  const SubmitBottonHandler = async (onClose : () => void) => {
     // you can find the data to send in the backand interface
     //  for the ticketId use this library https://www.npmjs.com/package/uuid
     let res = await axios.post(
@@ -50,9 +50,7 @@ export default function NewRequest() {
       alert(res.status);
       console.log(res);
     }
-    // console.log(webSiteLink)
-    // console.log(websiteName)
-    
+    onClose()
 
   };
 
@@ -91,7 +89,7 @@ export default function NewRequest() {
                   HINT: A correct base URL looks something like this:
                   https://www.instagram.com/
                 </p>
-                <Button color="primary" onPress={() => SubmitBottonHandler()}>
+                <Button color="primary" onPress={() => SubmitBottonHandler(onClose)}>
                   Submit
                 </Button>
               </ModalFooter>
