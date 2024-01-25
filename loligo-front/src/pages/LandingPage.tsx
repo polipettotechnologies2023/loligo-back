@@ -1,5 +1,5 @@
 import LoginButton from '../components/LoginButton';
-import background from '../assets/loligo_logo_traced.svg'
+// import background from '../assets/loligo_logo_traced.svg'
 import LoginButtonExpert from '../components/LoginButtonExpert';
 export default function LandingPage() {
 
