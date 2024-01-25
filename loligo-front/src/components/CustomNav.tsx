@@ -8,14 +8,12 @@ import {
   Dropdown,
   DropdownMenu,
   Avatar,
-  Button,
 } from "@nextui-org/react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 
 export default function CustomNav() {
   const { user, logout } = useAuth0();
-
   return (
     <Navbar>
       <NavbarBrand>
@@ -26,9 +24,7 @@ export default function CustomNav() {
 
       <NavbarContent className=" sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link to="/newrequest">
-            <Button> ➕ new Request</Button>
-          </Link>
+          <NewRequest></NewRequest>
         </NavbarItem>
       </NavbarContent>
 
