@@ -8,7 +8,8 @@ from .utils import VerifyAndIssueToken as VerifyToken
 from .utils import get_access_token
 from ..modules.dashboard import get_dashboard, UserInfoDashboard
 from ..modules.certificates import get_my_certificates
-from ..modules.jira_intereactions import store_issue_id
+from ..modules.jira_intereactions import store_issue_id, JiraRequest
+
 
 router = APIRouter()
 
@@ -63,7 +64,7 @@ async def handle_get_my_certificates(request_data : UserInfoDashboard = Body(...
 #     return new_request_func(request_data)
 
 @router.post("/issueid")
-async def handle_storage_issue_id(request_data, token : str = Depends(token_auth_scheme)):
+async def handle_storage_issue_id(request_data : JiraRequest = Body(...), token : str = Depends(token_auth_scheme)):
     result = VerifyToken(token.credentials).verify()
     # TODO: check the result before sendiing the request
     print(result)
