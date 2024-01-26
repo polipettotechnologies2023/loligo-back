@@ -1,8 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
 from dotenv import dotenv_values
-import requests
-import mysql.connector
 from .db_connection import db_open
 from .db_connection import db_close
 from .db_connection import db_insert
@@ -19,6 +17,8 @@ class UserInfoNewRequest(BaseModel): #this is an interface. this how you define 
     user_id : str
     user_email : str
 
+class UserInfoDashboard(BaseModel):
+    user_id: str
 
 #main function module
 def new_request_func(userInfoNewRequest : UserInfoNewRequest):
