@@ -18,7 +18,6 @@ class JiraRequest(BaseModel): #this is an interface. this how you define the str
     oldData : UserInfoNewRequest
        
 
-
 config = dotenv_values(".env")
 
 def ticket_creation(data,dp_result):
