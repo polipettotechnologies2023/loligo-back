@@ -1,6 +1,8 @@
 from dotenv import dotenv_values
 import requests
 from threading import Thread
+from .db_connection import db_open
+from .db_connection import db_update
 
 config = dotenv_values(".env")
 
@@ -23,8 +25,17 @@ def ticket_creation(data,dp_result):
 
         print("jira ticket creation was called succesfully")
 
+
+
     except:
         print("error in request for jira")
         # if this return false notify the adminitrator or something
         return False
     return True
+
+
+def store_issue_id(data):
+
+    print(data)
+    
+    return 200
