@@ -20,6 +20,7 @@ def ticket_creation(data,dp_result):
     try:
         res = requests.post(url, json = my_dict)
         print(res)
+
         print("jira ticket creation was called succesfully")
 
     except:
