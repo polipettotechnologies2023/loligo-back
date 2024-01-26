@@ -1,6 +1,6 @@
 // import { useAuth0 } from "@auth0/auth0-react";
 import RequestsLists from "../components/RequestsLIsts"
-
+import CustomRequest from "../components/CustomRequest"
 
 export default function Home() {
 
@@ -8,9 +8,7 @@ export default function Home() {
 
 
     return (
-  
-           <RequestsLists></RequestsLists>
-     
+            <CustomRequest></CustomRequest>
          )
        
 }
