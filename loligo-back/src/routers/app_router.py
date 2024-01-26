@@ -7,6 +7,9 @@ from fastapi.security import HTTPBearer
 from .utils import VerifyAndIssueToken as VerifyToken
 from .utils import get_access_token
 from ..modules.dashboard import get_dashboard, UserInfoDashboard
+from ..modules.ticket_management import get_jira_issues_by_ticket_id, get_jira_issues_by_ticket_id2
+import requests
+
 
 router = APIRouter()
 
@@ -43,3 +46,20 @@ async def handle_new_request(request_data : UserInfoNewRequest = Body(...), toke
 
 
 # endpoints for jira automations
+
+@router.post("/tickets/{ticket_id}")
+async def get_issues_by_ticket_id(ticket_id: str):
+    try:
+        issues = await get_jira_issues_by_ticket_id(ticket_id)
+        return {"issues": issues["issues"]}
+    except requests.exceptions.RequestException as e:
+        raise HTTPException(status_code=500, detail=f"Jira API request failed: {str(e)}")
+
+#same route method as above but just to get
+@router.get("/tickets/{ticket_id}")
+async def get_issues_by_ticket_id2(ticket_id: str):
+    try:
+        issues = await get_jira_issues_by_ticket_id2(ticket_id)
+        return {"issues": issues["issues"]}
+    except requests.exceptions.RequestException as e:
+        raise HTTPException(status_code=500, detail=f"Jira API request failed: {str(e)}")
