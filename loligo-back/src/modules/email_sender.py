@@ -1,1 +1,0 @@
-# https://resend.com/docs/send-with-python
