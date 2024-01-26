@@ -63,7 +63,8 @@ async def handle_get_my_certificates(request_data : UserInfoDashboard = Body(...
 #     return new_request_func(request_data)
 
 @router.post("/issueid")
-async def handle_storage_issue_id(request_data : UserInfoNewRequest = Body(...), token : str = Depends(token_auth_scheme)):
+
+async def handle_storage_issue_id(request_data, token : str = Depends(token_auth_scheme)):
     result = VerifyToken(token.credentials).verify()
     # TODO: check the result before sendiing the request
     print(result)
