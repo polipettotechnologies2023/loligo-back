@@ -1,8 +1,31 @@
-import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
 import NewRequestButton from "../components/NewRequestButton";
 import CustomFilter from "../components/CustomFilter";
+import CustomCard from "./CustomCard";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function CustomRequest() {
+const [cardList, setCardList] = useState(()=> HTMLAllCollection)
+const { user } = useAuth0();
+  useEffect(()=>{
+    (async ()=>{
+      
+    let res = await axios.post(import.meta.env.VITE_JIRA_SEARCH,{
+      // "jql": `project= LOL AND UserID ~ ${user?.sub}`,
+      // "maxResults": 50
+      },{
+      auth: {
+        'username': 'polipettotechnologies@gmail.com',
+        'password': 'ATATT3xFfGF07QBgdCmx_WTsetPDSLpGtoEiCq6cExdz-QWEyo2DDvQouBwAec_PgbuWrAndyNv3qhYy-Ze4eTHwHAEsDAKYnOlNA5NjLwtm5jpjLS4s1LIw4Yhnxrvw65i6o5y-gYjmdeU2AJoG--58C2zF4E2YcE3yp2IFksklyK5cvsATfiA=FC9B23B0',
+      }
+    }
+    )
+      console.log(res)
+
+    })()
+  },[])
+
   return (
     <>
       <div
@@ -56,34 +79,10 @@ export default function CustomRequest() {
           }}
         >
           <NewRequestButton></NewRequestButton>
+
         </div>
       </div>
-      <Card
-        className="py-4"
-        isPressable
-        onPress={() => console.log("item pressed")}
-        style={{
-          margin: "1em 5em",
-        }}
-      >
-        <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-          <p className="text-tiny uppercase font-bold">REQUEST #12345 </p>{" "}
-          {/* ticketId */}
-          <small className="text-default-500">
-            https://www.loligo.com
-          </small>{" "}
-          {/* websiteLink */}
-          <h4 className="font-bold text-large">Loligo</h4> {/* websiteName */}
-        </CardHeader>
-        <CardBody className="overflow-visible py-2">
-          <Image
-            alt="Card background"
-            className="object-cover rounded-3xl"
-            src="sent_backdrop.svg" //This should be variable, based on status
-            width={370}
-          />
-        </CardBody>
-      </Card>
+          <CustomCard></CustomCard>
     </>
   );
 }
