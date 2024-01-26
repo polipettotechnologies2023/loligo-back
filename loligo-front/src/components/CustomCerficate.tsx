@@ -1,3 +1,5 @@
+import CustomCard from "./CustomCard";
+
 export default function CustomCertificate(){
     return(
         <>
@@ -34,6 +36,11 @@ export default function CustomCertificate(){
            }}>
            </div>
          </div>
+         <CustomCard></CustomCard>
+         <CustomCard></CustomCard>
+         <CustomCard></CustomCard>
+         <CustomCard></CustomCard>
+         
         </>
     )
 }

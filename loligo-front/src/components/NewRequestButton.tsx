@@ -16,13 +16,16 @@ export default function newRequestButton() {
     const SubmitButtonHandler = async () => {
       // you can find the data to send in the backand interface
       //  for the ticketId use this library https://www.npmjs.com/package/uuid
+      if(user?.sub)
+      {
+      let user_id = extractUserId(user?.sub)
       let res = await axios.post(
         `${import.meta.env.VITE_PYTHON_SERVER}/newrequest`,
         {
           "ticket_name" : websiteName,
           "website_link" : webSiteLink,
           "user_email" : user?.email,
-          "user_id" : user?.sub,
+          "user_id" : user_id,
         },
         {
           headers: {
@@ -41,7 +44,17 @@ export default function newRequestButton() {
         alert(res.status);
         console.log(res);
       }  
+    }
     };
+
+    function extractUserId(userString: string) {
+      const separatorIndex = userString.indexOf("|");
+      if (separatorIndex !== -1) {
+          return userString.slice(separatorIndex + 1);
+      } else {
+          return userString;
+      }
+  }
     
   return (
     <Popover placement="bottom" showArrow={true} size="lg">

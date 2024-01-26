@@ -11,7 +11,7 @@ export default function CustomCard(prop: any) { //TODO: ts interface
     }}
   >
     <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-      <p className="text-tiny uppercase font-bold">{prop.ticketId} </p>{" "}
+      <p className="text-tiny uppercase font-bold">{prop.ticketId}</p>
       {/* ticketId */}
       <small className="text-default-500">
        {prop.website_link}
@@ -26,6 +26,7 @@ export default function CustomCard(prop: any) { //TODO: ts interface
         src={prop.statusImage} //This should be variable, based on status
         width={370}
       />
+      <p>{prop.status}</p>
     </CardBody>
   </Card>
   );

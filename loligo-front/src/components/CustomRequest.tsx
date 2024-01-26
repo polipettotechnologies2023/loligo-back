@@ -4,27 +4,46 @@ import CustomCard from "./CustomCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useSelector } from "react-redux";
+import { RootState } from "../vite-env";
 
 export default function CustomRequest() {
 const [cardList, setCardList] = useState(()=> HTMLAllCollection)
 const { user } = useAuth0();
+const token = useSelector((state: RootState) => state.token.value);
+
   useEffect(()=>{
     (async ()=>{
-      
-    let res = await axios.post(import.meta.env.VITE_JIRA_SEARCH,{
-      // "jql": `project= LOL AND UserID ~ ${user?.sub}`,
-      // "maxResults": 50
+    if(user?.sub)
+    {
+    let user_id = await extractUserId(user?.sub)
+    let res = await axios.post(`${import.meta.env.VITE_PYTHON_SERVER}/dashboard`,{
+      user_id
       },{
-      auth: {
-        'username': 'polipettotechnologies@gmail.com',
-        'password': 'ATATT3xFfGF07QBgdCmx_WTsetPDSLpGtoEiCq6cExdz-QWEyo2DDvQouBwAec_PgbuWrAndyNv3qhYy-Ze4eTHwHAEsDAKYnOlNA5NjLwtm5jpjLS4s1LIw4Yhnxrvw65i6o5y-gYjmdeU2AJoG--58C2zF4E2YcE3yp2IFksklyK5cvsATfiA=FC9B23B0',
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
       }
-    }
     )
-      console.log(res)
-
+    
+      let issues = JSON.parse(res.data)
+      let cardMap = issues.issues.map((issue:any)=> {
+        return <CustomCard key={issue?.fields?.customfield_10062} ticketId={issue?.fields?.customfield_10062} status={issue?.fields?.status?.name}></CustomCard>
+      });
+      setCardList(cardMap)
+    }
     })()
   },[])
+
+  async function extractUserId(userString: string) {
+    const separatorIndex = userString.indexOf("|");
+    if (separatorIndex !== -1) {
+        return userString.slice(separatorIndex + 1);
+    } else {
+        return userString;
+    }
+}
 
   return (
     <>
@@ -82,7 +101,7 @@ const { user } = useAuth0();
 
         </div>
       </div>
-          <CustomCard></CustomCard>
+          {cardList}
     </>
   );
 }

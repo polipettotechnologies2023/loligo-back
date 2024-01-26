@@ -1,9 +1,10 @@
 import LoginButton from '../components/LoginButton';
 // import background from '../assets/loligo_logo_traced.svg'
 import LoginButtonExpert from '../components/LoginButtonExpert';
+import "./LandingPage.css"
 export default function LandingPage() {
 
-    document.body.style.overflow = "hidden"
+    //document.body.style.overflow = "hidden"
 
     return (
          <>
