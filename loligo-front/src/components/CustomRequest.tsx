@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../vite-env";
 
 export default function CustomRequest() {
-const [cardList, setCardList] = useState(()=> HTMLAllCollection)
+const [cardList, setCardList] = useState("")
 const { user } = useAuth0();
 const token = useSelector((state: RootState) => state.token.value);
 
@@ -101,7 +101,9 @@ const token = useSelector((state: RootState) => state.token.value);
 
         </div>
       </div>
+        <div className="gap-2 grid grid-cols-2 md:grid-cols-4">
           {cardList}
+          </div>
     </>
   );
 }
