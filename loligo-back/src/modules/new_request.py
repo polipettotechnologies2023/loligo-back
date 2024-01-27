@@ -42,7 +42,8 @@ def new_request_func(userInfoNewRequest : UserInfoNewRequest):
         return {
                 "result": "error",
                 "status": issue_creation.status_code,
-                "message": "an error has occured during the issue creation. Please create a new ticket or contact the assistance polipettotechnologis@gmail.com"
+                "message": "an error has occured during the issue creation. Please create a new ticket or contact the assistance polipettotechnologis@gmail.com",
+                "message" : issue_creation.content
             }
 
     Thread(target=lambda: automatic_dp_detection(userInfoNewRequest.website_link, userInfoNewRequest, parsed_res)).start()
