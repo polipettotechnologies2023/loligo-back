@@ -6,7 +6,12 @@ from fastapi import Depends, Body
 from fastapi.security import HTTPBearer
 from .utils import VerifyAndIssueToken as VerifyToken
 from .utils import get_access_token
+<<<<<<< HEAD
 from ..modules.dashboard import get_dashboard, UserInfoDashboard
+=======
+from ..modules.certificates import get_my_certificates
+from ..modules.dashboard import get_dashboard
+>>>>>>> c4823b7a81ee7e634ecd1986dfb1552aed9113d7
 
 router = APIRouter()
 
@@ -25,6 +30,12 @@ def login(user_id: str):
     access_token = get_access_token(user_id)
     return access_token
 
+@router.post("/dashboard")
+def handle_dahsboard(request_data : UserInfoDashboard = Body(...), token : str = Depends(token_auth_scheme)):
+    result = VerifyToken(token.credentials).verify()
+    # TODO: check the result before sendiing the request
+    print(result)
+    return get_dashboard(request_data)
 
 @router.post("/newrequest")
 async def handle_new_request(request_data : UserInfoNewRequest = Body(...), token : str = Depends(token_auth_scheme)):
