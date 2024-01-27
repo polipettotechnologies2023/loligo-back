@@ -1,12 +1,13 @@
 
 from typing import Union
 from fastapi import APIRouter
-from ..modules.new_request import new_request_func, UserInfoNewRequest
-from fastapi import Depends, HTTPException, Header, Body
+from ..modules.new_request import new_request_func, UserInfoNewRequest, UserInfoDashboard
+from fastapi import Depends, Body
 from fastapi.security import HTTPBearer
 from .utils import VerifyAndIssueToken as VerifyToken
 from .utils import get_access_token
-from ..modules.dashboard import get_dashboard, UserInfoDashboard
+from ..modules.certificates import get_my_certificates
+from ..modules.dashboard import get_dashboard
 
 router = APIRouter()
 
@@ -25,14 +26,12 @@ def login(user_id: str):
     access_token = get_access_token(user_id)
     return access_token
 
-
 @router.post("/dashboard")
 def handle_dahsboard(request_data : UserInfoDashboard = Body(...), token : str = Depends(token_auth_scheme)):
     result = VerifyToken(token.credentials).verify()
     # TODO: check the result before sendiing the request
     print(result)
     return get_dashboard(request_data)
-
 
 @router.post("/newrequest")
 async def handle_new_request(request_data : UserInfoNewRequest = Body(...), token : str = Depends(token_auth_scheme)):
@@ -42,4 +41,20 @@ async def handle_new_request(request_data : UserInfoNewRequest = Body(...), toke
     return new_request_func(request_data)
 
 
+@router.post("/mycertificates")
+async def handle_get_my_certificates(request_data : UserInfoDashboard = Body(...), token : str = Depends(token_auth_scheme)):
+    result = VerifyToken(token.credentials).verify()
+    # TODO: check the result before sendiing the request
+    print(result)
+    return get_my_certificates(request_data)
+
+
+
 # endpoints for jira automations
+
+# @router.post("/certify")
+# async def handle_new_request(request_data : UserInfoNewRequest = Body(...), token : str = Depends(token_auth_scheme)):
+#     result = VerifyToken(token.credentials).verify()
+#     # TODO: check the result before sendiing the request
+#     print(result)
+#     return new_request_func(request_data)

@@ -1,17 +1,20 @@
 import { Outlet } from "react-router-dom";
-import CustomNav from "../components/CustomNav"
 
+import CustomNav from "../components/CustomNav";
 // TODO Creare a good layout page
 
 const Layout = () => {
   return (
     <>
-    <br />
-      <CustomNav></CustomNav>
-      <br />
-      <br />
-      {/* TODO: change the br with some real spacing in css/trailwind/nexui */}
-      <Outlet />
+    <CustomNav></CustomNav>
+      {/* Container of "My requests" header, filter and new request btn */}
+
+      <div className="container" id="requests">
+        <Outlet></Outlet>
+      </div>
+      {/* Container of "My certificates" header*/}
+
+
     </>
   )
 };

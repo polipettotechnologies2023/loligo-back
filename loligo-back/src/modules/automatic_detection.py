@@ -1,16 +1,9 @@
-# https://arrow.tudublin.ie/cgi/viewcontent.cgi?article=1162&context=scschcomart
-
-# test https://devsolc.netlify.app/
-# test https://www.victorypiesolutions.com/#team
-
 import urllib.request
 import re
-from urllib.parse import urlparse, urljoin
 from urllib.error import URLError, HTTPError
-from .jira_intereactions import ticket_creation
+from .jira_intereactions import update_issue_dp
 from .db_connection import db_open
-from .db_connection import db_close
-from .db_connection import db_update
+from .db_connection import db_update 
 import json
 
 def is_html(content_type):
@@ -93,7 +86,7 @@ def find_dp_in_websites(url, search_pd):
     return found_pd_sites
 
 
-def automatic_dp_detection(url_link, userData):
+def automatic_dp_detection(url_link, userData, issueData):
 
     #TODO: think about using multithreading for this -- see above 
     search_dp_to_find = {
@@ -107,8 +100,9 @@ def automatic_dp_detection(url_link, userData):
     # update endtry in the db
     db_update_req(userData,result)
 
-    # create a jira ticket
-    ticket_creation(userData,result)
+    # update a jira ticket
+    update_issue_dp(issueData,result)
+
     return
 
 

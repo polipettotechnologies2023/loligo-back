@@ -1,10 +1,6 @@
 from pydantic import BaseModel
 from dotenv import dotenv_values
 import requests
-import mysql.connector
-from .db_connection import db_open
-from .db_connection import db_close
-from .db_connection import get_db_data
 
 config = dotenv_values(".env")
 
@@ -12,14 +8,14 @@ class UserInfoDashboard(BaseModel):
     user_id: str
 
 def get_dashboard(user_info: UserInfoDashboard):
+    print(user_info)
     try:
-        open_db = db_open()
-        if open_db == True:
-            sql = f"SELECT * FROM ticket WHERE userId = '{user_info.user_id}'"
-            result = get_db_data(sql)
-            db_close()
-            return {'result': result}
-        else:
-            return {'error': 'Failed to open the database connection'}, 500
+        url = config["JIRA_SEARCH"]
+        jql = {
+            "jql": f"project= LOL AND UserID ~ '{user_info.user_id}'",
+            "maxResults": 50
+            }
+        res = requests.post(url, json = jql, auth = (f'{config["JIRA_USERNAME"]}', config["JIRA_API_TOKEN"]))
+        return res.content
     except Exception as e:
         return {'error': f'An error occurred: {str(e)}'}, 500
