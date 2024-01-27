@@ -7,6 +7,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useSelector } from "react-redux";
 import { RootState } from "../vite-env";
 
+
 export default function CustomRequest() {
 const [cardList, setCardList] = useState("")
 const { user } = useAuth0();
@@ -51,12 +52,15 @@ const token = useSelector((state: RootState) => state.token.value);
         className="container"
         style={{
           display: "flex",
+          marginTop: "2em",
+          maxWidth: "100%",
+          justifyContent: "center"
         }}
       >
         <div
           className="column"
           style={{
-            margin: "1em 1em 0 0",
+            marginTop: "1em",
             flex: "1",
           }}
         >
@@ -78,7 +82,7 @@ const token = useSelector((state: RootState) => state.token.value);
         <div
           className="column"
           style={{
-            margin: "1em 1em 0 0",
+            marginTop: "1em",
             flex: "1",
             display: "flex",
             alignItems: "center",
@@ -90,7 +94,7 @@ const token = useSelector((state: RootState) => state.token.value);
         <div
           className="column"
           style={{
-            margin: "1em 1em 0 0",
+            marginTop: "1em",
             flex: "1",
             display: "flex",
             alignItems: "center",
