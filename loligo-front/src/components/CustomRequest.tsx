@@ -30,7 +30,17 @@ const token = useSelector((state: RootState) => state.token.value);
     
       let issues = JSON.parse(res.data)
       let cardMap = issues.issues.map((issue:any)=> {
-        return <CustomCard key={issue?.fields?.customfield_10062} ticketId={issue?.fields?.customfield_10062} status={issue?.fields?.status?.name}></CustomCard>
+        console.log(issue?.fields)
+        if(issue?.fields?.customfield_10068?.id !== "10081")
+        {    
+        return <CustomCard key={issue?.fields?.customfield_10062} 
+                            ticketId={issue?.fields?.customfield_10062} 
+                            status={issue?.fields?.status?.id} 
+                            website_link={issue?.fields?.customfield_10048} 
+                            websiteName={issue?.fields?.summary} 
+                            outcome={issue?.fields?.customfield_10068.id}
+                            entry_time={issue?.fields?.customfield_10046}></CustomCard>
+        }
       });
       setCardList(cardMap)
     }
@@ -105,7 +115,7 @@ const token = useSelector((state: RootState) => state.token.value);
 
         </div>
       </div>
-        <div className="gap-2 grid grid-cols-2 md:grid-cols-4">
+        <div className="gap-2 grid grid-cols-3 lg:grid-cols-4">
           {cardList}
           </div>
     </>

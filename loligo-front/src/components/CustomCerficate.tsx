@@ -1,6 +1,53 @@
 import CustomCard from "./CustomCard";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useSelector } from "react-redux";
+import { RootState } from "../vite-env";
 
 export default function CustomCertificate(){
+
+  const [cardList, setCardList] = useState("")
+  const { user } = useAuth0();
+  const token = useSelector((state: RootState) => state.token.value);
+  
+    useEffect(()=>{
+      (async ()=>{
+      if(user?.sub)
+      {
+      let user_id = await extractUserId(user?.sub)
+      let res = await axios.post(`${import.meta.env.VITE_PYTHON_SERVER}/dashboard`,{
+        user_id
+        },{
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${token}`,
+          },
+        }
+      )
+      
+        let issues = JSON.parse(res.data)
+        let cardMap = issues.issues.map((issue:any)=> {
+          if(issue?.fields?.customfield_10068?.id == "10081")
+          {         
+            return <CustomCard key={issue?.fields?.customfield_10062} ticketId={issue?.fields?.customfield_10062} status={issue?.fields?.status?.id} website_link={issue?.fields?.customfield_10048} websiteName={issue?.fields?.summary} outcome={issue?.fields?.customfield_10068.id}></CustomCard> 
+          }
+          }); 
+        setCardList(cardMap)
+      }
+      })()
+    },[])
+  
+    async function extractUserId(userString: string) {
+      const separatorIndex = userString.indexOf("|");
+      if (separatorIndex !== -1) {
+          return userString.slice(separatorIndex + 1);
+      } else {
+          return userString;
+      }
+  }
+
+
     return(
         <>
         <div className="container" id="myRequestsContainer" style={{
@@ -36,11 +83,9 @@ export default function CustomCertificate(){
            }}>
            </div>
          </div>
-         <CustomCard></CustomCard>
-         <CustomCard></CustomCard>
-         <CustomCard></CustomCard>
-         <CustomCard></CustomCard>
-         
-        </>
+         <div className="gap-2 grid grid-cols-3 lg:grid-cols-4">
+          {cardList}
+          </div>        
+          </>
     )
 }
