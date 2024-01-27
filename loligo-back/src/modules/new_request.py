@@ -24,7 +24,7 @@ class UserInfoDashboard(BaseModel):
 
 #main function module
 def new_request_func(userInfoNewRequest : UserInfoNewRequest):
-    userInfoNewRequest.ticket_id = uuid4()
+    userInfoNewRequest.ticket_id = f"LOLIGO-{uuid4()}"
     ticket_insetion = db_insert_req((f"{userInfoNewRequest.ticket_id}", f"{userInfoNewRequest.ticket_name}",f"{userInfoNewRequest.website_link}",f"{userInfoNewRequest.user_id}",f"{userInfoNewRequest.user_email}"))    
     
     if(ticket_insetion == False):
