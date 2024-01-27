@@ -7,6 +7,7 @@ import {
   Button,
   useDisclosure,
   Input,
+  Textarea,
 } from "@nextui-org/react";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
@@ -17,22 +18,21 @@ import { RootState } from "../vite-env";
 export default function NewRequest() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { user } = useAuth0();
-  
-  
+
   const [websiteName, setWebsiteName] = useState("");
   const [webSiteLink, setWebsiteLink] = useState("");
   const token = useSelector((state: RootState) => state.token.value);
 
-  const SubmitBottonHandler = async (onClose : () => void) => {
+  const SubmitBottonHandler = async (onClose: () => void) => {
     // you can find the data to send in the backand interface
     //  for the ticketId use this library https://www.npmjs.com/package/uuid
     let res = await axios.post(
       `${import.meta.env.VITE_PYTHON_SERVER}/newrequest`,
       {
-        "ticket_name" : websiteName,
-        "website_link" : webSiteLink,
-        "user_email" : user?.email,
-        "user_id" : user?.sub,
+        ticket_name: websiteName,
+        website_link: webSiteLink,
+        user_email: user?.email,
+        user_id: user?.sub,
       },
       {
         headers: {
@@ -50,8 +50,7 @@ export default function NewRequest() {
       alert(res.status);
       console.log(res);
     }
-    onClose()
-
+    onClose();
   };
 
   return (
@@ -77,19 +76,27 @@ export default function NewRequest() {
                 />
                 <p>Your Base URL:</p>
                 <Input
-                onChange={ e => setWebsiteLink(e.target.value)}
+                  onChange={(e) => setWebsiteLink(e.target.value)}
                   label=""
                   placeholder="i.e.polipetto.pp.ua"
                   type="WebsiteURL"
                   variant="bordered"
                 />
+
+                <Textarea
+                  isDisabled
+                  label="Hint"
+                  labelPlacement="outside"
+                  placeholder="Enter your description"
+                  defaultValue="A correct base URL looks something like this: https://www.instagram.com/"
+                  className="max-w-s"
+                />
               </ModalBody>
               <ModalFooter>
-                <p>
-                  HINT: A correct base URL looks something like this:
-                  https://www.instagram.com/
-                </p>
-                <Button color="primary" onPress={() => SubmitBottonHandler(onClose)}>
+                <Button
+                  color="primary"
+                  onPress={() => SubmitBottonHandler(onClose)}
+                >
                   Submit
                 </Button>
               </ModalFooter>
@@ -97,7 +104,6 @@ export default function NewRequest() {
           )}
         </ModalContent>
       </Modal>
-    
     </>
   );
 }
