@@ -39,7 +39,8 @@ const token = useSelector((state: RootState) => state.token.value);
                             website_link={issue?.fields?.customfield_10048} 
                             websiteName={issue?.fields?.summary} 
                             outcome={issue?.fields?.customfield_10068.id}
-                            entry_time={issue?.fields?.customfield_10046}></CustomCard>
+                            entry_time={issue?.fields?.customfield_10046}
+                            automaticDetectionResults={issue?.fields?.customfield_10060}></CustomCard>
         }
       });
       setCardList(cardMap)
@@ -74,15 +75,8 @@ const token = useSelector((state: RootState) => state.token.value);
             flex: "1",
           }}
         >
-          <h1
+          <h1 className="text-6xl	bg-gradient-to-tr from-purple-950 via-purple-800 to-fuchsia-500 text-transparent text-wrap bg-clip-text font-bold text-center"
             style={{
-              textAlign: "center",
-              fontSize: "4rem",
-              fontWeight: "bolder",
-              lineHeight: "1em",
-              WebkitTextFillColor: "transparent",
-              backgroundImage: "linear-gradient(45deg, #020024, #a516b3)",
-              backgroundClip: "text",
               margin: ".5em",
             }}
           >
