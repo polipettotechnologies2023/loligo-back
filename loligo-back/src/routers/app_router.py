@@ -58,3 +58,30 @@ async def handle_get_my_certificates(request_data : UserInfoDashboard = Body(...
 #     # TODO: check the result before sendiing the request
 #     print(result)
 #     return new_request_func(request_data)
+
+
+#######################################################
+#HOTFIX FOR THE DEMO -- EXCEEDED MACHINE TO MACHINE TOKEN IN AUTH0
+#######################################################
+
+@router.post("/dashboard")
+def handle_dahsboard(request_data : UserInfoDashboard = Body(...)):
+    # result = VerifyToken(token.credentials).verify()
+    # TODO: check the result before sendiing the request
+    # print(result)
+    return get_dashboard(request_data)
+
+@router.post("/newrequest")
+async def handle_new_request(request_data : UserInfoNewRequest = Body(...)):
+    # result = VerifyToken(token.credentials).verify()
+    # TODO: check the result before sendiing the request
+    # print(result)
+    return new_request_func(request_data)
+
+
+@router.post("/mycertificates")
+async def handle_get_my_certificates(request_data : UserInfoDashboard = Body(...)):
+    # result = VerifyToken(token.credentials).verify()
+    # TODO: check the result before sendiing the request
+    # print(result)
+    return get_my_certificates(request_data)
