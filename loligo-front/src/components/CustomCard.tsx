@@ -4,12 +4,15 @@ export default function CustomCard(prop: any) { //TODO: ts interface
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   console.log("isOpen : ", isOpen);
 
+
   let outcome = prop.status+"_"+prop.outcome;
+  let certifiedBackground = "";
   let outcomeColor = "";
   console.log(outcome);
 
   if(outcome == "10002_10081"){
     outcomeColor = "bg-gradient-to-tr from-sky-400 via-sky-500 to-blue-500 text-white";
+    certifiedBackground = "bg-loligo_certified bg-no-repeat";
   }
   else {
     outcomeColor = "bg-gradient-to-tr from-purple-950 via-purple-800 to-fuchsia-500 text-white"
@@ -44,7 +47,12 @@ export default function CustomCard(prop: any) { //TODO: ts interface
     </CardBody>
   </Card>
 
-  <Modal isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={false} backdrop="opaque" size="3xl">
+  <Modal isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={false} backdrop="opaque" size="3xl" className={certifiedBackground} style={{
+    backgroundRepeat: "no-repeat",
+    backgroundColor: "white",
+    backgroundPositionX: "right",
+    backgroundSize: ""
+  }}>
                 {/* PASS isOpen STATE FROM  useDisclosure HOOK*/}
                 <ModalContent>
 
@@ -78,6 +86,8 @@ export default function CustomCard(prop: any) { //TODO: ts interface
                                         <p className="text-lg text-wrap">Unfortunately, your website does not meet the necessary requirements to be certified.
                                         <br></br>
                                         What does that mean? After our careful analysis, our experts have found Dark Patterns present in your website. </p>
+                                        <h1 className="text-lg font-bold">Here is what we found:</h1>
+                                        <p>{prop.automaticDetectionResults}</p>
                                         <ModalFooter>
                                           <Button className={outcomeColor} onPress={onClose}>{/* PASS  onClose FUNCTION TO onPress EVENT LISTENER*/}Close</Button>
                                         </ModalFooter>

@@ -39,7 +39,8 @@ const token = useSelector((state: RootState) => state.token.value);
                             website_link={issue?.fields?.customfield_10048} 
                             websiteName={issue?.fields?.summary} 
                             outcome={issue?.fields?.customfield_10068.id}
-                            entry_time={issue?.fields?.customfield_10046}></CustomCard>
+                            entry_time={issue?.fields?.customfield_10046}
+                            automaticDetectionResults={issue?.fields?.customfield_10060}></CustomCard>
         }
       });
       setCardList(cardMap)
