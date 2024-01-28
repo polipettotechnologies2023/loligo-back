@@ -6,9 +6,6 @@ from .db_connection import db_open
 from .db_connection import db_update 
 import json
 from urllib.parse import urljoin
-from urllib.parse import urlparse
-
-from url_normalize import url_normalize
 from bs4 import BeautifulSoup
 
 
