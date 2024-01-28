@@ -9,7 +9,9 @@ const Layout = () => {
     <CustomNav></CustomNav>
       {/* Container of "My requests" header, filter and new request btn */}
 
-      <div className="container" id="requests">
+      <div className="container" id="requests" style={{
+        maxWidth:"100%"
+      }}>
         <Outlet></Outlet>
       </div>
       {/* Container of "My certificates" header*/}
