@@ -6,12 +6,9 @@ from fastapi import Depends, Body
 from fastapi.security import HTTPBearer
 from .utils import VerifyAndIssueToken as VerifyToken
 from .utils import get_access_token
-<<<<<<< HEAD
 from ..modules.dashboard import get_dashboard, UserInfoDashboard
-=======
 from ..modules.certificates import get_my_certificates
 from ..modules.dashboard import get_dashboard
->>>>>>> c4823b7a81ee7e634ecd1986dfb1552aed9113d7
 
 router = APIRouter()
 
