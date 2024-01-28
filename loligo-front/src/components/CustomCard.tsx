@@ -4,6 +4,17 @@ export default function CustomCard(prop: any) { //TODO: ts interface
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   console.log("isOpen : ", isOpen);
 
+  let outcome = prop.status+"_"+prop.outcome;
+  let outcomeColor = "";
+  console.log(outcome);
+
+  if(outcome == "10002_10081"){
+    outcomeColor = "bg-gradient-to-tr from-sky-400 via-sky-500 to-blue-500 text-white";
+  }
+  else {
+    outcomeColor = "bg-gradient-to-tr from-purple-950 via-purple-800 to-fuchsia-500 text-white"
+  }
+
   return (
   <>
     <Card
@@ -33,13 +44,13 @@ export default function CustomCard(prop: any) { //TODO: ts interface
     </CardBody>
   </Card>
 
-  <Modal isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={false}>
+  <Modal isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={false} backdrop="opaque" size="3xl">
                 {/* PASS isOpen STATE FROM  useDisclosure HOOK*/}
                 <ModalContent>
 
                     {(onClose) => (
                         <>
-                            <ModalHeader className="bg-gradient-to-tr from-purple-950 via-purple-800 to-fuchsia-500 text-white">{prop.ticketId.toUpperCase()}</ModalHeader>
+                            <ModalHeader className={outcomeColor}>{prop.ticketId.toUpperCase()}</ModalHeader>
                             <ModalBody>
                                 <h1 className="text-lg font-bold">Website's name</h1>
                                 <p className="text-lg">{prop.websiteName}</p>
@@ -47,15 +58,40 @@ export default function CustomCard(prop: any) { //TODO: ts interface
                                 <p className="text-lg">{prop.website_link}</p>
                                 <h1 className="text-lg font-bold">Request made on</h1>
                                 <p className="text-lg">{prop.entry_time}</p>
-
+                                {(() => {
+                                  switch (outcome) {
+                                    case '10002_10081':
+                                      return (
+                                      <>
+                                        <h1 className="text-lg font-bold">Request's Outcome</h1>
+                                        <p className="text-lg text-wrap">Congratulations! Your website meets the requirements and is now officially certified.</p>
+                                        <ModalFooter>
+                                          <Button className={outcomeColor} onPress={onClose}>{/* PASS  onClose FUNCTION TO onPress EVENT LISTENER*/}Close</Button>
+                                          <Button className={outcomeColor}>{/* PASS  onClose FUNCTION TO onPress EVENT LISTENER*/}Download</Button>
+                                        </ModalFooter>
+                                      </>
+                                      )
+                                    case '10002_10082':
+                                      return (
+                                        <>
+                                        <h1 className="text-lg font-bold">Request's Outcome</h1>
+                                        <p className="text-lg text-wrap">Unfortunately, your website does not meet the necessary requirements to be certified.
+                                        <br></br>
+                                        What does that mean? After our careful analysis, our experts have found Dark Patterns present in your website. </p>
+                                        <ModalFooter>
+                                          <Button className={outcomeColor} onPress={onClose}>{/* PASS  onClose FUNCTION TO onPress EVENT LISTENER*/}Close</Button>
+                                        </ModalFooter>
+                                      </>
+                                      )
+                                    default:
+                                      return (
+                                        <ModalFooter>
+                                        <Button className={outcomeColor} onPress={onClose}>{/* PASS  onClose FUNCTION TO onPress EVENT LISTENER*/}Close</Button>
+                                        </ModalFooter>
+                                      )
+                                      }
+                                    })()}
                             </ModalBody>
-                            <ModalFooter>
-                                <Button className="bg-gradient-to-tr from-purple-950 via-purple-800 to-fuchsia-500 text-white"
-                                    onPress={onClose}>
-                                    {/* PASS  onClose FUNCTION TO onPress EVENT LISTENER*/}
-                                    Close
-                                </Button>
-                            </ModalFooter>
                         </>
                     )}
                 </ModalContent>

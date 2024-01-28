@@ -30,7 +30,13 @@ export default function CustomCertificate(){
         let cardMap = issues.issues.map((issue:any)=> {
           if(issue?.fields?.customfield_10068?.id == "10081")
           {         
-            return <CustomCard key={issue?.fields?.customfield_10062} ticketId={issue?.fields?.customfield_10062} status={issue?.fields?.status?.id} website_link={issue?.fields?.customfield_10048} websiteName={issue?.fields?.summary} outcome={issue?.fields?.customfield_10068.id}></CustomCard> 
+            return <CustomCard key={issue?.fields?.customfield_10062} 
+                              ticketId={issue?.fields?.customfield_10062} 
+                              status={issue?.fields?.status?.id} 
+                              website_link={issue?.fields?.customfield_10048} 
+                              websiteName={issue?.fields?.summary} 
+                              outcome={issue?.fields?.customfield_10068.id}
+                              entry_time={issue?.fields?.customfield_10046}></CustomCard> 
           }
           }); 
         setCardList(cardMap)
@@ -56,13 +62,7 @@ export default function CustomCertificate(){
            <div className="column" style={{
              margin:"1em 1em 0 0",
              flex: "1",
-           }}>  <h1 style={{textAlign:"center",
-                     fontSize:"4rem",
-                     fontWeight:"bolder",
-                     lineHeight: "1em",
-                     WebkitTextFillColor:"transparent",
-                     backgroundImage: "linear-gradient(45deg, #020024, #a516b3)",
-                     backgroundClip: "text",
+           }}>  <h1 className="text-6xl	bg-gradient-to-tr from-sky-400 via-sky-500 to-blue-500 text-transparent text-wrap bg-clip-text font-bold text-center" style={{
                      margin: ".5em"}}>My certificates
                  </h1>
            </div>

@@ -59,7 +59,7 @@ export default function newRequestButton() {
   return (
     <Popover placement="bottom" showArrow={true} size="lg">
       <PopoverTrigger>
-        <Button color="secondary">New request</Button>
+        <Button className="bg-gradient-to-tr from-purple-950 via-purple-800 to-fuchsia-500 text-white">New request</Button>
       </PopoverTrigger>
       <PopoverContent>
         <div className="px-1 py-2">
@@ -93,7 +93,7 @@ export default function newRequestButton() {
             justifyContent:"center",
             paddingTop: "1em"
           }}>
-          <Button color="secondary" variant="bordered" onClick={() => SubmitButtonHandler()}>Submit</Button>
+          <Button className="bg-gradient-to-tr from-purple-950 via-purple-800 to-fuchsia-500 text-white" onClick={() => SubmitButtonHandler()}>Submit</Button>
           </div>
           </div>
         </div>
