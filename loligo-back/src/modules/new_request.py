@@ -24,7 +24,7 @@ class UserInfoDashboard(BaseModel):
 
 #main function module
 def new_request_func(userInfoNewRequest : UserInfoNewRequest):
-    userInfoNewRequest.ticket_id = uuid4()
+    userInfoNewRequest.ticket_id = f"LOLIGO-{uuid4()}"
     ticket_insetion = db_insert_req((f"{userInfoNewRequest.ticket_id}", f"{userInfoNewRequest.ticket_name}",f"{userInfoNewRequest.website_link}",f"{userInfoNewRequest.user_id}",f"{userInfoNewRequest.user_email}"))    
     
     if(ticket_insetion == False):
@@ -42,7 +42,8 @@ def new_request_func(userInfoNewRequest : UserInfoNewRequest):
         return {
                 "result": "error",
                 "status": issue_creation.status_code,
-                "message": "an error has occured during the issue creation. Please create a new ticket or contact the assistance polipettotechnologis@gmail.com"
+                "message": "an error has occured during the issue creation. Please create a new ticket or contact the assistance polipettotechnologis@gmail.com",
+                "message" : issue_creation.content
             }
 
     Thread(target=lambda: automatic_dp_detection(userInfoNewRequest.website_link, userInfoNewRequest, parsed_res)).start()
