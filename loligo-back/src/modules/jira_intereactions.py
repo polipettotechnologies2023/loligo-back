@@ -95,12 +95,15 @@ def update_issue_dp(data,dp_result):
     print(dp_result)
     
     #Formatting the JSON to beautify it in Jira
-    formatted_data = ""
-    for category, items in dp_result.items():
-        formatted_data += f"\n**{category}:**\n"
-    for item, urls in items.items():
-        for url in urls:
-            formatted_data += f"- {item} -> {url}\n"
+    if not dp_result : 
+        formatted_data = "No Dark Patterns Detected!"
+    else:
+        formatted_data = ""
+        for category, items in dp_result.items():
+            formatted_data += f"\n**{category}:**\n"
+        for item, urls in items.items():
+            for url in urls:
+                formatted_data += f"- {item} -> {url}\n"
 
     # remider, before send inf the data back, in python you have to paseit into a dict and then sent it as a json
     payload = {
