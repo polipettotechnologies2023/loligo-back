@@ -58,7 +58,7 @@ def ticket_creation(data):
         "customfield_10065": f"{data.user_email}",
         "customfield_10057": f"{data.user_id}",
         "customfield_10048": f"{data.website_link}",
-        "customfield_10060": {
+        "customfield_10070": {
         "content": [
             {
             "content": [
@@ -105,12 +105,12 @@ def update_issue_dp(data,dp_result):
     # remider, before send inf the data back, in python you have to paseit into a dict and then sent it as a json
     payload = {
         "fields": {
-         "customfield_10060": {
+         "customfield_10070": {
         "content": [
             {
             "content": [
                 {
-                "text": f"{dp_result}",
+                "text": f"{formatted_data}",
                 "type": "text"
                 }
             ],
