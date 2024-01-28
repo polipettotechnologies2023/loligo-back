@@ -40,7 +40,7 @@ const token = useSelector((state: RootState) => state.token.value);
                             websiteName={issue?.fields?.summary} 
                             outcome={issue?.fields?.customfield_10068.id}
                             entry_time={issue?.fields?.customfield_10046}
-                            automaticDetectionResults={issue?.fields?.customfield_10060}></CustomCard>
+                            automaticDetectionResults={issue?.fields?.customfield_10070}></CustomCard>
         }
       });
       setCardList(cardMap)
