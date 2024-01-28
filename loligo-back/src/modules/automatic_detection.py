@@ -1,57 +1,37 @@
 import urllib.request
-import re
+import requests
 from urllib.error import URLError, HTTPError
 from .jira_intereactions import update_issue_dp
 from .db_connection import db_open
 from .db_connection import db_update 
 import json
+from urllib.parse import urljoin
+from urllib.parse import urlparse
 
-def is_html(content_type):
-    return content_type.startswith('text/html')
+from url_normalize import url_normalize
+from bs4 import BeautifulSoup
+
 
 def get_websites_links(url):
-    arrOfLink = []
-    try:
-        website = urllib.request.urlopen(url)
-        # Read HTML code
-        html = website.read().decode('utf-8')
+    links = []
+    website = requests.get(url)
+    website_text = website.text
+    soup = BeautifulSoup(website_text)
 
-        # Use re.findall to get all the links
-        links = re.findall('\"((http|ftp)s?://.*?)\"', html)
+    for link in soup.find_all('a'):
+        href = link.get('href')
+        if href:
+            if href.startswith(('http://', 'https://')):
+                links.append(href)
+            else:
+                absolute_url = urljoin(url, href)
+                links.append(absolute_url)
 
-        # Filter the links based on the base URL
-        base_url = url
-        filtered_links = [link[0] for link in links if base_url in link[0]]
+    for link in links:
+        print(link)
 
-        # Add links that start with '#' to the filtered links
-        # filtered_links += [urljoin(url, link) for link in re.findall('\"(#.*?)\"', html)]
-
-        # Print only text/html pages
-        for link in filtered_links:
-            try:
-                # Check content type
-                response = urllib.request.urlopen(link)
-                content_type = response.headers.get('Content-Type', '')
-
-                if is_html(content_type):
-                    arrOfLink.append(link)
-
-            except urllib.error.HTTPError as e:
-                pass  # Ignore HTTP errors
-            except urllib.error.URLError as e:
-                pass  # Ignore URL errors
-            except Exception as e:
-                pass  # Ignore other errors
-
-    except urllib.error.HTTPError as e:
-        print(f'HTTP Error accessing the main URL {url}: {e.code}')
-    except urllib.error.URLError as e:
-        print(f'URL Error accessing the main URL {url}: {e.reason}')
-    except Exception as e:
-        print(f'Error accessing the main URL {url}: {str(e)}')
-    arrOfLink = set(arrOfLink)
-    return arrOfLink
-
+    print(len(links))
+    return links
 
 
 def find_dp_in_websites(url, search_pd):
@@ -96,7 +76,7 @@ def automatic_dp_detection(url_link, userData, issueData):
                                                  "Explore items that others have been interested in.", "People are buying this item right now", "Join the waitlist to secure your spot", 
                                                 "number of people viewed this in the last hour", "Don't miss out on the latest trend!", "VIP access - claim your spot now!",
                                                  "Get access before everyone else does", "Join the elite group of early buyers", "This item is in high demand - grab yours!", "Exclusive deal for the first 100 customers!", "Offered only for a limited amount of time", "Subscribe Now", 
-                                                "Sign up for newsletters", "Activate the newsletters", "Click here to find more info",],
+                                                "Sign up for newsletters", "Activate the newsletters", "Click Here to Find More Info",],
         #  Look for phrases like “offer ends in” or “countdown”
         "Beyond Brignull - Fake Countdown " : ["Your order is reserved for", "offer ends in", "countdown",  "Flash sale: ending soon!", ],
 
@@ -110,6 +90,7 @@ def automatic_dp_detection(url_link, userData, issueData):
     }
 
     result = find_dp_in_websites(url_link, search_dp_to_find)
+    print(result)
     # update endtry in the db
     db_update_req(userData,result)
 
