@@ -1,4 +1,5 @@
 import {Card, CardHeader, CardBody, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
+
 export default function CustomCard(prop: any) { //TODO: ts interface
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   console.log("isOpen : ", isOpen);
@@ -30,35 +31,29 @@ export default function CustomCard(prop: any) { //TODO: ts interface
         width={370}
       />
     </CardBody>
-    <p>{prop.status}</p>
-    <p>{prop.outcome}</p>
   </Card>
+
   <Modal isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={false}>
                 {/* PASS isOpen STATE FROM  useDisclosure HOOK*/}
                 <ModalContent>
 
                     {(onClose) => (
                         <>
-                            <ModalHeader >{prop.ticketId.toUpperCase()}</ModalHeader>
+                            <ModalHeader className="bg-gradient-to-tr from-purple-950 via-purple-800 to-fuchsia-500 text-white">{prop.ticketId.toUpperCase()}</ModalHeader>
                             <ModalBody>
-                                <h1 className="text-lg">Website's name</h1>
+                                <h1 className="text-lg font-bold">Website's name</h1>
                                 <p className="text-lg">{prop.websiteName}</p>
-                                <h1 className="text-lg">Base URL</h1>
+                                <h1 className="text-lg font-bold">Base URL</h1>
                                 <p className="text-lg">{prop.website_link}</p>
-                                <h1 className="text-lg">Request made on</h1>
+                                <h1 className="text-lg font-bold">Request made on</h1>
                                 <p className="text-lg">{prop.entry_time}</p>
 
                             </ModalBody>
                             <ModalFooter>
-                                <Button color="danger" variant="light"
+                                <Button className="bg-gradient-to-tr from-purple-950 via-purple-800 to-fuchsia-500 text-white"
                                     onPress={onClose}>
                                     {/* PASS  onClose FUNCTION TO onPress EVENT LISTENER*/}
-                                    CLOSE
-                                </Button>
-                                <Button color="success" variant="light"
-                                    onPress={onClose}>
-                                    {/* PASS  onClose OR ANY OTHER FUNCTION TO onPress EVENT LISTENER*/}
-                                    ACCEPT
+                                    Close
                                 </Button>
                             </ModalFooter>
                         </>
@@ -66,6 +61,9 @@ export default function CustomCard(prop: any) { //TODO: ts interface
                 </ModalContent>
             </Modal>
   </>
+
   )
+
+ 
 }
 

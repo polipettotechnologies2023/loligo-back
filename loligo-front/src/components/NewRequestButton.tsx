@@ -38,9 +38,9 @@ export default function newRequestButton() {
       if (res.status == 200) {
         console.log(res.request)
         console.log(res.data);
+        window.location.reload();
       } else {
         //TODO: Change this with a good handler
-  
         alert(res.status);
         console.log(res);
       }  
