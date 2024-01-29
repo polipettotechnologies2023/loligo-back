@@ -72,10 +72,10 @@ def automatic_dp_detection(url_link, userData, issueData):
                                                  "Explore this frequently viewed item","Discover what others are considering", "This item is gaining popularity", "Find out what's trending right now.", "Discover items getting attention from others", 
                                                  "Explore items that others have been interested in.", "People are buying this item right now", "Join the waitlist to secure your spot", 
                                                 "number of people viewed this in the last hour", "Don't miss out on the latest trend!", "VIP access - claim your spot now!",
-                                                 "Get access before everyone else does", "Join the elite group of early buyers", "This item is in high demand - grab yours!", "Exclusive deal for the first 100 customers!", "Offered only for a limited amount of time", "Subscribe Now", 
-                                                "Sign up for newsletters", "Activate the newsletters", "Click Here to Find More Info",],
+                                                 "Get access before everyone else does", "Join the elite group of early buyers", "This item is in high demand - grab yours!", "Exclusive deal for the first 100 customers!", "offered only for a limited amount of time", "Subscribe Now", 
+                                                "Sign up for newsletters", "Click Here to Find More Info", "Other people are viewing this product now!", "high demand"],
         #  Look for phrases like “offer ends in” or “countdown”
-        "Beyond Brignull - Fake Countdown " : ["Your order is reserved for", "offer ends in", "countdown",  "Flash sale: ending soon!", ],
+        "Beyond Brignull - Fake Countdown " : ["Your order is reserved for", "offer ends in", "countdown",  "Flash sale: ending soon!", "limited amount of time"],
 
         # Look for phrases that come under ConfirmShaming
         "Misdirection - Confirmshaming" : ["No thanks, I don't like free stuff", "No thanks. I don't like free things...", "Yes, I want to save money - who wouldn't?", "No, I don't care about my privacy", "Sure, continue being wasteful",
@@ -83,7 +83,7 @@ def automatic_dp_detection(url_link, userData, issueData):
 
         # Look for phrases like “only” and “units left”
         "Beyond Bringnull - Low Stock Messages" : ["pieces of items left in stock", "Time is running out! Buy now",  "Act now before it's too late!","Limited stock remaining", "Hurry, only a few items left", "Almost sold out! Act fast!", "Popular choice! Act quickly", 
-                                                   "Claimed! Hurry, only a few left!",],
+                                                   "Claimed! Hurry, only a few left!"],
     }
 
     result = find_dp_in_websites(url_link, search_dp_to_find)
