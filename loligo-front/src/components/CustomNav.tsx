@@ -14,13 +14,13 @@ export default function CustomNav() {
         style={{
           marginTop: "2em",
           display: "flex",
-          maxHeight: "6em",
+          maxHeight: "8em",
           maxWidth: "100%",
         }}
       >
         <NavbarContent>
           <NavbarBrand>
-            <img src="loligo_branding_logo.svg" width="25%"></img>
+            <img src="loligo_branding_logo.svg" width="20%"></img>
           </NavbarBrand>
         </NavbarContent>
         <NavbarContent>
