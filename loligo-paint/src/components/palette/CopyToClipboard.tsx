@@ -1,5 +1,6 @@
 import { useCanvas } from "../canvas/CanvasContext";
 import CopyIcon from '@atlaskit/icon/glyph/copy'
+import Button from '@atlaskit/button';
 
 export default function CopyToClipboard() {
   const { canvasRef } = useCanvas();
@@ -24,9 +25,9 @@ export default function CopyToClipboard() {
 
   return (
     <>
-      <button type="button" onClick={() => copyImage(canvasRef.current)}>
+      <Button appearance="warning" onClick={() => copyImage(canvasRef.current)}>
         <CopyIcon label="Copy Canva"/>
-      </button>
+      </Button>
     </>
   );
 }

@@ -93,7 +93,6 @@ export const CanvasProvider = ({ children }: any) => {
     }
 
     let image = await navigator.clipboard.readText()
-    
       const img = new Image()
       img.src = image
       img.onload = () => {
