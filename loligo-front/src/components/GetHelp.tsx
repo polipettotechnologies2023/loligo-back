@@ -4,9 +4,32 @@ import {
   DropdownTrigger,
   Dropdown,
   DropdownMenu,
+  useDisclosure,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
 } from "@nextui-org/react";
+import { useState } from "react";
 
 export default function GetHelp() {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [tip, setTip] = useState("");
+
+  const tips = ["Tip 1", "Tip 2", "Tip 3", "Tip 4", "Tip 5", "Tip 6"];
+
+  const getRandomTip = () => {
+    const randomIndex = Math.floor(Math.random() * tips.length);
+    return tips[randomIndex];
+  };
+
+  const handleOpenModal = () => {
+    setTip(getRandomTip());
+    onOpen();
+  };
+
   return (
     <>
       <div
@@ -33,7 +56,7 @@ export default function GetHelp() {
               <Avatar
                 isBordered
                 as="button"
-                className="transition-transform"
+                className="transition-transform "
                 color="secondary"
                 name="?"
                 size="lg"
@@ -41,17 +64,50 @@ export default function GetHelp() {
               />
             </DropdownTrigger>
             <DropdownMenu aria-label="Profile Actions" variant="flat">
-              <DropdownItem key="my_profile" color="secondary">
+              <DropdownItem key="take_a_tour" color="secondary">
                 Take A Tour!
               </DropdownItem>
-              <DropdownItem key="get_help" color="secondary">
+              <DropdownItem
+                key="tip_random"
+                color="secondary"
+                onPress={handleOpenModal}
+              >
                 A Tips A Day Keeps Dark Patterns Away
               </DropdownItem>
-              <DropdownItem key="delete_account" color="secondary">
+              <DropdownItem key="get_help_email" color="secondary">
                 Get Help
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
+
+          <Modal
+            isOpen={isOpen}
+            onOpenChange={onOpenChange}
+            isDismissable={false}
+          >
+            <ModalContent>
+              {(onClose) => (
+                <>
+                  <ModalHeader className="flex flex-col gap-1">
+                    Do you know?
+                  </ModalHeader>
+                  <ModalBody>
+                    <p>{tip}</p>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button
+                      color="secondary"
+                      radius="full"
+                      variant="ghost"
+                      onPress={onClose}
+                    >
+                      Close
+                    </Button>
+                  </ModalFooter>
+                </>
+              )}
+            </ModalContent>
+          </Modal>
         </div>
       </div>
     </>
