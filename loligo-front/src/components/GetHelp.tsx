@@ -30,6 +30,17 @@ export default function GetHelp() {
     onOpen();
   };
 
+  const [emailContent, setEmailContent] = useState({
+    recipient: "polipettotechnologies@gmail.com",
+    subject: "Custom Service - Loligo",
+  });
+  const sendEmail = () => {
+    const { recipient, subject } = emailContent;
+    window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(
+      subject
+    )}`;
+  };
+
   return (
     <>
       <div
@@ -74,7 +85,11 @@ export default function GetHelp() {
               >
                 A Tips A Day Keeps Dark Patterns Away
               </DropdownItem>
-              <DropdownItem key="get_help_email" color="secondary">
+              <DropdownItem
+                key="get_help_email"
+                color="secondary"
+                onPress={sendEmail}
+              >
                 Get Help
               </DropdownItem>
             </DropdownMenu>
