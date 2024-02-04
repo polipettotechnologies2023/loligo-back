@@ -31,7 +31,7 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
 
     //TODO: img.png is the name of the image. ask the user to give it a name before submitting it
     
-    form.append('file', file, 'img.png');
+    form.append('file', file, `${req.body.imgName}.png`);
 
     const fetchRes = await fetch(`${process.env.PLASMO_PUBLIC_JIRA_API}/issue/${req.body.issueKey}/attachments`, {
         method: 'POST',
