@@ -2,6 +2,8 @@ import Button from '@atlaskit/button';
 import { useCanvas } from "../canvas/CanvasContext";
 import { Storage } from "@plasmohq/storage"
 import { useEffect, useState } from 'react';
+import { sendToBackground } from "@plasmohq/messaging"
+
 
 export default function AppendToJira() {
     const { canvasRef } = useCanvas();
@@ -12,22 +14,33 @@ export default function AppendToJira() {
             setIssueKey(issuekeyStore)
             })();
     },[])
+
+
         const sendHandler = async () =>{
             const storage = new Storage()
             const issueKey = await storage.getItem("issueKey") 
+            
+            const dataURLB64 = canvasRef.current.toDataURL()
 
-            //make a post to the backned with the issuseURL and the canvasRef.current
-            //canvasRef.current
-            //after it's coplited, close the window 
+            const res = await sendToBackground({
+                name: "createJiraTicket",
+                body: {
+                    issueKey: issueKey,
+                    dataURLB64: dataURLB64
+                    // here you we to send also the name of the image
+                }
+              })
 
         }
+
+        
+
 return(
     <Button onClick={sendHandler} appearance='primary'> Attach to {issueKey}</Button>
 )
     
 
     
-
     
 
 }

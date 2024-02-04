@@ -10,6 +10,7 @@ const storage = new Storage()
 
 //TODO: the load event runs only when the page opens. The URL changes, but the page is not reloaded. 
 // find a way to fix this and retrieve always the latests URL
+
 window.addEventListener('load', async function () {
     let issueURL = window.location.href
     

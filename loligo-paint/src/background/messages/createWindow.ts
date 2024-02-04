@@ -12,5 +12,4 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
   )
   
 }
- 
 export default handler

@@ -8,7 +8,7 @@ export default function CopyToClipboard() {
 
   const copyImage = async (img:any) => {
     try {
-    img.toBlob(async (blob:any)=>{
+    let x = await img.toBlob(async (blob:any)=>{
         console.log(blob.type)
         await navigator.clipboard.write([
             new ClipboardItem({
