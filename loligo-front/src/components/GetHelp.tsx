@@ -1,5 +1,4 @@
 import {
-  Avatar,
   DropdownItem,
   DropdownTrigger,
   Dropdown,
@@ -13,6 +12,7 @@ import {
   Button,
 } from "@nextui-org/react";
 import { useState } from "react";
+import QuestionCircleIcon from "@atlaskit/icon/glyph/question-circle";
 
 export default function GetHelp() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -64,15 +64,13 @@ export default function GetHelp() {
         >
           <Dropdown placement="top">
             <DropdownTrigger>
-              <Avatar
-                isBordered
-                as="button"
-                className="transition-transform "
-                color="secondary"
-                name="?"
-                size="lg"
-                src="../../public/question-mark.png"
-              />
+              <Button
+                isIconOnly
+                className="bg-gradient-to-tr from-purple-950 via-purple-800 to-fuchsia-500"
+                radius="full"
+              >
+                <QuestionCircleIcon label="Question Icon" size="large" />
+              </Button>
             </DropdownTrigger>
             <DropdownMenu aria-label="Profile Actions" variant="flat">
               <DropdownItem key="take_a_tour" color="secondary">
