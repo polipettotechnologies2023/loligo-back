@@ -4,15 +4,11 @@ import {
   Dropdown,
   DropdownMenu,
   useDisclosure,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
   Button,
 } from "@nextui-org/react";
 import { useState } from "react";
 import QuestionCircleIcon from "@atlaskit/icon/glyph/question-circle";
+import TipModal from "./TipModal";
 
 export default function GetHelp() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -93,34 +89,11 @@ export default function GetHelp() {
             </DropdownMenu>
           </Dropdown>
 
-          <Modal
-            isOpen={isOpen}
-            onOpenChange={onOpenChange}
-            isDismissable={false}
-          >
-            <ModalContent>
-              {(onClose) => (
-                <>
-                  <ModalHeader className="flex flex-col gap-1">
-                    Do you know?
-                  </ModalHeader>
-                  <ModalBody>
-                    <p>{tip}</p>
-                  </ModalBody>
-                  <ModalFooter>
-                    <Button
-                      color="secondary"
-                      radius="full"
-                      variant="ghost"
-                      onPress={onClose}
-                    >
-                      Close
-                    </Button>
-                  </ModalFooter>
-                </>
-              )}
-            </ModalContent>
-          </Modal>
+          <TipModal
+            tip={tip}
+            isOpenState={isOpen}
+            onOpenChangeFunc={onOpenChange}
+          ></TipModal>
         </div>
       </div>
     </>
