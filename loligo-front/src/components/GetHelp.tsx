@@ -5,6 +5,7 @@ import {
   DropdownMenu,
   useDisclosure,
   Button,
+  Tooltip,
 } from "@nextui-org/react";
 import { useState } from "react";
 import QuestionCircleIcon from "@atlaskit/icon/glyph/question-circle";
@@ -14,7 +15,14 @@ export default function GetHelp() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [tip, setTip] = useState("");
 
-  const tips = ["Tip 1", "Tip 2", "Tip 3", "Tip 4", "Tip 5", "Tip 6"];
+  const tips = [
+    "Dark patterns are tricks used in websites and apps that make you do things that you didn't mean to, like buying or signing up for something.",
+    "Many types of dark patterns are already illegal in the EU and US, depending on the type and context of use.",
+    "'Comparison prevention' is a dark pattern that makes the comparison of products as difficult as possible for users. This enables the provider to steer them towards a decision that generates more revenue, but may not be in the user's best interest.",
+    "'Trick wording' is a dark pattern that takes advantage of user expectations and ambiguous language to mislead and deceive users.",
+    "Dark patterns are also known as 'deceptive patterns'.",
+    "'Preselection' employs a psychological phenomenon where people tend to go with the option that is already chosen for them, even if there are other choices available. ",
+  ];
 
   const getRandomTip = () => {
     const randomIndex = Math.floor(Math.random() * tips.length);
@@ -41,9 +49,10 @@ export default function GetHelp() {
     <>
       <div
         className="container"
+        id="getHelpContainer"
         style={{
           display: "flex",
-          marginTop: "2em",
+          marginTop: "5em",
           maxWidth: "100%",
           justifyContent: "center",
         }}
@@ -51,7 +60,27 @@ export default function GetHelp() {
         <div
           className="column"
           style={{
-            marginTop: "1em",
+            margin: "1em 1em 0 0",
+            flex: "1",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        ></div>
+        <div
+          className="column"
+          style={{
+            margin: "1em 1em 0 0",
+            flex: "1",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        ></div>
+        <div
+          className="column"
+          style={{
+            height: "100px",
             flex: "1",
             display: "flex",
             alignItems: "center",
@@ -61,11 +90,11 @@ export default function GetHelp() {
           <Dropdown placement="top">
             <DropdownTrigger>
               <Button
-                isIconOnly
                 className="bg-gradient-to-tr from-purple-950 via-purple-800 to-fuchsia-500"
-                radius="full"
+                radius="md"
               >
                 <QuestionCircleIcon label="Question Icon" size="large" />
+                <span className="text-white">Need Help</span>
               </Button>
             </DropdownTrigger>
             <DropdownMenu aria-label="Profile Actions" variant="flat">
