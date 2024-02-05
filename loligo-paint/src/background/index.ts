@@ -1,24 +1,43 @@
 export {}
-import { sendToBackground } from "@plasmohq/messaging"
-import { windowCanvas } from "~contents/window-canvas"
-// export const config: PlasmoCSConfig = {
-//   matches: ["https://polipetto-lolligo.atlassian.net/jira/software/projects/LOL/boards/1?selectedIssue=*"],
-//   all_frames: true
-// }
+import { Storage } from "@plasmohq/storage"
 
-// chrome.tabs.onUpdated.addListener(function
-//    (tabId, changeInfo, tab) {
+  const storage = new Storage()
 
-//      const url = changeInfo.url.split('=')
+  //this function looks at the extension load if there is an open jira board tab
+chrome.tabs.query({}, async tabs => {
+    let loligoTabIsOpen = tabs.filter((tab) => {
+      if(tab.url) {
+        let urlKey = tab.url.split('=')
+        if (urlKey.length == 2 &&  urlKey[0] == 'https://polipetto-lolligo.atlassian.net/jira/software/projects/LOL/boards/1?selectedIssue'){
+          return urlKey[1]
+        }
+      }
+    })
+    if(loligoTabIsOpen[0].url) {
+      let urlKey = loligoTabIsOpen[0].url.split('=')
+      if (urlKey.length == 2 &&  urlKey[0] == 'https://polipetto-lolligo.atlassian.net/jira/software/projects/LOL/boards/1?selectedIssue'){
+        await storage.setItem("issueKey", `${urlKey[1]}`)
+      }
+    }
 
-//      if (url[0] == "https://polipetto-lolligo.atlassian.net/jira/software/projects/LOL/boards/1?selectedIssue") {
-//       console.log('hello')
+});
 
-//      }
-//    }
-//  );
+//this is checking when the ticket id changes
+chrome.tabs.onUpdated.addListener(async function
+   (tabId, changeInfo, tab) {
+     console.log(changeInfo)
+     const url = changeInfo.url
+     let splitURL = []
+        if (url){
+          splitURL = url.split('=')
+          if (splitURL.length > 1){
+            await storage.setItem("issueKey", `${splitURL[1]}`)
+          }
+        }
+   }
+ );
 
-// TODO: find a way to call the plug in by commands
+// TODO: fix the empty canvas
 chrome.commands.onCommand.addListener((command, tab) => {
     if(command == "Screenshot"){
     chrome.tabs.captureVisibleTab(null, {}, (base64) => {
@@ -27,8 +46,6 @@ chrome.commands.onCommand.addListener((command, tab) => {
       target: { tabId: tab.id },
       func: async (args) => {
         try {
-          console.log("injected")
-          console.log(args)
           navigator.clipboard.writeText(args)
           const file1Url = chrome.runtime.getURL("tabs/AppCanvas.html")
 
@@ -38,36 +55,29 @@ chrome.commands.onCommand.addListener((command, tab) => {
           }, function(response) {
             console.log("Response from background script:", response);
           });
-          
-
-
         } catch (error) {
           console.error("Error capturing screenshot:", error)
         }
       }
     })
   })
-}else if (command == "WhiteCanvas") {
-   
+} else if(command == "WhiteCanvas") {
         chrome.scripting.executeScript({
-          args: ['hello'],
+          args: [null],
           target: { tabId: tab.id },
           func: async (args) => {
-            try {''
-              console.log("injected")
-              console.log(args)
-              navigator.clipboard.writeText("nulla")
+            try {
+
+              navigator.clipboard.writeText("")
               const file1Url = chrome.runtime.getURL("tabs/AppCanvas.html")
-    
+
               chrome.runtime.sendMessage({
                 action: "createWindow",
                 argument: file1Url
               }, function(response) {
                 console.log("Response from background script:", response);
               });
-              
-    
-    
+
             } catch (error) {
               console.error("Error capturing screenshot:", error)
             }
