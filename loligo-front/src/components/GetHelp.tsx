@@ -5,32 +5,28 @@ import {
   DropdownMenu,
   useDisclosure,
   Button,
-  Tooltip,
 } from "@nextui-org/react";
 import { useState } from "react";
 import QuestionCircleIcon from "@atlaskit/icon/glyph/question-circle";
 import TipModal from "./TipModal";
+import DataTips from "./DataTips";
 
 export default function GetHelp() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [tip, setTip] = useState("");
-
-  const tips = [
-    "Dark patterns are tricks used in websites and apps that make you do things that you didn't mean to, like buying or signing up for something.",
-    "Many types of dark patterns are already illegal in the EU and US, depending on the type and context of use.",
-    "'Comparison prevention' is a dark pattern that makes the comparison of products as difficult as possible for users. This enables the provider to steer them towards a decision that generates more revenue, but may not be in the user's best interest.",
-    "'Trick wording' is a dark pattern that takes advantage of user expectations and ambiguous language to mislead and deceive users.",
-    "Dark patterns are also known as 'deceptive patterns'.",
-    "'Preselection' employs a psychological phenomenon where people tend to go with the option that is already chosen for them, even if there are other choices available. ",
-  ];
+  const [tipTitle, setTipTitle] = useState("");
+  const [tipContent, setTipContent] = useState("");
 
   const getRandomTip = () => {
-    const randomIndex = Math.floor(Math.random() * tips.length);
-    return tips[randomIndex];
+    const randomIndex = Math.floor(Math.random() * DataTips.length);
+    return DataTips[randomIndex];
   };
 
   const handleOpenModal = () => {
-    setTip(getRandomTip());
+    const currTip = getRandomTip();
+    const tip_title = currTip.title;
+    setTipTitle(tip_title);
+    const tip_content = currTip.content;
+    setTipContent(tip_content);
     onOpen();
   };
 
@@ -119,7 +115,8 @@ export default function GetHelp() {
           </Dropdown>
 
           <TipModal
-            tip={tip}
+            tip_title={tipTitle}
+            tip_content={tipContent}
             isOpenState={isOpen}
             onOpenChangeFunc={onOpenChange}
           ></TipModal>

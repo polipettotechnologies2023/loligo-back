@@ -8,13 +8,15 @@ import {
 } from "@nextui-org/react";
 
 type TipModalProps = {
-  tip: string;
+  tip_title: string;
+  tip_content: string;
   isOpenState: boolean;
   onOpenChangeFunc: () => void;
 };
 
 export default function TipModal({
-  tip,
+  tip_title,
+  tip_content,
   isOpenState,
   onOpenChangeFunc,
 }: TipModalProps) {
@@ -28,10 +30,10 @@ export default function TipModal({
         {(onClose) => (
           <>
             <ModalHeader className="flex flex-col gap-1">
-              Do you know?
+              <p>{tip_title}</p>
             </ModalHeader>
             <ModalBody>
-              <p>{tip}</p>
+              <p>{tip_content}</p>
             </ModalBody>
             <ModalFooter>
               <Button
