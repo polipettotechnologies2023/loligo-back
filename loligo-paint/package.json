@@ -1,7 +1,7 @@
 {
   "name": "loligo-paint",
-  "displayName": "Loligo paint",
-  "version": "0.0.1",
+  "displayName": "Loligo Paint",
+  "version": "0.0.2",
   "description": "A basic Plasmo extension.",
   "author": "Wesley G. Obi",
   "scripts": {
@@ -35,15 +35,15 @@
     "commands": {
       "Screenshot": {
         "suggested_key": {
-          "default": "Ctrl+Shift+L",
-          "mac": "Command+Shift+L"
+          "default": "Ctrl+Shift+P",
+          "mac": "Command+Shift+P"
         },
         "description": "Take a screen shot and open a canvas"
       },
       "WhiteCanvas": {
         "suggested_key": {
-          "default": "Ctrl+Shift+W",
-          "mac": "Command+Shift+W"
+          "default": "Ctrl+Shift+O",
+          "mac": "Command+Shift+O"
         },
         "description": "Open a White Canvas"
       }
