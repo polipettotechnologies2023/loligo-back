@@ -13,7 +13,8 @@ chrome.tabs.query({}, async tabs => {
         }
       }
     })
-    if(loligoTabIsOpen[0].url) {
+    console.log(loligoTabIsOpen)
+    if(loligoTabIsOpen[0]?.url) {
       let urlKey = loligoTabIsOpen[0].url.split('=')
       if (urlKey.length == 2 &&  urlKey[0] == 'https://polipetto-lolligo.atlassian.net/jira/software/projects/LOL/boards/1?selectedIssue'){
         await storage.setItem("issueKey", `${urlKey[1]}`)
@@ -25,7 +26,7 @@ chrome.tabs.query({}, async tabs => {
 //this is checking when the ticket id changes
 chrome.tabs.onUpdated.addListener(async function
    (tabId, changeInfo, tab) {
-     console.log(changeInfo)
+     if(changeInfo.url){
      const url = changeInfo.url
      let splitURL = []
         if (url){
@@ -34,11 +35,12 @@ chrome.tabs.onUpdated.addListener(async function
             await storage.setItem("issueKey", `${splitURL[1]}`)
           }
         }
+     }
    }
  );
 
-// TODO: fix the empty canvas
 chrome.commands.onCommand.addListener((command, tab) => {
+  console.log(command)
     if(command == "Screenshot"){
     chrome.tabs.captureVisibleTab(null, {}, (base64) => {
     chrome.scripting.executeScript({

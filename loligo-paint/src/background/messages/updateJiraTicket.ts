@@ -1,25 +1,3 @@
-// https://polipetto-lolligo.atlassian.net/rest/api/3/issue/key
-
-// payload = {
-//     "fields": {
-//      "customfield_10070": {
-//     "content": [
-//         {
-//         "content": [
-//             {
-//             "text": f"{formatted_data}",
-//             "type": "text"
-//             }
-//         ],
-//         "type": "paragraph"
-//         }
-//     ],
-//     "type": "doc",
-//     "version": 1
-//     }
-// }
-// } 
-
 import type { PlasmoMessaging } from "@plasmohq/messaging"
 
 const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
@@ -30,7 +8,7 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
 
 
     //TODO: img.png is the name of the image. ask the user to give it a name before submitting it
-    
+
     form.append('file', file, `${req.body.imgName}.png`);
 
     const fetchRes = await fetch(`${process.env.PLASMO_PUBLIC_JIRA_API}/issue/${req.body.issueKey}/attachments`, {
@@ -45,12 +23,10 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
             'X-Atlassian-Token': 'no-check'
         }
     })
-    console.log(fetchRes)
-
   res.send({
     fetchRes
   })
-  
+
 }
 
 
