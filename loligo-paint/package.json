@@ -35,14 +35,14 @@
     "commands": {
       "Screenshot": {
         "suggested_key": {
-          "default": "Ctrl+Shift+P",
+          "default": "Ctrl+Shift+L",
           "mac": "Command+Shift+P"
         },
         "description": "Take a screen shot and open a canvas"
       },
       "WhiteCanvas": {
         "suggested_key": {
-          "default": "Ctrl+Shift+O",
+          "default": "Ctrl+Shift+E",
           "mac": "Command+Shift+O"
         },
         "description": "Open a White Canvas"
