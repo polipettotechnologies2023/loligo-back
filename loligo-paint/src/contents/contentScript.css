@@ -1,0 +1,16 @@
+/* 
+
+myelement{
+    flex-grow: 0;
+    float: right;
+    flex-shrink: 1;
+    display: flex;
+    width: 50% !important;
+    flex-direction: row;
+    background: rgb(25, 25, 25);
+    z-index: 1;
+    height: calc(100vh - 45px);
+    max-height: 100%;
+    position: absolute;
+    right: 0;
+} */
