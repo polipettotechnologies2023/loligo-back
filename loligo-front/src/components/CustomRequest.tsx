@@ -7,55 +7,59 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useSelector } from "react-redux";
 import { RootState } from "../vite-env";
 
-
 export default function CustomRequest() {
-const [cardList, setCardList] = useState("")
-const { user } = useAuth0();
-const token = useSelector((state: RootState) => state.token.value);
+  const [cardList, setCardList] = useState("");
+  const { user } = useAuth0();
+  const token = useSelector((state: RootState) => state.token.value);
 
-  useEffect(()=>{
-    (async ()=>{
-    if(user?.sub)
-    {
-    let user_id = await extractUserId(user?.sub)
-    let res = await axios.post(`${import.meta.env.VITE_PYTHON_SERVER}/dashboard`,{
-      user_id
-      },{
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${token}`,
-        },
+  useEffect(() => {
+    (async () => {
+      if (user?.sub) {
+        let user_id = await extractUserId(user?.sub);
+        let res = await axios.post(
+          `${import.meta.env.VITE_PYTHON_SERVER}/dashboard`,
+          {
+            user_id,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `${token}`,
+            },
+          }
+        );
+
+        let issues = JSON.parse(res.data);
+        let cardMap = issues.issues.map((issue: any) => {
+          console.log(issue?.fields);
+          if (issue?.fields?.customfield_10068?.id !== "10081") {
+            return (
+              <CustomCard
+                key={issue?.fields?.customfield_10062}
+                ticketId={issue?.fields?.customfield_10062}
+                status={issue?.fields?.status?.id}
+                website_link={issue?.fields?.customfield_10048}
+                websiteName={issue?.fields?.summary}
+                outcome={issue?.fields?.customfield_10068.id}
+                entry_time={issue?.fields?.customfield_10046}
+                automaticDetectionResults={issue?.fields?.customfield_10070}
+              ></CustomCard>
+            );
+          }
+        });
+        setCardList(cardMap);
       }
-    )
-    
-      let issues = JSON.parse(res.data)
-      let cardMap = issues.issues.map((issue:any)=> {
-        console.log(issue?.fields)
-        if(issue?.fields?.customfield_10068?.id !== "10081")
-        {    
-        return <CustomCard key={issue?.fields?.customfield_10062} 
-                            ticketId={issue?.fields?.customfield_10062} 
-                            status={issue?.fields?.status?.id} 
-                            website_link={issue?.fields?.customfield_10048} 
-                            websiteName={issue?.fields?.summary} 
-                            outcome={issue?.fields?.customfield_10068.id}
-                            entry_time={issue?.fields?.customfield_10046}
-                            automaticDetectionResults={issue?.fields?.customfield_10070}></CustomCard>
-        }
-      });
-      setCardList(cardMap)
-    }
-    })()
-  },[])
+    })();
+  }, []);
 
   async function extractUserId(userString: string) {
     const separatorIndex = userString.indexOf("|");
     if (separatorIndex !== -1) {
-        return userString.slice(separatorIndex + 1);
+      return userString.slice(separatorIndex + 1);
     } else {
-        return userString;
+      return userString;
     }
-}
+  }
 
   return (
     <>
@@ -65,7 +69,7 @@ const token = useSelector((state: RootState) => state.token.value);
           display: "flex",
           marginTop: "2em",
           maxWidth: "100%",
-          justifyContent: "center"
+          justifyContent: "center",
         }}
       >
         <div
@@ -75,7 +79,9 @@ const token = useSelector((state: RootState) => state.token.value);
             flex: "1",
           }}
         >
-          <h1 className="text-6xl	bg-gradient-to-tr from-purple-950 via-purple-800 to-fuchsia-500 text-transparent text-wrap bg-clip-text font-bold text-center"
+          <h1
+            id="my-request-text"
+            className="text-6xl	bg-gradient-to-tr from-purple-950 via-purple-800 to-fuchsia-500 text-transparent text-wrap bg-clip-text font-bold text-center"
             style={{
               margin: ".5em",
             }}
@@ -106,12 +112,9 @@ const token = useSelector((state: RootState) => state.token.value);
           }}
         >
           <NewRequestButton></NewRequestButton>
-
         </div>
       </div>
-        <div className="gap-2 grid grid-cols-3 lg:grid-cols-4">
-          {cardList}
-          </div>
+      <div className="gap-2 grid grid-cols-3 lg:grid-cols-4">{cardList}</div>
     </>
   );
 }

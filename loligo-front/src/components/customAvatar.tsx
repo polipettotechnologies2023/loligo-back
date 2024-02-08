@@ -13,6 +13,7 @@ export default function CustomAvatar() {
     <Dropdown placement="bottom-end">
       <DropdownTrigger>
         <Avatar
+          id="custom-avatar"
           isBordered
           as="button"
           className="transition-transform"
