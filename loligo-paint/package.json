@@ -17,6 +17,7 @@
     "axios": "^1.6.7",
     "plasmo": "0.84.2",
     "react": "18.2.0",
+    "react-color": "^2.19.3",
     "react-dom": "18.2.0"
   },
   "devDependencies": {

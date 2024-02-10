@@ -5,6 +5,7 @@ import CopyToClipboard from "./CopyToClipboard";
 import {ClearCanvasButton} from "../canvas/ClearCanvasButton"
 import AppendToJira from "./AppendToJira";
 
+
 export default function Palette() {
   let { tool, setTool, color, setColor, text, setText } = useCanvas();
 
@@ -37,7 +38,7 @@ export default function Palette() {
       <select
         className="paletteItem"
         defaultValue={tool}
-        
+
         onChange={(event) => selectedValue(event)}
       >
         <option value="hand">✋</option>
@@ -46,7 +47,9 @@ export default function Palette() {
         <option value="eraser">❌</option>
       </select>
 
-      {tool == "pen" ? (<input className="paletteItem" type="color" name="colorPicket" id="colorPicket" onChange={selectColor}/>) : (<></>) }
+      {tool == "pen" &&
+        <input className="paletteItem" list="data" type="color" name="colorPicker" id="colorPicker" onChange={selectColor} />}
+
       {tool == "text" ? (<textarea name="text-area" id="text-area" onChange={writeText}></textarea>) : (<></>) }
       <br />
       <br />

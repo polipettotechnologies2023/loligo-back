@@ -1,0 +1,20 @@
+#colorPickerLabel {
+    cursor: pointer;
+}
+
+#colorPicker {
+    display: none; /* hide the default color picker */
+}
+
+/* Style the image as desired */
+#colorPickerLabel img {
+    width: 50px; /* Adjust size as needed */
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+}
+
+/* When color is picked, update the border color of the image */
+#colorPicker:checked + #colorPickerLabel img {
+    border-color: var(--picked-color); /* Change to the picked color */
+}
