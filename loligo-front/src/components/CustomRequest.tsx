@@ -6,6 +6,7 @@ import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useSelector } from "react-redux";
 import { RootState } from "../vite-env";
+import GetHelp from "./GetHelp";
 
 export default function CustomRequest() {
   const [cardList, setCardList] = useState("");
@@ -112,6 +113,14 @@ export default function CustomRequest() {
           }}
         >
           <NewRequestButton></NewRequestButton>
+          <div
+            style={{
+              marginLeft: "1em",
+              marginTop: "0.5em",
+            }}
+          >
+            <GetHelp></GetHelp>
+          </div>
         </div>
       </div>
       <div className="gap-2 grid grid-cols-3 lg:grid-cols-4">{cardList}</div>
