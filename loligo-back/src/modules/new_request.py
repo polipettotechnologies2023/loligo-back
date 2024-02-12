@@ -24,15 +24,15 @@ class UserInfoDashboard(BaseModel):
 
 #main function module
 def new_request_func(userInfoNewRequest : UserInfoNewRequest):
-    userInfoNewRequest.ticket_id = f"LOLIGO-{uuid4()}"
-    ticket_insetion = db_insert_req((f"{userInfoNewRequest.ticket_id}", f"{userInfoNewRequest.ticket_name}",f"{userInfoNewRequest.website_link}",f"{userInfoNewRequest.user_id}",f"{userInfoNewRequest.user_email}"))    
-    
-    if(ticket_insetion == False):
-        return {
-                "result": "error",
-                "status": 500,
-                "message": "an error has occured during the insertion of the ticket in the DB. Please create a new ticket or contact the assistance polipettotechnologis@gmail.com"
-            }
+#    userInfoNewRequest.ticket_id = f"LOLIGO-{uuid4()}"
+#    ticket_insetion = db_insert_req((f"{userInfoNewRequest.ticket_id}", f"{userInfoNewRequest.ticket_name}",f"{userInfoNewRequest.website_link}",f"{userInfoNewRequest.user_id}",f"{userInfoNewRequest.user_email}"))    
+#    
+#    if(ticket_insetion == False):
+#        return {
+#                "result": "error",
+#                "status": 500,
+#                "message": "an error has occured during the insertion of the ticket in the DB. Please create a new ticket or contact the assistance polipettotechnologis@gmail.com"
+#            }
 
     issue_creation = ticket_creation(userInfoNewRequest)
 
