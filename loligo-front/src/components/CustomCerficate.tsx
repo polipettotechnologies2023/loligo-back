@@ -19,11 +19,20 @@ export default function CustomCertificate() {
           {
             user_id,
           },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `${token}`,
-            },
+        }
+      )
+      
+        let issues = JSON.parse(res.data)
+        let cardMap = issues.issues.map((issue:any)=> {
+          if(issue?.fields?.customfield_10068?.id == "10081")
+          {         
+            return <CustomCard key={issue?.fields?.customfield_10062} 
+                              ticketId={issue.key} 
+                              status={issue?.fields?.status?.id} 
+                              website_link={issue?.fields?.customfield_10074} 
+                              websiteName={issue?.fields?.summary} 
+                              outcome={issue?.fields?.customfield_10068.id}
+                              entry_time={issue?.fields?.customfield_10046}></CustomCard> 
           }
         );
 
