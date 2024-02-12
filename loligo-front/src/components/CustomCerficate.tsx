@@ -31,9 +31,9 @@ export default function CustomCertificate(){
           if(issue?.fields?.customfield_10068?.id == "10081")
           {         
             return <CustomCard key={issue?.fields?.customfield_10062} 
-                              ticketId={issue?.fields?.customfield_10062} 
+                              ticketId={issue.key} 
                               status={issue?.fields?.status?.id} 
-                              website_link={issue?.fields?.customfield_10048} 
+                              website_link={issue?.fields?.customfield_10074} 
                               websiteName={issue?.fields?.summary} 
                               outcome={issue?.fields?.customfield_10068.id}
                               entry_time={issue?.fields?.customfield_10046}></CustomCard> 
