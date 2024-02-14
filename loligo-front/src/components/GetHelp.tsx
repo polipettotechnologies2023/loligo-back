@@ -31,7 +31,7 @@ export default function GetHelp() {
     onOpen();
   };
 
-  const [emailContent, setEmailContent] = useState({
+  const [emailContent] = useState({
     recipient: "polipettotechnologies@gmail.com",
     subject: "Custom Service - Loligo",
   });
