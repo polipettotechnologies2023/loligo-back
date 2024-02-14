@@ -19,6 +19,7 @@ export default function CustomCertificate() {
           {
             user_id,
           },
+        
       )
       
         // let issues = JSON.parse(res.data)
@@ -85,7 +86,6 @@ export default function CustomCertificate() {
             flex: "1",
           }}
         >
-          {" "}
           <h1
             id="my-certificate-text"
             className="text-6xl	bg-gradient-to-tr from-sky-400 via-sky-500 to-blue-500 text-transparent text-wrap bg-clip-text font-bold text-center"
