@@ -9,7 +9,7 @@ import { RootState } from "../vite-env";
 import GetHelp from "./GetHelp";
 
 export default function CustomRequest() {
-  const [cardList, setCardList] = useState("");
+  const [cardList, setCardList] = useState<any>("");
   const { user } = useAuth0();
   const token = useSelector((state: RootState) => state.token.value);
 
@@ -30,7 +30,14 @@ export default function CustomRequest() {
           }
         );
 
+        //@alexis imporve with a card or an image that says "it's looking dry in here"
         let issues = JSON.parse(res.data);
+        if(issues.issues.length == 0){
+          let error = (<p> is looking dry in here</p> )
+          setCardList(error)
+        }
+
+
         let cardMap = issues.issues.map((issue: any) => {
           console.log(issue?.fields);
           if (issue?.fields?.customfield_10068?.id !== "10081") {

@@ -7,20 +7,28 @@ import {
 } from "@nextui-org/react";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../vite-env";
+import ConfermationModal from "./ConfermationModal"
+
 
 export default function newRequestButton() {
   const { user } = useAuth0();
 
   const [websiteName, setWebsiteName] = useState("");
   const [webSiteLink, setWebsiteLink] = useState("");
+  const [confermationModal, setConfermationModal] = useState<any>(undefined);
+  const [disabled, setDisabled] = useState<any>(false)
+
   const token = useSelector((state: RootState) => state.token.value);
 
+  useEffect(()=>{
+    
+  },[confermationModal,disabled])
+
   const SubmitButtonHandler = async () => {
-    // you can find the data to send in the backand interface
-    //  for the ticketId use this library https://www.npmjs.com/package/uuid
+
     if (user?.sub) {
       let user_id = extractUserId(user?.sub);
       let res = await axios.post(
@@ -40,9 +48,7 @@ export default function newRequestButton() {
       );
 
       if (res.status == 200) {
-        console.log(res.request);
-        console.log(res.data);
-        window.location.reload();
+        return setConfermationModal(<ConfermationModal></ConfermationModal>)
       } else {
         //TODO: Change this with a good handler
         alert(res.status);
@@ -61,6 +67,8 @@ export default function newRequestButton() {
   }
 
   return (
+    <>
+    {confermationModal}
     <Popover placement="bottom" showArrow={true} size="lg">
       <PopoverTrigger>
         <Button
@@ -125,7 +133,8 @@ export default function newRequestButton() {
             >
               <Button
                 className="bg-gradient-to-tr from-purple-950 via-purple-800 to-fuchsia-500 text-white"
-                onClick={() => SubmitButtonHandler()}
+                isDisabled={disabled}
+                onClick={() => {SubmitButtonHandler(); setDisabled(true)}}
               >
                 Submit
               </Button>
@@ -134,5 +143,6 @@ export default function newRequestButton() {
         </div>
       </PopoverContent>
     </Popover>
+    </>
   );
 }
