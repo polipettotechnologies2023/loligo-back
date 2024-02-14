@@ -7,7 +7,6 @@ import {
   Button,
 } from "@nextui-org/react";
 import { useState } from "react";
-import QuestionCircleIcon from "@atlaskit/icon/glyph/question-circle";
 import TipModal from "./TipModal";
 import DataTips from "./DataTips";
 import { useSetState } from "react-use";
@@ -32,7 +31,7 @@ export default function GetHelp() {
     onOpen();
   };
 
-  const [emailContent, setEmailContent] = useState({
+  const [emailContent] = useState({
     recipient: "polipettotechnologies@gmail.com",
     subject: "Custom Service - Loligo",
   });
@@ -179,22 +178,13 @@ export default function GetHelp() {
       />
       <Dropdown placement="bottom">
         <DropdownTrigger>
-          <Button id="help-button" isIconOnly radius="full">
-            <div
-              style={{
+          <Button id="help-button" isIconOnly radius="full" style={{
                 backgroundImage:
                   "linear-gradient(to top right, #3b0764, #6b21a8, #d946ef)",
-                display: "inline-block",
-                padding: "8px",
-                borderRadius: "50%",
-              }}
-            >
-              <QuestionCircleIcon
-                label="Question Icon"
-                size="xlarge"
-                primaryColor="transparent"
-              />
-            </div>
+                color: "white",
+                marginBottom: "8px"
+              }}>
+              ?
           </Button>
         </DropdownTrigger>
         <DropdownMenu aria-label="Profile Actions" variant="flat">
