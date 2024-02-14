@@ -8,7 +8,6 @@ import {
 } from "@nextui-org/react";
 
 export default function CustomNav() {
-
   return (
     <>
       <Navbar
@@ -25,9 +24,9 @@ export default function CustomNav() {
           </NavbarBrand>
         </NavbarContent>
         <NavbarContent>
-        <NavbarBrand>
-          <img src="loligo_textonly_logo.svg" width="100%"></img>
-        </NavbarBrand>
+          <NavbarBrand>
+            <img src="loligo_textonly_logo.svg" width="100%"></img>
+          </NavbarBrand>
         </NavbarContent>
         <NavbarContent justify="end">
           <NavbarItem>

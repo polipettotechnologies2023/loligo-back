@@ -1,6 +1,8 @@
 # How to install requirements
 pip install -r requirements.txt
 
+# Build docker image 
+docker build -t loligo-back .
 
 # Build docker image 
 docker build -t loligo-back .
@@ -12,7 +14,6 @@ docker run -dp 127.0.0.1:8080:8080 loligo-back
 # How to start the server app
 python3 -m src.main
 
-<!-- old -->
 # How to start the server app
 uvicorn src.main:app --reload 
 and with a specific port -> uvicorn src.main:app --reload --port 8080
