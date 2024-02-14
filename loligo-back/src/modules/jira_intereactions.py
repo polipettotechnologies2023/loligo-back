@@ -77,6 +77,7 @@ def ticket_creation(data):
 
     try:
         res = requests.post(jira_endpoint, json = payload, auth = (f'{config["JIRA_USERNAME"]}', config["JIRA_API_TOKEN"]))
+        print(res)
         return res
     except:
         print("error in request for jira")
