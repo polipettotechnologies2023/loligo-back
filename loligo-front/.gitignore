@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# icon package
+./node_modules/@atlaskit/icon/

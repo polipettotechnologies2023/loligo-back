@@ -1,8 +1,6 @@
 from dotenv import dotenv_values
 import requests
 from threading import Thread
-from .db_connection import db_open
-from .db_connection import db_update
 from pydantic import BaseModel
 from typing import Optional
 import json
@@ -57,7 +55,7 @@ def ticket_creation(data):
         "customfield_10062": f"{data.ticket_id}",
         "customfield_10065": f"{data.user_email}",
         "customfield_10057": f"{data.user_id}",
-        "customfield_10048": f"{data.website_link}",
+        "customfield_10074": f"{data.website_link}",
         "customfield_10070": {
         "content": [
             {

@@ -7,7 +7,8 @@ from fastapi.security import HTTPBearer
 from .utils import VerifyAndIssueToken as VerifyToken
 from .utils import get_access_token
 from ..modules.dashboard import get_dashboard, UserInfoDashboard
-from ..modules.certificates import get_my_certificates
+# TODO: uncommente then line when you implement the get my cetificates function
+# from ..modules.certificates import get_my_certificates
 from ..modules.dashboard import get_dashboard
 
 router = APIRouter()
@@ -81,9 +82,10 @@ async def handle_new_request(request_data : UserInfoNewRequest = Body(...)):
     return new_request_func(request_data)
 
 
-@router.post("/mycertificates")
-async def handle_get_my_certificates(request_data : UserInfoDashboard = Body(...)):
-    # result = VerifyToken(token.credentials).verify()
-    # TODO: check the result before sendiing the request
-    # print(result)
-    return get_my_certificates(request_data)
+# TODO: @Rohit uncomment this function and work int he get my cerficate function in order to answer with the required data
+# @router.post("/mycertificates")
+# async def handle_get_my_certificates(request_data : UserInfoDashboard = Body(...)):
+#     # result = VerifyToken(token.credentials).verify()
+#     # TODO: check the result before sendiing the request
+#     # print(result)
+#     return get_my_certificates(request_data)
