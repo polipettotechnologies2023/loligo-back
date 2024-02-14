@@ -2,8 +2,8 @@ import urllib.request
 import requests
 from urllib.error import URLError, HTTPError
 from .jira_intereactions import update_issue_dp
-from .db_connection import db_open
-from .db_connection import db_update 
+#from .db_connection import db_open
+#from .db_connection import db_update 
 import json
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
@@ -89,7 +89,7 @@ def automatic_dp_detection(url_link, userData, issueData):
     result = find_dp_in_websites(url_link, search_dp_to_find)
     print(result)
     # update endtry in the db
-    db_update_req(userData,result)
+#    db_update_req(userData,result)
 
     # update a jira ticket
     update_issue_dp(issueData,result)
@@ -97,7 +97,7 @@ def automatic_dp_detection(url_link, userData, issueData):
     return
 
 
-def db_update_req(userData, result_auto_detection):
+'''def db_update_req(userData, result_auto_detection):
     result_auto_detection = json.dumps(result_auto_detection)
     try:
         db_open()
@@ -110,3 +110,4 @@ def db_update_req(userData, result_auto_detection):
         print(NameError)
 
     return 400
+'''

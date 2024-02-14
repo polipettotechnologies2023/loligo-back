@@ -81,9 +81,9 @@ async def handle_new_request(request_data : UserInfoNewRequest = Body(...)):
     return new_request_func(request_data)
 
 
-@router.post("/mycertificates")
-async def handle_get_my_certificates(request_data : UserInfoDashboard = Body(...)):
+#@router.post("/mycertificates")
+#async def handle_get_my_certificates(request_data : UserInfoDashboard = Body(...)):
     # result = VerifyToken(token.credentials).verify()
     # TODO: check the result before sendiing the request
     # print(result)
-    return get_my_certificates(request_data)
+#    return get_my_certificates(request_data)

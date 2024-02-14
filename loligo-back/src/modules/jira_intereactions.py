@@ -1,8 +1,8 @@
 from dotenv import dotenv_values
 import requests
 from threading import Thread
-from .db_connection import db_open
-from .db_connection import db_update
+#from .db_connection import db_open
+#from .db_connection import db_update
 from pydantic import BaseModel
 from typing import Optional
 import json
