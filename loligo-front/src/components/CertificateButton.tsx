@@ -1,6 +1,8 @@
 import {
   Page,
   Text,
+  Image,
+  View,
   Document,
   StyleSheet,
   PDFViewer,
@@ -35,12 +37,12 @@ const styles = StyleSheet.create({
     color: "grey",
   },
   title: {
-    fontSize: 48,
+    fontSize: 46,
     textAlign: "center",
     fontFamily: "Times-Bold",
   },
   subtitle: {
-    fontSize: 22,
+    fontSize: 20,
     margin: 12,
     textAlign: "center",
     fontFamily: "Times-Roman",
@@ -56,18 +58,27 @@ const styles = StyleSheet.create({
   },
   text: {
     margin: 12,
-    fontSize: 18,
+    fontSize: 16,
     textAlign: "center",
     fontFamily: "Times-Roman",
-  },
-  author: {
-    fontSize: 12,
-    textAlign: "center",
-    marginBottom: 40,
   },
   image: {
     marginVertical: 15,
     marginHorizontal: 100,
+    height: 130,
+    width: 130,
+  },
+  imagecontainer: { alignItems: "center", justifyContent: "center" },
+  footercontainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginTop: 20,
+  },
+  footertext: {
+    fontSize: 16,
+    textAlign: "center",
+    fontFamily: "Times-Roman",
   },
 });
 
@@ -80,6 +91,9 @@ const MyDocument = () => (
       <Text style={styles.header} fixed>
         Polipetto Technologies
       </Text>
+      <View style={styles.imagecontainer}>
+        <Image style={styles.image} src="certificate_purple.png" />
+      </View>
       <Text style={styles.title}>CERTIFICATE</Text>
       <Text style={styles.subtitle}>OF DARK PATTERNS FREE</Text>
       <Text style={styles.subtitle}>ACKNOWLEDGES THAT</Text>
@@ -96,6 +110,11 @@ const MyDocument = () => (
         and was proved to be free of the following dark patterns:
       </Text>
       <Text style={styles.text}>List of dark patterns tba.</Text>
+      <Text style={styles.emptyLine} />
+      <View style={styles.footercontainer}>
+        <Text style={styles.footertext}>Date</Text>
+        <Text style={styles.footertext}>Signature</Text>
+      </View>
     </Page>
   </Document>
 );
