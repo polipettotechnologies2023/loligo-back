@@ -37,18 +37,18 @@ const styles = StyleSheet.create({
     color: "grey",
   },
   title: {
-    fontSize: 46,
+    fontSize: 44,
     textAlign: "center",
     fontFamily: "Times-Bold",
   },
   subtitle: {
-    fontSize: 20,
+    fontSize: 18,
     margin: 12,
     textAlign: "center",
     fontFamily: "Times-Roman",
   },
   company: {
-    fontSize: 34,
+    fontSize: 32,
     margin: 12,
     textAlign: "center",
     fontFamily: "Courier-Bold",
@@ -58,15 +58,15 @@ const styles = StyleSheet.create({
   },
   text: {
     margin: 12,
-    fontSize: 16,
+    fontSize: 12,
     textAlign: "center",
     fontFamily: "Times-Roman",
   },
   image: {
     marginVertical: 15,
     marginHorizontal: 100,
-    height: 130,
-    width: 130,
+    height: 120,
+    width: 120,
   },
   imagecontainer: { alignItems: "center", justifyContent: "center" },
   footercontainer: {
@@ -76,16 +76,19 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   footertext: {
-    fontSize: 16,
+    fontSize: 14,
     textAlign: "center",
     fontFamily: "Times-Roman",
   },
 });
 
-const company_name = "test company";
-const website_url = "https://polipetto.pp.ua";
+type CertificateProps = {
+  company_name: string;
+  website_url: string;
+};
+
 // Create Document Component
-const MyDocument = () => (
+const MyDocument = ({ company_name, website_url }: CertificateProps) => (
   <Document>
     <Page size="A4" style={styles.body}>
       <Text style={styles.header} fixed>
@@ -99,32 +102,51 @@ const MyDocument = () => (
       <Text style={styles.subtitle}>ACKNOWLEDGES THAT</Text>
       <Text style={styles.emptyLine} />
       <Text style={styles.text}>The Website {website_url} of</Text>
-      <Text style={styles.emptyLine} />
       <Text style={styles.company}>{company_name}</Text>
       <Text style={styles.emptyLine} />
       <Text style={styles.text}>
-        Has passed all of the dark patterns detection
+        Has passed all of the dark patterns detection provided by Loligo
       </Text>
-      <Text style={styles.text}>provided by Loligo</Text>
       <Text style={styles.text}>
         and was proved to be free of the following dark patterns:
       </Text>
-      <Text style={styles.text}>List of dark patterns tba.</Text>
+      <Text style={styles.text}>
+        Fake Activity, Fake Countdown, Confirmshaming, Low Stock Messages,
+        Disguised Ads, Fake Scarcity,
+      </Text>
+      <Text style={styles.text}>
+        Fake Social Proof, Forced Action, Hard to Cancel, Hidden Costs, Hidden
+        Subscription, Nagging,
+      </Text>
+      <Text style={styles.text}>
+        Obstruction, Preselection, Sneaking, Trick Wording, Visual Interference,
+        Comparison Prevention.
+      </Text>
       <Text style={styles.emptyLine} />
       <View style={styles.footercontainer}>
         <Text style={styles.footertext}>Date</Text>
         <Text style={styles.footertext}>Signature</Text>
       </View>
+      <View style={styles.footercontainer}>
+        <Text style={styles.footertext}>Fake Date</Text>
+        <Text style={styles.footertext}>Polipetto Technologies</Text>
+      </View>
     </Page>
   </Document>
 );
 
-export default function CertificateButton() {
+export default function CertificateButton({
+  company_name,
+  website_url,
+}: CertificateProps) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <>
-      <Button color="primary" onPress={onOpen}>
-        preview pdf
+      <Button
+        className="bg-gradient-to-tr from-sky-400 via-sky-500 to-blue-500 text-white"
+        onPress={onOpen}
+      >
+        Preview Certificate
       </Button>
       <Modal size="2xl" isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
@@ -135,7 +157,10 @@ export default function CertificateButton() {
               </ModalHeader>
               <ModalBody>
                 <PDFViewer height="400" showToolbar={false}>
-                  <MyDocument />
+                  <MyDocument
+                    company_name={company_name}
+                    website_url={website_url}
+                  />
                 </PDFViewer>
               </ModalBody>
               <ModalFooter>
@@ -148,7 +173,12 @@ export default function CertificateButton() {
                   Close
                 </Button>
                 <PDFDownloadLink
-                  document={<MyDocument />}
+                  document={
+                    <MyDocument
+                      company_name={company_name}
+                      website_url={website_url}
+                    />
+                  }
                   fileName="TestCertificate.pdf"
                   style={{
                     borderRadius: "9999px",

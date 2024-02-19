@@ -11,6 +11,8 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+import CertificateButton from "./CertificateButton";
+import SvgButton from "./SvgButton";
 
 export default function CustomCard(prop: any) {
   //TODO: ts interface
@@ -104,10 +106,11 @@ export default function CustomCard(prop: any) {
                               {/* PASS  onClose FUNCTION TO onPress EVENT LISTENER*/}
                               Close
                             </Button>
-                            <Button className={outcomeColor}>
-                              {/* PASS  onClose FUNCTION TO onPress EVENT LISTENER*/}
-                              Download
-                            </Button>
+                            <CertificateButton
+                              company_name={prop.websiteName}
+                              website_url={prop.website_link}
+                            ></CertificateButton>
+                            <SvgButton></SvgButton>
                           </ModalFooter>
                         </>
                       );
