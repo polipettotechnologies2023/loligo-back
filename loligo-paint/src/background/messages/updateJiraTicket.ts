@@ -23,12 +23,13 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
             'X-Atlassian-Token': 'no-check'
         }
     })
-  res.send({
-    fetchRes
-  })
+
+ 
+      res.send({
+        "status" : fetchRes.status
+      })  
 
 }
-
 
 function DataURIToBlob(dataURI: string) {
     const splitDataURI = dataURI.split(',')

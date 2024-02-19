@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@atlaskit/button": "^17.2.0",
+    "@atlaskit/form": "^9.0.7",
     "@atlaskit/icon": "^22.0.0",
+    "@atlaskit/select": "^17.1.1",
     "@plasmohq/messaging": "^0.5.0",
     "@plasmohq/storage": "^1.9.1",
     "axios": "^1.6.7",
