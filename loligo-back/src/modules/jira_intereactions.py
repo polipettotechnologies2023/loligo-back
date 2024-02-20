@@ -92,16 +92,17 @@ def update_issue_dp(data,dp_result):
     print(data["key"])
     print(dp_result)
     
-    #Formatting the JSON to beautify it in Jira
-    if not dp_result : 
+
+    if not dp_result: 
         formatted_data = "No Dark Patterns Detected!"
     else:
         formatted_data = ""
-        for category, items in dp_result.items():
-            formatted_data += f"\n**{category}:**\n"
-        for item, urls in items.items():
-            for url in urls:
-                formatted_data += f"- {item} -> {url}\n"
+        categories_to_update = []
+        all_categories = ["Fake Activity", "Fake Countdown", "Confirmshaming", "Scarcity"]
+        for category in all_categories:
+            if category in dp_result and dp_result[category]:
+                categories_to_update.append(category)
+
 
     # remider, before send inf the data back, in python you have to paseit into a dict and then sent it as a json
     payload = {
@@ -120,7 +121,8 @@ def update_issue_dp(data,dp_result):
         ],
         "type": "doc",
         "version": 1
-        }
+        },
+        "customfield_10042": [{"value": category} for category in categories_to_update],
     }
     } 
 
