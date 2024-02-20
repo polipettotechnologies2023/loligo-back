@@ -115,6 +115,7 @@ export default function CustomCard(prop: any) {
                               company_name={prop.websiteName}
                               website_url={prop.website_link}
                               certify_date={finish_date}
+                              cid={prop.ticketId}
                             ></CertificateButton>
                             <DownloadSVG cid={prop.ticketId}></DownloadSVG>
                           </ModalFooter>

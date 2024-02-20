@@ -108,6 +108,7 @@ type CertificateProps = {
   company_name: string;
   website_url: string;
   certify_date: string;
+  cid: string;
 };
 
 // Create Document Component
@@ -115,11 +116,12 @@ const MyDocument = ({
   company_name,
   website_url,
   certify_date,
+  cid,
 }: CertificateProps) => (
   <Document>
     <Page size="A4" style={styles.body}>
       <Text style={styles.header} fixed>
-        Polipetto Technologies
+        Polipetto Technologies - Certificate ID {cid}
       </Text>
       <View style={styles.imagecontainer}>
         <Image style={styles.imagesquare} src="certificate_purple.png" />
@@ -167,6 +169,7 @@ export default function CertificateButton({
   company_name,
   website_url,
   certify_date,
+  cid,
 }: CertificateProps) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
@@ -190,6 +193,7 @@ export default function CertificateButton({
                     company_name={company_name}
                     website_url={website_url}
                     certify_date={certify_date}
+                    cid={cid}
                   />
                 </PDFViewer>
               </ModalBody>
@@ -208,6 +212,7 @@ export default function CertificateButton({
                       company_name={company_name}
                       website_url={website_url}
                       certify_date={certify_date}
+                      cid={cid}
                     />
                   }
                   fileName="Certificate.pdf"
