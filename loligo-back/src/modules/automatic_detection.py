@@ -80,28 +80,34 @@ def automatic_dp_detection(url_link, userData, issueData):
                           "Get access before everyone else does", "Join the elite group of early buyers",
                           "This item is in high demand - grab yours!", "Exclusive deal for the first 100 customers!",
                           "offered only for a limited amount of time", "Subscribe Now",
-                          "Sign up for newsletters", "Click Here to Find More Info",
+                          "Sign up for newsletters",
                           "Other people are viewing this product now!", "people are viewing this", "SECONDS AGO",
                           "HOUR AGO", " just bought", "purchased", "minutes ago", "mins ago", "just ordered",
                           "added this item to cart", " to their cart"],
         #  Look for phrases like “offer ends in” or “countdown”
         "Fake Countdown": ["Your order is reserved for", "offer ends in", "countdown", "Flash sale: ending soon!",
-                           "limited amount of time", "left at this price", "Your order is reserved for",
-                           "Activate within", "Ends in"],
+                           "limited amount of time", "left at this price",
+                           "Activate within", "Ends in", "Save 25\%\ on your entire order","Cart Expires In", "Prices increase in", 
+                           "Today's sale ends in", "ENDS ONCE COUNTER HITS ZERO", "EXPIRES IN", " left to buy", "Please Order Within", "Days left until the offer ends", 
+                           "Checkout within", " order within", "Complete your purchase within the next", "Items will be reserved in your cart for"],
 
         # Look for phrases that come under ConfirmShaming
-        "Confirmshaming": ["No thanks, I don't like free stuff", "No thanks. I don't like free things...",
+        "Confirmshaming": ["No thanks, I don't like free stuff", "No thanks. I don't like free things",
                            "Yes, I want to save money - who wouldn't?", "No, I don't care about my privacy",
                            "Sure, continue being wasteful",
                            "No, I prefer paying more for no reason", "Yes, I love missing out on great deals",
                            "No, I'd rather not be a smart shopper", "Yes, I enjoy making bad choices",
-                           "Sure, ignore this incredible offer", "No, I don't want to be a savvy consumer", ],
+                           "Sure, ignore this incredible offer", "No, I don't want to be a savvy consumer", "I don't like discounts", "no thanks, I like paying full price", 
+                           "No Thanks, I Prefer Paying Full Price", "No thanks, I don't like good deals", "No I don't feel lucky", "No thanks, I'll skip this amazing super-saver deal",
+                           "No thanks, I'd like 0\%\ off", "No Thanks, I Don't Like Exclusive Offers"],
 
         # Look for phrases like “only” and “units left”
         "Scarcity": ["pieces of items left in stock", "Time is running out! Buy now", "Act now before it's too late!",
                      "Limited stock remaining", "Hurry, only a few items left", "Almost sold out! Act fast!",
-                     "Popular choice! Act quickly",
-                     "Claimed! Hurry, only a few left!", "limited quantity left", "No restock", "offer ends on"],
+                     "Popular choice! Act quickly",  "Claimed! Hurry, only a few left!", "limited quantity left", "No restock", "offer ends on",
+                     "LEFT", "limited availability at this price", "SELLING FAST", "An item you ordered is in high demand. No worries, we have reserved your order", 
+                     "Will sell out fast","it's too late", "HIGH DEMAND", "ONCE IT'S GONE, IT'S GONE", "Our items sell fast, don't miss out", "SELLING OUT QUICKLY",
+                     "selling fast", "Sale ends soon", "Limited Time", ""],
     }
 
     result = find_dp_in_websites(url_link, search_dp_to_find)
