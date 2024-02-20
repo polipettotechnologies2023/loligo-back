@@ -50,6 +50,7 @@ export default function CustomCertificate() {
                 websiteName={issue?.fields?.summary}
                 outcome={issue?.fields?.customfield_10068.id}
                 entry_time={issue?.fields?.customfield_10046}
+                finish_time={issue?.fields?.customfield_10055}
               ></CustomCard>
             );
           }

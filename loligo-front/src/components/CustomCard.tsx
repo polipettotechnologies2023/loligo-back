@@ -12,7 +12,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import CertificateButton from "./CertificateButton";
-import SvgButton from "./SvgButton";
+import DownloadSVG from "./DownloadSVG";
 
 export default function CustomCard(prop: any) {
   //TODO: ts interface
@@ -32,6 +32,11 @@ export default function CustomCard(prop: any) {
     outcomeColor =
       "bg-gradient-to-tr from-purple-950 via-purple-800 to-fuchsia-500 text-white";
   }
+
+  //ticket finish date formatting
+  const temp_date = prop.finish_time;
+  const format_date = temp_date.substring(0, 10);
+  const finish_date = format_date.replace(/-/g, ".");
 
   return (
     <>
@@ -109,8 +114,9 @@ export default function CustomCard(prop: any) {
                             <CertificateButton
                               company_name={prop.websiteName}
                               website_url={prop.website_link}
+                              certify_date={finish_date}
                             ></CertificateButton>
-                            <SvgButton></SvgButton>
+                            <DownloadSVG cid={prop.ticketId}></DownloadSVG>
                           </ModalFooter>
                         </>
                       );

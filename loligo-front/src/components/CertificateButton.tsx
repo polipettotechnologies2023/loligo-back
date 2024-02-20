@@ -8,6 +8,7 @@ import {
   PDFViewer,
   PDFDownloadLink,
   Font,
+  Link,
 } from "@react-pdf/renderer";
 import {
   Modal,
@@ -54,48 +55,75 @@ const styles = StyleSheet.create({
     fontFamily: "Courier-Bold",
   },
   emptyLine: {
-    marginBottom: 20,
+    marginBottom: 15,
   },
   text: {
     margin: 12,
     fontSize: 12,
     textAlign: "center",
     fontFamily: "Times-Roman",
+    lineHeight: 0.6,
   },
-  image: {
+  imagesquare: {
     marginVertical: 15,
     marginHorizontal: 100,
     height: 120,
     width: 120,
   },
+  imagesignature: {
+    height: 90,
+    width: 160,
+    marginLeft: 40,
+  },
   imagecontainer: { alignItems: "center", justifyContent: "center" },
-  footercontainer: {
+  footercontainer1: {
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
     marginTop: 20,
+  },
+  footercontainer2: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginLeft: 40,
   },
   footertext: {
     fontSize: 14,
     textAlign: "center",
     fontFamily: "Times-Roman",
   },
+  link: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundColor: "transparent",
+    cursor: "pointer",
+  },
 });
 
 type CertificateProps = {
   company_name: string;
   website_url: string;
+  certify_date: string;
 };
 
 // Create Document Component
-const MyDocument = ({ company_name, website_url }: CertificateProps) => (
+const MyDocument = ({
+  company_name,
+  website_url,
+  certify_date,
+}: CertificateProps) => (
   <Document>
     <Page size="A4" style={styles.body}>
       <Text style={styles.header} fixed>
         Polipetto Technologies
       </Text>
       <View style={styles.imagecontainer}>
-        <Image style={styles.image} src="certificate_purple.png" />
+        <Image style={styles.imagesquare} src="certificate_purple.png" />
+        <Link style={styles.link} src="https://polipetto.pp.ua" />
       </View>
       <Text style={styles.title}>CERTIFICATE</Text>
       <Text style={styles.subtitle}>OF DARK PATTERNS FREE</Text>
@@ -123,13 +151,13 @@ const MyDocument = ({ company_name, website_url }: CertificateProps) => (
         Comparison Prevention.
       </Text>
       <Text style={styles.emptyLine} />
-      <View style={styles.footercontainer}>
+      <View style={styles.footercontainer1}>
         <Text style={styles.footertext}>Date</Text>
         <Text style={styles.footertext}>Signature</Text>
       </View>
-      <View style={styles.footercontainer}>
-        <Text style={styles.footertext}>Fake Date</Text>
-        <Text style={styles.footertext}>Polipetto Technologies</Text>
+      <View style={styles.footercontainer2}>
+        <Text style={styles.footertext}>{certify_date}</Text>
+        <Image style={styles.imagesignature} src="polipetto_signature.png" />
       </View>
     </Page>
   </Document>
@@ -138,6 +166,7 @@ const MyDocument = ({ company_name, website_url }: CertificateProps) => (
 export default function CertificateButton({
   company_name,
   website_url,
+  certify_date,
 }: CertificateProps) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
@@ -160,6 +189,7 @@ export default function CertificateButton({
                   <MyDocument
                     company_name={company_name}
                     website_url={website_url}
+                    certify_date={certify_date}
                   />
                 </PDFViewer>
               </ModalBody>
@@ -177,9 +207,10 @@ export default function CertificateButton({
                     <MyDocument
                       company_name={company_name}
                       website_url={website_url}
+                      certify_date={certify_date}
                     />
                   }
-                  fileName="TestCertificate.pdf"
+                  fileName="Certificate.pdf"
                   style={{
                     borderRadius: "9999px",
                     backgroundColor: "#6E2DC1",
