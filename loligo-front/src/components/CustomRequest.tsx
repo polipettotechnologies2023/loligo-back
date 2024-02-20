@@ -32,11 +32,10 @@ export default function CustomRequest() {
 
         //@alexis imporve with a card or an image that says "it's looking dry in here"
         let issues = JSON.parse(res.data);
-        if(issues.issues.length == 0){
-          let error = (<p> is looking dry in here</p> )
-          setCardList(error)
+        if (issues.issues.length == 0) {
+          let error = <p> is looking dry in here</p>;
+          setCardList(error);
         }
-
 
         let cardMap = issues.issues.map((issue: any) => {
           console.log(issue?.fields);
@@ -44,9 +43,9 @@ export default function CustomRequest() {
             return (
               <CustomCard
                 key={issue?.fields?.customfield_10062}
-                ticketId={issue?.fields?.customfield_10062}
+                ticketId={issue.key}
                 status={issue?.fields?.status?.id}
-                website_link={issue?.fields?.customfield_10048}
+                website_link={issue?.fields?.customfield_10074}
                 websiteName={issue?.fields?.summary}
                 outcome={issue?.fields?.customfield_10068.id}
                 entry_time={issue?.fields?.customfield_10046}

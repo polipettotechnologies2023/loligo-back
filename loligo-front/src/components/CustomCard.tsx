@@ -33,11 +33,6 @@ export default function CustomCard(prop: any) {
       "bg-gradient-to-tr from-purple-950 via-purple-800 to-fuchsia-500 text-white";
   }
 
-  //ticket finish date formatting
-  const temp_date = prop.finish_time;
-  const format_date = temp_date.substring(0, 10);
-  const finish_date = format_date.replace(/-/g, ".");
-
   return (
     <>
       <Card
@@ -53,7 +48,7 @@ export default function CustomCard(prop: any) {
           {/* ticketId */}
           <small className="text-default-500">{prop.website_link}</small>
           {/* websiteLink */}
-          <h4 className="font-bold text-large">{prop.websiteName}</h4>{" "}
+          <h4 className="font-bold text-large">{prop.websiteName}</h4>
           {/* websiteName */}
         </CardHeader>
         <CardBody className="overflow-visible py-2">
@@ -114,7 +109,9 @@ export default function CustomCard(prop: any) {
                             <CertificateButton
                               company_name={prop.websiteName}
                               website_url={prop.website_link}
-                              certify_date={finish_date}
+                              certify_date={prop.finish_time
+                                .substring(0, 10)
+                                .replace(/-/g, ".")}
                               cid={prop.ticketId}
                             ></CertificateButton>
                             <DownloadSVG cid={prop.ticketId}></DownloadSVG>
