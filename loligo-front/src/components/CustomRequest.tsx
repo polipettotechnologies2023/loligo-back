@@ -1,6 +1,7 @@
 import NewRequestButton from "../components/NewRequestButton";
 import CustomFilter from "../components/CustomFilter";
 import CustomCard from "./CustomCard";
+import EmptyCard from "./EmptyCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -10,8 +11,10 @@ import GetHelp from "./GetHelp";
 
 export default function CustomRequest() {
   const [cardList, setCardList] = useState<any>("");
+  const [emptyRequest, setEmptyRequest] = useState("hidden");
   const { user } = useAuth0();
   const token = useSelector((state: RootState) => state.token.value);
+  console.log("Original value:" + emptyRequest);
 
   useEffect(() => {
     (async () => {
@@ -33,8 +36,7 @@ export default function CustomRequest() {
         //@alexis imporve with a card or an image that says "it's looking dry in here"
         let issues = JSON.parse(res.data);
         if (issues.issues.length == 0) {
-          let error = <p> is looking dry in here</p>;
-          setCardList(error);
+          setEmptyRequest("contents");
         }
 
         let cardMap = issues.issues.map((issue: any) => {
@@ -58,6 +60,8 @@ export default function CustomRequest() {
       }
     })();
   }, []);
+
+  console.log("Changed value:" + emptyRequest);
 
   async function extractUserId(userString: string) {
     const separatorIndex = userString.indexOf("|");
@@ -128,6 +132,9 @@ export default function CustomRequest() {
             <GetHelp></GetHelp>
           </div>
         </div>
+      </div>
+      <div>
+        <EmptyCard displayValue={emptyRequest}></EmptyCard>
       </div>
       <div className="gap-2 grid grid-cols-3 lg:grid-cols-4">{cardList}</div>
     </>
