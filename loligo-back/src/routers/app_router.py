@@ -1,12 +1,15 @@
 
 from typing import Union
 from fastapi import APIRouter
-from ..modules.new_request import new_request_func, UserInfoNewRequest
-from fastapi import Depends, HTTPException, Header, Body
+from ..modules.new_request import new_request_func, UserInfoNewRequest, UserInfoDashboard
+from fastapi import Depends, Body
 from fastapi.security import HTTPBearer
 from .utils import VerifyAndIssueToken as VerifyToken
 from .utils import get_access_token
 from ..modules.dashboard import get_dashboard, UserInfoDashboard
+# TODO: uncommente then line when you implement the get my cetificates function
+# from ..modules.certificates import get_my_certificates
+from ..modules.dashboard import get_dashboard
 
 router = APIRouter()
 
@@ -14,32 +17,75 @@ token_auth_scheme = HTTPBearer()
 
 # endpoints for our frontend 
 
-@router.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None, token : str = Depends(token_auth_scheme)):
-    result = VerifyToken(token.credentials).verify()
-    print(result)
-    return result
+# @router.get("/items/{item_id}")
+# def read_item(item_id: int, q: Union[str, None] = None, token : str = Depends(token_auth_scheme)):
+#     result = VerifyToken(token.credentials).verify()
+#     print(result)
+#     return result
 
-@router.get("/login/{user_id}")
-def login(user_id: str):
-    access_token = get_access_token(user_id)
-    return access_token
+# @router.get("/login/{user_id}")
+# def login(user_id: str):
+#     access_token = get_access_token(user_id)
+#     return access_token
+
+# @router.post("/dashboard")
+# def handle_dahsboard(request_data : UserInfoDashboard = Body(...), token : str = Depends(token_auth_scheme)):
+#     result = VerifyToken(token.credentials).verify()
+#     # TODO: check the result before sendiing the request
+#     print(result)
+#     return get_dashboard(request_data)
+
+# @router.post("/newrequest")
+# async def handle_new_request(request_data : UserInfoNewRequest = Body(...), token : str = Depends(token_auth_scheme)):
+#     result = VerifyToken(token.credentials).verify()
+#     # TODO: check the result before sendiing the request
+#     print(result)
+#     return new_request_func(request_data)
 
 
-@router.post("/dashboard")
-async def handle_dahsboard(request_data : UserInfoDashboard = Body(...), token : str = Depends(token_auth_scheme)):
-    result = VerifyToken(token.credentials).verify()
-    # TODO: check the result before sendiing the request
-    print(result)
-    return await get_dashboard(request_data)
+# @router.post("/mycertificates")
+# async def handle_get_my_certificates(request_data : UserInfoDashboard = Body(...), token : str = Depends(token_auth_scheme)):
+#     result = VerifyToken(token.credentials).verify()
+#     # TODO: check the result before sendiing the request
+#     print(result)
+#     return get_my_certificates(request_data)
 
-
-@router.post("/newrequest")
-async def handle_new_request(request_data : UserInfoNewRequest = Body(...), token : str = Depends(token_auth_scheme)):
-    result = VerifyToken(token.credentials).verify()
-    # TODO: check the result before sendiing the request
-    print(result)
-    return await new_request_func(request_data)
 
 
 # endpoints for jira automations
+# endpoints for jira automations
+
+# @router.post("/certify")
+# async def handle_new_request(request_data : UserInfoNewRequest = Body(...), token : str = Depends(token_auth_scheme)):
+#     result = VerifyToken(token.credentials).verify()
+#     # TODO: check the result before sendiing the request
+#     print(result)
+#     return new_request_func(request_data)
+
+
+#######################################################
+#HOTFIX FOR THE DEMO -- EXCEEDED MACHINE TO MACHINE TOKEN IN AUTH0
+#######################################################
+
+@router.post("/dashboard")
+def handle_dahsboard(request_data : UserInfoDashboard = Body(...)):
+    # result = VerifyToken(token.credentials).verify()
+    # TODO: check the result before sendiing the request
+    # print(result)
+    return get_dashboard(request_data)
+
+@router.post("/newrequest")
+async def handle_new_request(request_data : UserInfoNewRequest = Body(...)):
+    # result = VerifyToken(token.credentials).verify()
+    # TODO: check the result before sendiing the request
+    # print(result)
+    return new_request_func(request_data)
+
+
+# TODO: @Rohit uncomment this function and work int he get my cerficate function in order to answer with the required data
+# @router.post("/mycertificates")
+# async def handle_get_my_certificates(request_data : UserInfoDashboard = Body(...)):
+#     # result = VerifyToken(token.credentials).verify()
+#     # TODO: check the result before sendiing the request
+#     # print(result)
+#     return get_my_certificates(request_data)
