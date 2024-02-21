@@ -52,7 +52,6 @@ def ticket_creation(data):
         "reporter": {
         "id": "557058:f58131cb-b67d-43c7-b30d-6b58d40bd077"
         }, 
-        "customfield_10062": f"{data.ticket_id}",
         "customfield_10065": f"{data.user_email}",
         "customfield_10057": f"{data.user_id}",
         "customfield_10074": f"{data.website_link}",
@@ -122,7 +121,7 @@ def update_issue_dp(data,dp_result):
         "type": "doc",
         "version": 1
         },
-        "customfield_10042": [{"value": category} for category in categories_to_update],
+        "customfield_10075": [{"value": category} for category in categories_to_update],
     }
     } 
 
