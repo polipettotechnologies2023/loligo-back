@@ -21,7 +21,6 @@ config = dotenv_values(".env")
 
 def ticket_creation(data):
     jira_endpoint = f'{config["JIRA_API"]}/issue'
-    print(data)
 
     # remider, before send inf the data back, in python you have to paseit into a dict and then sent it as a json
     payload = {
@@ -62,7 +61,6 @@ def ticket_creation(data):
 
     try:
         res = requests.post(jira_endpoint, json = payload, auth = (f'{config["JIRA_USERNAME"]}', config["JIRA_API_TOKEN"]))
-        print(res)
         return res
     except:
         print("error in request for jira")
