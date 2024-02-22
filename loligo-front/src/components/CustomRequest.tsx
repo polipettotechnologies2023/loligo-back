@@ -39,6 +39,7 @@ export default function CustomRequest() {
           setEmptyRequest("contents");
         }
 
+
         let cardMap = issues.issues.map((issue: any) => {
           console.log(issue?.fields);
           if (issue?.fields?.customfield_10068?.id !== "10081") {
@@ -52,6 +53,8 @@ export default function CustomRequest() {
                 outcome={issue?.fields?.customfield_10068.id}
                 entry_time={issue?.fields?.customfield_10046}
                 automaticDetectionResults={issue?.fields?.customfield_10070}
+                automatedDarkPatterns={issue?.fields?.customfield_10075}
+                manualDarkPatterns={issue?.fields?.customfield_10073}
               ></CustomCard>
             );
           }
@@ -133,10 +136,8 @@ export default function CustomRequest() {
           </div>
         </div>
       </div>
-      <div>
-        <EmptyCard displayValue={emptyRequest}></EmptyCard>
-      </div>
-      <div className="gap-2 grid grid-cols-3 lg:grid-cols-4">{cardList}</div>
+      <div><EmptyCard displayValue={emptyRequest}></EmptyCard></div>
+      <div className="gap-2 grid grid-cols-3 lg:grid-cols-4 ml-10">{cardList}</div>
     </>
   );
 }

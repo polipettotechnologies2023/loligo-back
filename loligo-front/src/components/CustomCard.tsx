@@ -13,6 +13,9 @@ import {
 } from "@nextui-org/react";
 import CertificateButton from "./CertificateButton";
 import DownloadSVG from "./DownloadSVG";
+import CustomTableAutomated from "./CustomTableAutomated";
+import CustomTableManual from "./CustomTableManual";
+
 
 export default function CustomCard(prop: any) {
   //TODO: ts interface
@@ -20,18 +23,32 @@ export default function CustomCard(prop: any) {
   console.log("isOpen : ", isOpen);
 
   let outcome = prop.status + "_" + prop.outcome;
-  let certifiedBackground = "";
   let outcomeColor = "";
   console.log(outcome);
 
   if (outcome == "10002_10081") {
     outcomeColor =
       "bg-gradient-to-tr from-sky-400 via-sky-500 to-blue-500 text-white";
-    certifiedBackground = "bg-loligo_certified bg-no-repeat";
   } else {
     outcomeColor =
       "bg-gradient-to-tr from-purple-950 via-purple-800 to-fuchsia-500 text-white";
   }
+
+  var key;
+  let automatedDarkPatterns = [""];
+  for (key in prop.automatedDarkPatterns){
+    automatedDarkPatterns.push(prop.automatedDarkPatterns[key].value);
+  }
+  automatedDarkPatterns.shift();
+  console.log(automatedDarkPatterns);
+
+  var key;
+  let manualDarkPatterns = [""];
+  for (key in prop.manualDarkPatterns){
+    manualDarkPatterns.push(prop.manualDarkPatterns[key].value);
+  }
+  manualDarkPatterns.shift();
+  console.log(manualDarkPatterns);
 
   return (
     <>
@@ -62,18 +79,14 @@ export default function CustomCard(prop: any) {
       </Card>
 
       <Modal
+        className="mt-80"
+        scrollBehavior="inside"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
-        isDismissable={false}
+        isDismissable={true}
         backdrop="opaque"
-        size="3xl"
-        className={certifiedBackground}
-        style={{
-          backgroundRepeat: "no-repeat",
-          backgroundColor: "white",
-          backgroundPositionX: "right",
-          backgroundSize: "",
-        }}
+        placement="center"
+        size="5xl"
       >
         {/* PASS isOpen STATE FROM  useDisclosure HOOK*/}
         <ModalContent>
@@ -135,7 +148,10 @@ export default function CustomCard(prop: any) {
                           <h1 className="text-lg font-bold">
                             Here is what we found:
                           </h1>
-                          <p>{prop.automaticDetectionResults}</p>
+                          <p>Automatically Detected Datterns</p>
+                          <CustomTableAutomated automatedPat={automatedDarkPatterns}></CustomTableAutomated>
+                          <p>Manually detected patterns</p>
+                          <CustomTableManual manualPat={manualDarkPatterns}></CustomTableManual>
                           <ModalFooter>
                             <Button className={outcomeColor} onPress={onClose}>
                               {/* PASS  onClose FUNCTION TO onPress EVENT LISTENER*/}
