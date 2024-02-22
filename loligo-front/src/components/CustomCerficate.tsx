@@ -62,15 +62,14 @@ export default function CustomCertificate() {
         }}
       >
         <div
-          className="column"
+          className="column ml-20"
           style={{
-            margin: "1em 1em 0 0",
             flex: "1",
           }}
         >
           <h1
             id="my-certificate-text"
-            className="text-6xl	bg-gradient-to-tr from-sky-400 via-sky-500 to-blue-500 text-transparent text-wrap bg-clip-text font-bold text-center"
+            className="ml-10 text-6xl	bg-gradient-to-tr from-sky-400 via-sky-500 to-blue-500 text-transparent text-wrap bg-clip-text font-bold text-right"
             style={{
               margin: ".5em",
             }}
@@ -99,7 +98,7 @@ export default function CustomCertificate() {
           }}
         ></div>
       </div>
-      <div className="gap-2 grid grid-cols-3 lg:grid-cols-4">{cardList}</div>
+      <div className="gap-2 grid grid-cols-3 lg:grid-cols-4 ml-10">{cardList}</div>
     </>
   );
 }
