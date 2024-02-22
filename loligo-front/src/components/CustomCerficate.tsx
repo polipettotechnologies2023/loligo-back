@@ -18,9 +18,8 @@ export default function CustomCertificate() {
           `${import.meta.env.VITE_PYTHON_SERVER}/dashboard`,
           {
             user_id,
-          },
-        
-      )
+          }
+        );
 
         let issues = JSON.parse(res.data);
         let cardMap = issues.issues.map((issue: any) => {
@@ -34,6 +33,7 @@ export default function CustomCertificate() {
                 websiteName={issue?.fields?.summary}
                 outcome={issue?.fields?.customfield_10068.id}
                 entry_time={issue?.fields?.customfield_10046}
+                finish_time={issue?.fields?.customfield_10055}
               ></CustomCard>
             );
           }

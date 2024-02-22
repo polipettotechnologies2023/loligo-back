@@ -11,6 +11,8 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+import CertificateButton from "./CertificateButton";
+import DownloadSVG from "./DownloadSVG";
 
 export default function CustomCard(prop: any) {
   //TODO: ts interface
@@ -46,7 +48,7 @@ export default function CustomCard(prop: any) {
           {/* ticketId */}
           <small className="text-default-500">{prop.website_link}</small>
           {/* websiteLink */}
-          <h4 className="font-bold text-large">{prop.websiteName}</h4>{" "}
+          <h4 className="font-bold text-large">{prop.websiteName}</h4>
           {/* websiteName */}
         </CardHeader>
         <CardBody className="overflow-visible py-2">
@@ -104,10 +106,15 @@ export default function CustomCard(prop: any) {
                               {/* PASS  onClose FUNCTION TO onPress EVENT LISTENER*/}
                               Close
                             </Button>
-                            <Button className={outcomeColor}>
-                              {/* PASS  onClose FUNCTION TO onPress EVENT LISTENER*/}
-                              Download
-                            </Button>
+                            <CertificateButton
+                              company_name={prop.websiteName}
+                              website_url={prop.website_link}
+                              certify_date={prop.finish_time
+                                .substring(0, 10)
+                                .replace(/-/g, ".")}
+                              cid={prop.ticketId}
+                            ></CertificateButton>
+                            <DownloadSVG cid={prop.ticketId}></DownloadSVG>
                           </ModalFooter>
                         </>
                       );
