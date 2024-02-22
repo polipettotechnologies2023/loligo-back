@@ -4,7 +4,7 @@ import Confetti from 'react-confetti'
 
 export default function ConfermationModal() {
     const { width, height } = useWindowSize()
-    const {isOpen, onOpen, onOpenChange} = useDisclosure();
+    const {onOpenChange} = useDisclosure();
 
   return (
     <>

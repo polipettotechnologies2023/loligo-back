@@ -17,7 +17,8 @@ export default function CustomCertificate() {
         let res = await axios.post(
           `${import.meta.env.VITE_PYTHON_SERVER}/dashboard`,
           {
-            user_id,
+            user_id: user_id,
+            token: token
           }
         );
 
