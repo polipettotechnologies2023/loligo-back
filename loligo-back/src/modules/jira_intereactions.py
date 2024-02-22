@@ -21,6 +21,7 @@ config = dotenv_values(".env")
 
 def ticket_creation(data):
     jira_endpoint = f'{config["JIRA_API"]}/issue'
+    print(data)
 
     # remider, before send inf the data back, in python you have to paseit into a dict and then sent it as a json
     payload = {
@@ -55,27 +56,13 @@ def ticket_creation(data):
         "customfield_10065": f"{data.user_email}",
         "customfield_10057": f"{data.user_id}",
         "customfield_10074": f"{data.website_link}",
-        "customfield_10070": {
-        "content": [
-            {
-            "content": [
-                {
-                "text": "automatic dark pattern recognition has started...",
-                "type": "text"
-                }
-            ],
-            "type": "paragraph"
-            }
-        ],
-        "type": "doc",
-        "version": 1
-        },
     },
     "update": {}
     }
 
     try:
         res = requests.post(jira_endpoint, json = payload, auth = (f'{config["JIRA_USERNAME"]}', config["JIRA_API_TOKEN"]))
+        print(res)
         return res
     except:
         print("error in request for jira")
@@ -106,21 +93,6 @@ def update_issue_dp(data,dp_result):
     # remider, before send inf the data back, in python you have to paseit into a dict and then sent it as a json
     payload = {
         "fields": {
-         "customfield_10070": {
-        "content": [
-            {
-            "content": [
-                {
-                "text": f"{formatted_data}",
-                "type": "text"
-                }
-            ],
-            "type": "paragraph"
-            }
-        ],
-        "type": "doc",
-        "version": 1
-        },
         "customfield_10075": [{"value": category} for category in categories_to_update],
     }
     } 
