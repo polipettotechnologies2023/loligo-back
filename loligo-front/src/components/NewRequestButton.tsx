@@ -98,6 +98,7 @@ export default function newRequestButton() {
             </p>
             <Input
               type="websiteName"
+              isRequired
               placeholder="i.e. Loligo"
               style={{}}
               onChange={(e) => setWebsiteName(e.target.value)}
@@ -119,6 +120,7 @@ export default function newRequestButton() {
             </p>
             <Input
               type="websiteName"
+              isRequired={true}
               placeholder="i.e. https://www.loligo.com/"
               onChange={(e) => setWebsiteLink(e.target.value)}
             />
