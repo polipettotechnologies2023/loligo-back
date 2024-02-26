@@ -1,6 +1,10 @@
 import { Tabs, Tab } from "@nextui-org/react";
 
-export default function customFilter() {
+type customFilterProps = {
+  filterCards: (val: string) => void;
+};
+
+export default function customFilter({ filterCards }: customFilterProps) {
   return (
     <div
       id="custom-filter"
@@ -15,6 +19,10 @@ export default function customFilter() {
         color="secondary"
         aria-label="Tabs colors"
         radius="full"
+        defaultSelectedKey="all"
+        onSelectionChange={(key: any) => {
+          filterCards(key);
+        }}
       >
         <Tab key="sent" title="Sent" />
         <Tab key="in-review" title="In Review" />
