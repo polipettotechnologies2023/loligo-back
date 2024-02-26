@@ -24,7 +24,7 @@ export default function CustomCertificate() {
 
         let issues = JSON.parse(res.data);
         let cardMap = issues.issues.map((issue: any) => {
-          if (issue?.fields?.customfield_10068?.id == "10081") {
+          if (issue?.fields?.customfield_10068?.id == "10081" && issue?.fields?.status?.id == "10002") {
             return (
               <CustomCard
                 key={issue?.fields?.customfield_10062}
@@ -63,14 +63,14 @@ export default function CustomCertificate() {
         }}
       >
         <div
-          className="column ml-20"
+          className="column ml-10"
           style={{
             flex: "1",
           }}
         >
           <h1
             id="my-certificate-text"
-            className="ml-10 text-6xl	bg-gradient-to-tr from-sky-400 via-sky-500 to-blue-500 text-transparent text-wrap bg-clip-text font-bold text-right"
+            className="text-6xl	bg-gradient-to-tr from-sky-400 via-sky-500 to-blue-500 text-transparent text-wrap bg-clip-text font-bold text-center"
             style={{
               margin: ".5em",
             }}

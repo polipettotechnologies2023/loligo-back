@@ -12,18 +12,18 @@ export default function ConfermationModal() {
           width={width}
           height={height}
         />
-      <Modal isOpen={true} onOpenChange={onOpenChange}>
+      <Modal className="text-center" isOpen={true} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Congratulation!</ModalHeader>
+              <ModalHeader className="bg-gradient-to-tr from-purple-950 via-purple-800 to-fuchsia-500 text-white">Request successfully created!</ModalHeader>
               <ModalBody>
-                <p> 
-                 Congratulation bla bla bla
-                </p>
+                <img src="polipetto_stars_2.svg"></img>
+                <h1 className="text-6xl	bg-gradient-to-tr from-purple-950 via-purple-800 to-fuchsia-500 text-transparent text-wrap bg-clip-text font-bold text-center">THANKS!</h1>
+                <h2>Your request is now on the way to our experts.</h2>
               </ModalBody>
               <ModalFooter>
-                <Button color="primary" onPress={() => {onClose; location.reload()}}>
+                <Button className="bg-gradient-to-tr from-purple-950 via-purple-800 to-fuchsia-500 text-white" onPress={() => {onClose; location.reload()}}>
                   Close
                 </Button>
               </ModalFooter>
