@@ -22,7 +22,7 @@ export default function AppendToJira() {
 
     useEffect(()=>{
 
-    if(userChoice != undefined) setGoButton(<Button onClick={sendHandler}>Go</Button>)
+    if(userChoice != undefined) setGoButton(<Button appearance='primary' onClick={sendHandler}>Append</Button>)
 
     },[selectOption,userChoice])
 
@@ -59,7 +59,11 @@ export default function AppendToJira() {
                 }
               })
               
-              alert(resAppend.status)
+              if(resAppend.status == 200 || resAppend.status == 204){
+                alert("The image has been appended with success!")
+              }else{
+                alert("An error has occured during the submition. please copy your image with the copy button and pasted it manually. Politpetto has already dectected the error and it is already working on it!")
+              }
 
         }
             
@@ -73,10 +77,12 @@ return(
       className="single-select"
       classNamePrefix="react-select"
       options={selectOption}
-      placeholder="Choose a DP"
+      placeholder="Choose a taks"
       onMenuOpen={getList}
       onChange={(choice) => setUserChoice(choice)}
     />
+    <br />
+
     {goButton}
     </>
 )
