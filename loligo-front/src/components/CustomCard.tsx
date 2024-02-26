@@ -16,7 +16,6 @@ import DownloadSVG from "./DownloadSVG";
 import CustomTableAutomated from "./CustomTableAutomated";
 import CustomTableManual from "./CustomTableManual";
 
-
 export default function CustomCard(prop: any) {
   //TODO: ts interface
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -36,7 +35,7 @@ export default function CustomCard(prop: any) {
 
   var key;
   let automatedDarkPatterns = [""];
-  for (key in prop.automatedDarkPatterns){
+  for (key in prop.automatedDarkPatterns) {
     automatedDarkPatterns.push(prop.automatedDarkPatterns[key].value);
   }
   automatedDarkPatterns.shift();
@@ -44,7 +43,7 @@ export default function CustomCard(prop: any) {
 
   var key;
   let manualDarkPatterns = [""];
-  for (key in prop.manualDarkPatterns){
+  for (key in prop.manualDarkPatterns) {
     manualDarkPatterns.push(prop.manualDarkPatterns[key].value);
   }
   manualDarkPatterns.shift();
@@ -52,32 +51,33 @@ export default function CustomCard(prop: any) {
 
   return (
     <>
-      <Card
-        className="py-4"
-        isPressable={true}
-        onPress={onOpen}
-        style={{
-          margin: "1em",
-        }}
-      >
-        <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-          <p className="text-tiny uppercase font-bold">{prop.ticketId}</p>
-          {/* ticketId */}
-          <small className="text-default-500">{prop.website_link}</small>
-          {/* websiteLink */}
-          <h4 className="font-bold text-large">{prop.websiteName}</h4>
-          {/* websiteName */}
-        </CardHeader>
-        <CardBody className="overflow-visible py-2">
-          <Image
-            alt="Card background"
-            className="object-cover rounded-3xl"
-            src={`backdrop_${prop.status}_${prop.outcome}.svg`} //This should be variable, based on status
-            width={370}
-          />
-        </CardBody>
-      </Card>
-
+      {prop.showCard && (
+        <Card
+          className="py-4"
+          isPressable={true}
+          onPress={onOpen}
+          style={{
+            margin: "1em",
+          }}
+        >
+          <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+            <p className="text-tiny uppercase font-bold">{prop.ticketId}</p>
+            {/* ticketId */}
+            <small className="text-default-500">{prop.website_link}</small>
+            {/* websiteLink */}
+            <h4 className="font-bold text-large">{prop.websiteName}</h4>
+            {/* websiteName */}
+          </CardHeader>
+          <CardBody className="overflow-visible py-2">
+            <Image
+              alt="Card background"
+              className="object-cover rounded-3xl"
+              src={`backdrop_${prop.status}_${prop.outcome}.svg`} //This should be variable, based on status
+              width={370}
+            />
+          </CardBody>
+        </Card>
+      )}
       <Modal
         className="mt-80"
         scrollBehavior="inside"
@@ -149,9 +149,13 @@ export default function CustomCard(prop: any) {
                             Here is what we found:
                           </h1>
                           <p>Automatically Detected Datterns</p>
-                          <CustomTableAutomated automatedPat={automatedDarkPatterns}></CustomTableAutomated>
+                          <CustomTableAutomated
+                            automatedPat={automatedDarkPatterns}
+                          ></CustomTableAutomated>
                           <p>Manually detected patterns</p>
-                          <CustomTableManual manualPat={manualDarkPatterns}></CustomTableManual>
+                          <CustomTableManual
+                            manualPat={manualDarkPatterns}
+                          ></CustomTableManual>
                           <ModalFooter>
                             <Button className={outcomeColor} onPress={onClose}>
                               {/* PASS  onClose FUNCTION TO onPress EVENT LISTENER*/}

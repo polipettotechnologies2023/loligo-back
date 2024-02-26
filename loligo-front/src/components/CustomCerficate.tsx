@@ -18,7 +18,7 @@ export default function CustomCertificate() {
           `${import.meta.env.VITE_PYTHON_SERVER}/dashboard`,
           {
             user_id: user_id,
-            token: token
+            token: token,
           }
         );
 
@@ -35,6 +35,7 @@ export default function CustomCertificate() {
                 outcome={issue?.fields?.customfield_10068.id}
                 entry_time={issue?.fields?.customfield_10046}
                 finish_time={issue?.fields?.customfield_10055}
+                showCard={true}
               ></CustomCard>
             );
           }
@@ -99,7 +100,9 @@ export default function CustomCertificate() {
           }}
         ></div>
       </div>
-      <div className="gap-2 grid grid-cols-3 lg:grid-cols-4 ml-10">{cardList}</div>
+      <div className="gap-2 grid grid-cols-3 lg:grid-cols-4 ml-10">
+        {cardList}
+      </div>
     </>
   );
 }

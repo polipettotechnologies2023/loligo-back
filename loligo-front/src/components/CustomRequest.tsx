@@ -15,6 +15,7 @@ export default function CustomRequest() {
   const { user } = useAuth0();
   const token = useSelector((state: RootState) => state.token.value);
   console.log("Original value:" + emptyRequest);
+  const [tab, setTab] = useState("all");
 
   useEffect(() => {
     (async () => {
@@ -39,30 +40,56 @@ export default function CustomRequest() {
           setEmptyRequest("contents");
         }
 
-
         let cardMap = issues.issues.map((issue: any) => {
           console.log(issue?.fields);
-          if (issue?.fields?.customfield_10068?.id !== "10081") {
-            return (
-              <CustomCard
-                key={issue?.fields?.customfield_10062}
-                ticketId={issue.key}
-                status={issue?.fields?.status?.id}
-                website_link={issue?.fields?.customfield_10074}
-                websiteName={issue?.fields?.summary}
-                outcome={issue?.fields?.customfield_10068.id}
-                entry_time={issue?.fields?.customfield_10046}
-                automaticDetectionResults={issue?.fields?.customfield_10070}
-                automatedDarkPatterns={issue?.fields?.customfield_10075}
-                manualDarkPatterns={issue?.fields?.customfield_10073}
-              ></CustomCard>
-            );
+          let showCard = false;
+          if (
+            tab === "sent" &&
+            issue?.fields?.status?.id === "10000" &&
+            issue?.fields?.customfield_10068.id === "10084"
+          ) {
+            showCard = true;
+          } else if (
+            tab === "in-review" &&
+            (issue?.fields?.status?.id === "10015" ||
+              issue?.fields?.status?.id === "10016" ||
+              issue?.fields?.status?.id === "10017") &&
+            issue?.fields?.customfield_10068.id === "10084"
+          ) {
+            showCard = true;
+          } else if (
+            tab === "done" &&
+            issue?.fields?.status?.id === "10002" &&
+            (issue?.fields?.customfield_10068.id === "10082" ||
+              issue?.fields?.customfield_10068.id === "10083")
+          ) {
+            showCard = true;
+          } else if (
+            tab === "all" &&
+            issue?.fields?.customfield_10068?.id !== "10081"
+          ) {
+            showCard = true;
           }
+          return (
+            <CustomCard
+              key={issue?.fields?.customfield_10062}
+              ticketId={issue.key}
+              status={issue?.fields?.status?.id}
+              website_link={issue?.fields?.customfield_10074}
+              websiteName={issue?.fields?.summary}
+              outcome={issue?.fields?.customfield_10068.id}
+              entry_time={issue?.fields?.customfield_10046}
+              automaticDetectionResults={issue?.fields?.customfield_10070}
+              automatedDarkPatterns={issue?.fields?.customfield_10075}
+              manualDarkPatterns={issue?.fields?.customfield_10073}
+              showCard={showCard}
+            ></CustomCard>
+          );
         });
         setCardList(cardMap);
       }
     })();
-  }, []);
+  }, [tab]);
 
   console.log("Changed value:" + emptyRequest);
 
@@ -113,7 +140,7 @@ export default function CustomRequest() {
             justifyContent: "center",
           }}
         >
-          <CustomFilter></CustomFilter>
+          <CustomFilter filterCards={setTab}></CustomFilter>
         </div>
         <div
           className="column"
@@ -136,8 +163,12 @@ export default function CustomRequest() {
           </div>
         </div>
       </div>
-      <div><EmptyCard displayValue={emptyRequest}></EmptyCard></div>
-      <div className="gap-2 grid grid-cols-3 lg:grid-cols-4 ml-10">{cardList}</div>
+      <div>
+        <EmptyCard displayValue={emptyRequest}></EmptyCard>
+      </div>
+      <div className="gap-2 grid grid-cols-3 lg:grid-cols-4 ml-10">
+        {cardList}
+      </div>
     </>
   );
 }
