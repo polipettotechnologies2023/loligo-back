@@ -14,7 +14,6 @@ export default function CustomRequest() {
   const [emptyRequest, setEmptyRequest] = useState("hidden");
   const { user } = useAuth0();
   const token = useSelector((state: RootState) => state.token.value);
-  console.log("Original value:" + emptyRequest);
   const [tab, setTab] = useState("all");
 
   useEffect(() => {
@@ -91,7 +90,6 @@ export default function CustomRequest() {
     })();
   }, [tab]);
 
-  console.log("Changed value:" + emptyRequest);
 
   async function extractUserId(userString: string) {
     const separatorIndex = userString.indexOf("|");

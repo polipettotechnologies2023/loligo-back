@@ -23,7 +23,6 @@ export default function CustomCard(prop: any) {
 
   let outcome = prop.status + "_" + prop.outcome;
   let outcomeColor = "";
-  console.log(outcome);
 
   if (outcome == "10002_10081") {
     outcomeColor =
@@ -39,7 +38,6 @@ export default function CustomCard(prop: any) {
     automatedDarkPatterns.push(prop.automatedDarkPatterns[key].value);
   }
   automatedDarkPatterns.shift();
-  console.log(automatedDarkPatterns);
 
   var key;
   let manualDarkPatterns = [""];
@@ -47,7 +45,6 @@ export default function CustomCard(prop: any) {
     manualDarkPatterns.push(prop.manualDarkPatterns[key].value);
   }
   manualDarkPatterns.shift();
-  console.log(manualDarkPatterns);
 
   return (
     <>
