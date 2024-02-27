@@ -28,15 +28,6 @@ export default function CustomAvatar() {
           <p className="font-semibold">Signed in as</p>
           <p className="font-semibold">{user?.email}</p>
         </DropdownItem>
-        <DropdownItem key="my_profile" color="secondary">
-          Profile
-        </DropdownItem>
-        <DropdownItem key="get_help" color="secondary">
-          Get Help
-        </DropdownItem>
-        <DropdownItem key="delete_account" color="secondary">
-          Delete my account
-        </DropdownItem>
         <DropdownItem
           key="logout"
           color="danger"

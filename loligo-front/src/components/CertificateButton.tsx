@@ -8,7 +8,6 @@ import {
   PDFViewer,
   PDFDownloadLink,
   Font,
-  Link,
 } from "@react-pdf/renderer";
 import {
   Modal,
@@ -20,88 +19,114 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 
-Font.register({
-  family: "Oswald",
-  src: "https://fonts.gstatic.com/s/oswald/v13/Y_TKV6o8WovbUd3m_X9aAA.ttf",
-});
+Font.register({ family: 'Roboto', src: "https://fonts.googleapis.com/css2?family=Roboto:wght@900&family=Work+Sans:wght@500&display=swap", fontWeight:"ultrabold", fontStyle:"normal"  });
+
 
 const styles = StyleSheet.create({
   body: {
-    paddingTop: 35,
-    paddingBottom: 65,
-    paddingHorizontal: 35,
+    margin: "5px auto",
   },
   header: {
-    fontSize: 12,
-    marginBottom: 20,
+    height: "50px",
+    backgroundColor: "#4E3E88",
+    display: "flex",
+    flexDirection: "row",
+    //justifyContent:"center",
+  },
+
+  footer:{
+    color: "white",
+    height: "50px",
+    backgroundColor: "#4E3E88",
+    display: "flex",
+    //marginTop: "5%",
+    width: "100%",
+    position: "absolute",
+    bottom: "5px",
+  },
+
+  certifiedLogo: {
+    height: "325px", 
+    width:"325px", 
+    margin: "10px auto"
+  },
+
+  polipettoLogo:{
+    height:"40%",
+    width: "10%",
+    margin: "auto 0 auto 65%",
+    alignContent: "flex-end",
+  },
+
+  loligoLogo:{
+    height:"40%",
+    width: "15%", 
+    margin: "auto 0 auto 5%",
+    alignContent: "flex-start",
+  },
+
+  heading1: {
+    margin: "5px auto",
+    fontSize: "40px",
+    fontWeight: "extrabold",
+    fontStyle: "oblique",
+    fontFamily: "Helvetica",
+  },
+
+  heading2: {
+    fontSize: "15px",
+    fontWeight: "extrabold",
+    fontStyle: "oblique",
+    fontFamily: "Helvetica",
+    margin: "5px auto",
+  },
+
+  container1:{
+    margin: "auto",
+    left: "0px",
+    right: "10px",
+    marginRight: "5%",
+  },
+
+  container2:{
     textAlign: "center",
-    color: "grey",
+    margin: "auto",
+    left: "10px",
+    right: "10px",
   },
-  title: {
-    fontSize: 44,
+
+  bodyMiddle:{
+    display: "flex",
+    flexDirection: "row",
+    margin: "10px auto"
+  },
+
+  paragraph:{
     textAlign: "center",
-    fontFamily: "Times-Bold",
+    margin: "auto"
   },
-  subtitle: {
-    fontSize: 18,
-    margin: 12,
-    textAlign: "center",
-    fontFamily: "Times-Roman",
-  },
-  company: {
-    fontSize: 32,
-    margin: 12,
-    textAlign: "center",
-    fontFamily: "Courier-Bold",
-  },
-  emptyLine: {
-    marginBottom: 15,
-  },
-  text: {
-    margin: 12,
-    fontSize: 12,
-    textAlign: "center",
-    fontFamily: "Times-Roman",
-    lineHeight: 0.6,
-  },
-  imagesquare: {
-    marginVertical: 15,
-    marginHorizontal: 100,
-    height: 120,
-    width: 120,
-  },
-  imagesignature: {
-    height: 90,
-    width: 160,
-    marginLeft: 40,
-  },
-  imagecontainer: { alignItems: "center", justifyContent: "center" },
+  
   footercontainer1: {
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    marginTop: 20,
+    marginTop: "40px",
+    marginBottom: 0
   },
   footercontainer2: {
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
     marginLeft: 40,
+    marginTop: 0
+
   },
-  footertext: {
-    fontSize: 14,
-    textAlign: "center",
-    fontFamily: "Times-Roman",
+  imagesignature: {
+    height: 90,
+    width: 160,
+    marginLeft: 40,
   },
-  link: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backgroundColor: "transparent",
-    cursor: "pointer",
-  },
+
 });
 
 type CertificateProps = {
@@ -119,47 +144,37 @@ const MyDocument = ({
   cid,
 }: CertificateProps) => (
   <Document>
-    <Page size="A4" style={styles.body}>
-      <Text style={styles.header} fixed>
-        Polipetto Technologies - Certificate ID {cid}
-      </Text>
-      <View style={styles.imagecontainer}>
-        <Image style={styles.imagesquare} src="certificate_purple.png" />
-        <Link style={styles.link} src="https://polipetto.pp.ua" />
+    <Page size="A4" orientation="landscape" style={styles.body}>
+      <View style={styles.header}>
+        <Image src="loligo_text_white.png" style={styles.loligoLogo}></Image>
+        <Image src="polipetto_tech_white.png" style={styles.polipettoLogo}></Image>
       </View>
-      <Text style={styles.title}>CERTIFICATE</Text>
-      <Text style={styles.subtitle}>OF DARK PATTERNS FREE</Text>
-      <Text style={styles.subtitle}>ACKNOWLEDGES THAT</Text>
-      <Text style={styles.emptyLine} />
-      <Text style={styles.text}>The Website {website_url} of</Text>
-      <Text style={styles.company}>{company_name}</Text>
-      <Text style={styles.emptyLine} />
-      <Text style={styles.text}>
-        Has passed all of the dark patterns detection provided by Loligo
-      </Text>
-      <Text style={styles.text}>
-        and was proved to be free of the following dark patterns:
-      </Text>
-      <Text style={styles.text}>
-        Fake Activity, Fake Countdown, Confirmshaming, Low Stock Messages,
-        Disguised Ads, Fake Scarcity,
-      </Text>
-      <Text style={styles.text}>
-        Fake Social Proof, Forced Action, Hard to Cancel, Hidden Costs, Hidden
-        Subscription, Nagging,
-      </Text>
-      <Text style={styles.text}>
-        Obstruction, Preselection, Sneaking, Trick Wording, Visual Interference,
-        Comparison Prevention.
-      </Text>
-      <Text style={styles.emptyLine} />
-      <View style={styles.footercontainer1}>
-        <Text style={styles.footertext}>Date</Text>
-        <Text style={styles.footertext}>Signature</Text>
+      <View style={styles.body}>
+        <Text style={styles.heading1}>CERTIFICATE OF COMPLIANCE</Text>
+        <Text style={styles.heading2}>Hereby is certified that the below mentioned website is free of dark patterns.</Text>
+        <Text style={styles.heading2}>Succesfully assesed through Loligo powered by Polipetto Technologies</Text>
+        <View style={styles.bodyMiddle}>
+          <View style={styles.container1}>
+            <Image src="certificate_purple.png" style={styles.certifiedLogo}></Image>
+          </View>
+          <View style={styles.container2}>
+            <Text style={styles.paragraph}>Issued to:</Text>
+            <Text style={styles.paragraph}>{company_name}</Text>
+            <Text style={styles.paragraph}>Domain:</Text>
+            <Text style={styles.paragraph}>{website_url}</Text>
+            <View style={styles.footercontainer1}>
+              <Text>Date</Text>
+              <Text>Signature</Text>
+            </View>
+            <View style={styles.footercontainer2}>
+              <Text>{certify_date}</Text>
+              <Image style={styles.imagesignature} src="polipetto_signature.png" />
+            </View>
+          </View>
+        </View>
       </View>
-      <View style={styles.footercontainer2}>
-        <Text style={styles.footertext}>{certify_date}</Text>
-        <Image style={styles.imagesignature} src="polipetto_signature.png" />
+      <View style={styles.footer}>
+        <Text style={{margin: "auto auto"}}>Certificate ID: {cid}</Text>
       </View>
     </Page>
   </Document>
@@ -218,7 +233,7 @@ export default function CertificateButton({
                   fileName="Certificate.pdf"
                   style={{
                     borderRadius: "9999px",
-                    backgroundColor: "#6E2DC1",
+                    background: "linear-gradient(90deg,  #38bdf8 0%, #0ea5e9 49%, #3b82f6 76%)",
                     color: "white",
                     padding: "10px 16px",
                     border: "none",
